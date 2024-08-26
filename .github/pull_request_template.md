@@ -1,4 +1,5 @@
-# Issue: describe the overall issue that the pr addresses
+# Replace this with a descriptive PR title
+- replace this with a short description of what the pr is for
 
 # Changes
 - describe the details of what the pr changes
@@ -8,7 +9,7 @@
 # Additional Info
 - any additional information or context
 
-# Screenshots
+# Screenshots (if necessary)
 
 Original | Updated
 :------------------------:|:------------------------:
