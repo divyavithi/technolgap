@@ -1,0 +1,64 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Card from '../components/Card.astro';
+---
+
+<PageLayout title="Welcome to Technolgap">
+	<main>
+		<h1>Welcome to our Technolgap project!</h1>
+		<p class="message">
+			This is an example page to help understand the structure of Astro.
+		</p>
+		<h2>Some technologies we are using: </h2>
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="https://docs.astro.build/"
+				title="Astro"
+				body="Learn how Astro works and explore the official API docs."
+			/>
+			<Card
+				href="https://picocss.com/docs"
+				title="Pico CSS"
+				body="Learn how Pico works and explore the official API docs."
+			/>
+			<Card
+				href="https://docs.github.com/en"
+				title="Github"
+				body="Learn how Github works and explore the official API docs."
+			/>
+			<Card
+				href="https://docs.astro.build/en/guides/typescript/"
+				title="Typescript"
+				body="Learn how Astro Typescript works and explore the official API docs."
+			/>
+		</ul>
+	</main>
+</PageLayout>
+
+<style>
+	body {
+		background-color: #2D6D68;
+		text-align: center;
+		color: #fbf6ef;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		color: #FFBCE5;
+	}
+	.link-card-grid {
+		margin: 0 10vw;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
