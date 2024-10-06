@@ -1,0 +1,103 @@
+<nav class="navbar">
+    <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="/about-us">ABOUT US</a></li>
+        <li><a href="/events">EVENTS</a></li>
+        <li><a href="/resources">RESOURCES</a></li>
+        <li class="dropdown">
+          <a href="/get-involved" class="dropdown-toggle">GET INVOLVED</a>
+          <ul class="dropdown-menu">
+            <li><a href="/chapters">Chapters</a></li>
+            <li><a href="/sponsors">Sponsors</a></li>
+            <li><a href="/collaborators">Collaborators</a></li>
+            <li><a href="/volunteers">Volunteers</a></li>
+          </ul>
+        </li>
+        <button class="custom-button">Contact Us!</button>
+    </ul>
+</nav>
+
+<style>
+  /* Navbar style */
+  .navbar {
+    background-color: #2D6D68DD;
+    padding: 0.5rem;
+  }
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    margin-left: auto;
+    padding: 0;
+    gap: 2rem;
+  }
+  .navbar li {
+    position: relative;
+  }
+  .navbar a {
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+    font-weight: 400;
+    padding: 1rem 1.5rem;
+    display: block;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .navbar a:hover {
+    font-weight: bold;
+  }
+
+  /* Dropdown style */
+  .dropdown {
+    display: inline-block;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2D6D68DD;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: auto; 
+    border-radius: 0;
+  }
+  .dropdown-menu li {
+    width: 90%;
+  }
+  .dropdown-menu li a {
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    color: white;
+    border-radius: 0;
+    text-decoration: none;
+  }
+  .dropdown-menu li a:hover {
+    background-color: #64A8A2DD;
+    box-sizing: border-box;
+    border: 0.25px solid white;
+  }
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  .dropdown:hover .dropdown-toggle {
+    font-weight: bold;
+    background-color: #64A8A2DD;
+    border-radius: 0;
+  }
+
+  /* Button style */
+  .custom-button {
+    margin-right: 2rem;
+    border: 0.25px solid white;
+    color: white;
+    background-color: #2D6D68DD;
+  }
+  .custom-button:hover {
+    font-weight: bold;
+    background-color: #64A8A2DD;
+  }
+</style>
