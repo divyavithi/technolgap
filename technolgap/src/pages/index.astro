@@ -1,5 +1,5 @@
 ---
-import PageLayout from './PageLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import ExampleCard from '../components/ExampleCard.astro';
 ---
 
@@ -36,13 +36,17 @@ import ExampleCard from '../components/ExampleCard.astro';
 </PageLayout>
 
 <style>
-	body {
+	 body {
 		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-height: 100vh;
 		background-color: #2D6D68;
 		text-align: center;
 		color: #fbf6ef;
 		font-family: Verdana, Geneva, Tahoma, sans-serif;
 	}
+		
 	.astro-a {
 		position: absolute;
 		top: -32px;

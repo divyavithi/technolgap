@@ -1,28 +1,24 @@
 ---
-import Header from '../pages/Header.astro'
-import Footer from '../pages/Footer.astro'
-
-interface Props {
-	title: string;
-}
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../custom-pico.css'
 
 const { title } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
+<html>
+  <head>
+    <title>{title}</title>
+    <meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Header />
+  </head>
+  <body>
+    <Header />
     <main>
       <slot />
     </main>
     <Footer />
-	</body>
+  </body>
 </html>
