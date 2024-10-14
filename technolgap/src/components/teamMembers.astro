@@ -22,7 +22,7 @@ console.log(AllTeamMembers.items)
       <h1>Team Members</h1>
       <ul>
         {AllTeamMembers.items.map(item => (
-          <li key={item.sys.id}>{item.fields.name}</li>
+          <li>{item.fields.name}</li>
         ))}
       </ul>
     </main>
