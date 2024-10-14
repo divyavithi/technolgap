@@ -1,0 +1,29 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+import { contentfulClient } from '../lib/contentful';
+import type { EntryFieldTypes } from 'contentful';
+
+interface TeamMemberType {
+  contentTypeId: "teamMember";
+  fields: {
+    name: EntryFieldTypes.RichText
+  }
+}
+const AllTeamMembers = await contentfulClient.getEntries<TeamMemberType>({
+	content_type: "teamMember",
+});
+console.log(AllTeamMembers.items)
+---
+
+
+<PageLayout title='TEST CMS'>
+    <main>
+      <h1>Team Members</h1>
+      <ul>
+        {AllTeamMembers.items.map(item => (
+          <li key={item.sys.id}>{item.fields.name}</li>
+        ))}
+      </ul>
+    </main>
+  </PageLayout>
