@@ -1,6 +1,7 @@
 ---
 import { createClient } from 'contentful';
 import type { Entry } from 'contentful';
+import PageLayout from '../layouts/PageLayout.astro';
 
 const client = createClient({
   space: '33d3d7kdmbg5',
@@ -51,15 +52,7 @@ async function fetchTeamMembers(year: string): Promise<TeamMember[]> {
 const teamMembers = await fetchTeamMembers(yearParam);
 
 ---
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Members</title>
-</head>
-<body>
+<PageLayout>
   <h1>Team Members for {yearParam}</h1>
   <form action={Astro.request.url} method="GET">
     <select name="year">
@@ -75,7 +68,7 @@ const teamMembers = await fetchTeamMembers(yearParam);
         <h2>{member.fields.name}</h2>
         { member.fields.headshot && member.fields.headshot.fields &&(
           // @ts-ignore
-          <img src={member.fields.headshot.fields.file.url} alt="Headshot" />
+          <img width="100px" src={member.fields.headshot.fields.file.url} alt="Headshot" />
         )}
         <p>{member.fields.position}</p>
         <p>{member.fields.memberDegree}</p>
@@ -86,5 +79,4 @@ const teamMembers = await fetchTeamMembers(yearParam);
       </li>
     ))}
   </ul>
-</body>
-</html>
+</PageLayout>

@@ -1,6 +1,4 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-
 import { contentfulClient } from '../lib/contentful';
 import type { EntryFieldTypes } from 'contentful';
 
@@ -16,14 +14,8 @@ const AllTeamMembers = await contentfulClient.getEntries<TeamMemberType>({
 console.log(AllTeamMembers.items)
 ---
 
-
-<PageLayout title='TEST CMS'>
-    <main>
-      <h1>Team Members</h1>
-      <ul>
-        {AllTeamMembers.items.map(item => (
-          <li>{item.fields.name}</li>
-        ))}
-      </ul>
-    </main>
-  </PageLayout>
+<ul>
+  {AllTeamMembers.items.map(item => (
+    <li>{item.fields.name}</li>
+  ))}
+</ul>
