@@ -1,14 +1,15 @@
 ---
+//importing relevant libraries
 import { createClient } from 'contentful';
 import type { Entry } from 'contentful';
 import PageLayout from '../layouts/PageLayout.astro';
+
 
 const client = createClient({
   space: '33d3d7kdmbg5',
   accessToken: '00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM',
 });
 
-const years = ['1st Year','2nd Year', '3rd Year', '4th Year'];
 
 interface TeamMemberFields {
   fields: {
@@ -31,6 +32,7 @@ interface TeamMemberFields {
     institution: string;
     linkedin2: string;
     memberDegree: string;
+	teamYear: string;
   },
   contentTypeId: 'teamMember'
 }
@@ -38,26 +40,44 @@ interface TeamMemberFields {
 type TeamMember = Entry<TeamMemberFields>;
 
 const url = new URL(Astro.request.url);
-const yearParam = url.searchParams.get('year') || 'Technolgap'; 
+const teamYear = url.searchParams.get('year') || 'Technolgap'; 
 
 async function fetchTeamMembers(year: string): Promise<TeamMember[]> {
   const response = await client.getEntries({
     content_type: 'teamMember',
-    'fields.programYear': year,
+    'fields.teamYear': year,
   });
 
   return response.items as TeamMember[];
 }
+async function fetchteamYears(): Promise<string[]> {
+  try {
+    const response = await client.getEntries<TeamMemberFields>({
+      content_type: 'teamMember', 
+      select: 'fields.teamYear', 
+	  // @ts-ignore
+      order: 'fields.teamYear', 
+    });
+	
 
-const teamMembers = await fetchTeamMembers(yearParam);
+    const yearsSet = new Set(response.items.map(item => item.fields.teamYear));
+    return Array.from(yearsSet);
+  } catch (error) {
+    console.error('Error fetching years:', error);
+    return [];
+  }
+}
+
+// Fetch both team members and years
+const [teamMembers, years] = await Promise.all([fetchTeamMembers(teamYear), fetchteamYears()]);
 
 ---
 <PageLayout>
-  <h1>Team Members for {yearParam}</h1>
+  <h1>Team Members for {teamYear}</h1>
   <form action={Astro.request.url} method="GET">
     <select name="year">
       {years.map((yr) => (
-        <option value={yr} selected={yr === yearParam}>{yr}</option>
+        <option value={yr} selected={yr === teamYear}>{yr}</option>
       ))}
     </select>
     <button type="submit">Show Members</button>
