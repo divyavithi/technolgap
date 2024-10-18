@@ -1,0 +1,128 @@
+---
+//importing relevant libraries
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+interface TeamMemberFields {
+  fields: {
+    name: string;
+    headshot: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    position: string;
+    institution: string;
+    linkedin2: string;
+    memberDegree: string;
+    teamYearMany: [string];
+  };
+  contentTypeId: "teamMember";
+}
+
+type TeamMember = Entry<TeamMemberFields>;
+
+const url = new URL(Astro.request.url);
+const teamYear = url.searchParams.get("year") || "Technolgap";
+
+async function fetchTeamMembers(year: string): Promise<TeamMember[]> {
+  const response = await client.getEntries({
+    content_type: "teamMember",
+    "fields.teamYearMany[in]": year,
+  });
+
+  return response.items as TeamMember[];
+}
+async function fetchteamYears(): Promise<string[]> {
+  try {
+    const response = await client.getEntries<TeamMemberFields>({
+      content_type: "teamMember",
+      select: ["fields.teamYearMany"],
+      // @ts-ignore
+      // order: "fields.teamYearMany",
+    });
+
+    // console.log(response.items[0].fields)
+
+    const yearsSet = new Set<string>();
+
+    // Loop through the items and add each year to the Set
+    response.items.forEach((item: {fields: {teamYearMany: [string]}}) => {
+      item.fields?.teamYearMany.forEach((year: string) => {
+        yearsSet.add(year); // Add each year to the Set
+      });
+    });
+
+    return Array.from(yearsSet).sort((a, b) => {
+      return parseInt(a) - parseInt(b); // Sort numerically
+    });
+
+  } catch (error) {
+    console.error("Error fetching years:", error);
+    return [];
+  }
+}
+
+// Fetch both team members and years
+const [teamMembers, years] = await Promise.all([
+  fetchTeamMembers(teamYear),
+  fetchteamYears(),
+]);
+// console.log(teamMembers[0].fields.teamYearMany)
+---
+
+<PageLayout>
+  <h1>Team Members for {teamYear}</h1>
+  <form action={Astro.request.url} method="GET">
+    <select name="year">
+      {
+        years.map((yr) => (
+          <option value={yr} selected={yr === teamYear}>
+            {yr}
+          </option>
+        ))
+      }
+    </select>
+    <button type="submit">Show Members</button>
+  </form>
+  <ul>
+    {
+      teamMembers.map((member) => (
+        <li>
+          <h2>{member.fields.name}</h2>
+          {member.fields.headshot && member.fields.headshot.fields && (
+            // @ts-ignore
+            <img
+              width="100px"
+              src={member.fields.headshot.fields.file.url}
+              alt="Headshot"
+            />
+          )}
+          <p>{member.fields.position}</p>
+          <p>{member.fields.memberDegree}</p>
+          <p>{member.fields.institution}</p>
+          {typeof member.fields.linkedin2 === "string" && (
+            <p>
+              <a href={member!.fields!.linkedin2 || "#"}>LinkedIn</a>
+            </p>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>
