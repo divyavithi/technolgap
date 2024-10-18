@@ -1,3 +1,12 @@
+---
+name: Task
+about: describe a task
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ### Resources
 - 
 
