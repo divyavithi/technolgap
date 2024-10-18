@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://technolgap.org/*"
+  to = "https://technolgap.org/coming-soon"
+  status = 301
+  force = true
