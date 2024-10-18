@@ -1,5 +1,10 @@
 [[redirects]]
-  from = "https://technolgap.org/*"
-  to = "https://technolgap.org/coming-soon"
+  from = "/*"
+  to = "/coming-soon"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/coming-soon"
+  to = "/coming-soon"
+  status = 200
