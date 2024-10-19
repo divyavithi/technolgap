@@ -1,0 +1,144 @@
+---
+import greenline from "../public/line-design.png"
+import ellipseline from "../public/line-design-ellipse-highlight.png"
+import pinkstar from "../public/pink-star.png"
+import whitestar from "../public/white-star.png"
+---
+
+<main>
+    <div class="text-container">
+        <h1><span class="pink-shadow">technolgap</span></h1>
+        <h2>Welcome to Technolgap!</h2>
+        <p class="message">
+            At Technolgap, we're on a mission to bridge the gender gap in the technology sector across Canada. Our community is dedicated to creating opportunities and empowering women and non-binary individuals in the Canadian tech industry. We believe that by fostering inclusivity and collaboration, we can drive positive change in the industry.
+        </p>
+        <div class="buttons-container">
+            <button class="sponsor-button">SPONSOR</button>
+            <button class="conference-button">CONFERENCE</button>
+        </div>
+    </div>
+    <img src={greenline.src} alt="Green Line Design" class="greenline-image" />
+    <img src={ellipseline.src} alt="Ellipse for Green Line Design" class="ellipseline-image" />
+    <img src={greenline.src} alt="Green Line Design" class="greenline-image-rotated" />
+    <img src={ellipseline.src} alt="Ellipse for Green Line Design" class="ellipseline-image-rotated" />
+
+    <img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-top" />
+    <img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-bottom" />
+    <img src={whitestar.src} alt="White Star Design" class="whitestar-image-top" />
+    <img src={whitestar.src} alt="White Star Design" class="whitestar-image-bottom" />
+
+
+</main>
+
+<style>
+	body {
+		height: 100%;
+		background: linear-gradient(90deg, rgba(45, 109, 104, 0.866667) 23%, rgba(73, 139, 133, 0.866667) 56%, rgba(100, 168, 162, 0.866667) 75.5%);
+		color: #FBF6EF;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+	}
+	.text-container {
+        position: absolute;
+		width: 809px;
+        top: 250px;
+        left: 40px;
+    }
+	h1 {
+		font-size: 128px;
+		margin-left: -5px;
+	}
+	.pink-shadow {
+    	text-shadow: 4px 0px 0px #FFBCE5;
+	}
+	h2 {
+		font-size: 36px;
+		color: #FFBCE5;
+	}
+	.message {
+		font-size: 22px;
+	}
+	.buttons-container {
+		display: flex;
+		gap: 40px;
+		margin-top: 40px;
+	}
+	.sponsor-button, .conference-button {
+		width: 168px;
+		height: 64px;
+		border: 4px solid white;
+		color: white;
+		font-size: 18px;
+		background-color: transparent;
+		border-radius: 36px;
+	}
+	.sponsor-button:hover, .conference-button:hover {
+		background-color: #64A8A2DD;
+	}
+    .ellipseline-image { 
+        position: absolute;
+        width: 117.85px;
+        height: 81.69px;
+        top: 488px;
+        left: 1035px;
+        z-index: 1;
+    }
+    .ellipseline-image-rotated { 
+        position: absolute;
+        width: 117.85px; 
+        height: 81.69px; 
+        top: 15px;
+        left: 110px;
+        z-index: -1;
+        transform: rotate(65deg);
+    }
+    .greenline-image { 
+        position: absolute;
+        width: 522px; 
+        height: 642.71px; 
+        top: 125px;
+        left: 1000px;
+    }
+    .greenline-image-rotated { 
+        position: absolute;
+        width: 522px; /* 3/4 of the original image size */
+        height: 642.71px; /* 3/4 of the original image size */
+        top: -175px;
+        left: 85px;
+        z-index: -1;
+        transform: rotate(55deg);
+    }
+    .pinkstar-image-top {
+        position: absolute;
+        width: 259px;
+        height: 258px;
+        top: 275px;
+        left: 825px;
+        z-index: 1;
+    }
+    .pinkstar-image-bottom {
+        position: absolute;
+        width: 194.25px;
+        height: 193.5px;
+        top: 675px;
+        left: 1000px;
+        z-index: 0;
+    }
+    .whitestar-image-top {
+        position: absolute;
+        width: 159.82px;
+        height: 172.91px;
+        top: 118px;
+        left: 656px;
+        z-index: 1;
+        transform: rotate(-20deg);
+    }
+    .whitestar-image-bottom {
+        position: absolute;
+        width: 87.51px;
+        height: 99px;
+        top: 200px;
+        left: 1100px;
+        z-index: 1;
+        transform: rotate(10deg);
+    }
+</style>
