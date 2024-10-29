@@ -1,0 +1,57 @@
+---
+interface Props {
+	title: string;
+    body: string;
+}
+const { title, body } = Astro.props;
+---
+
+
+<li class="value-card">
+    <a>
+        <h3>
+            {title}
+        </h3>
+        <p>
+            {body}
+        </p>
+    </a>
+</li>
+
+<style>
+    .value-card {
+        display: flex;
+		background-color: #2f605c;
+		transition: background-color 0.5s;
+		border-radius: 90px;
+        border-color: #fbf6ef;
+        border-width: 2px;
+        border-style: solid;
+        box-shadow: 2px 4px 4px 2px #9a9a9a;
+    }
+
+    .value-card > a {
+		width: 100%;
+		text-decoration: none;
+		line-height: 1.4;
+		padding: calc(1.5rem - 1px);
+	}
+
+    h3 {
+        margin-top: 2rem;
+        color: white;
+        font-weight: bold;
+        text-shadow: 0px 2px 2px #353535;
+    }
+
+    p {
+		margin-top: 3rem;
+		margin-bottom: 0;
+		color: #fbf6ef;
+	}
+
+    /* .value-card:hover{
+		box-shadow: 12px 12px 2px 1px #fbf6ef;
+        box-shadow: 0px 4px 4px 0px #dadada;
+	} */
+</style>

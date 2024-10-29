@@ -1,37 +1,30 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import ExampleCard from '../components/ExampleCard.astro';
+import AboutUs from '../components/AboutUs.astro';
+import CoreValues from '../components/CoreValues.astro'
+import aboutUsPage from '../pages/aboutUsPage.astro'
 ---
 
 <PageLayout title="Welcome to Technolgap">
 	<main>
-		<h1>Welcome to our Technolgap project!</h1>
-		<p class="message">
-			This is an example page to help understand the structure of Astro.
-		</p>
-		<h2>Some technologies we are using: </h2>
-		<ul role="list" class="link-card-grid">
-			<ExampleCard
-				href="https://docs.astro.build/"
-				title="Astro"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://picocss.com/docs"
-				title="Pico CSS"
-				body="Learn how Pico works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://docs.github.com/en"
-				title="Github"
-				body="Learn how Github works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://docs.astro.build/en/guides/typescript/"
-				title="Typescript"
-				body="Learn how Astro Typescript works and explore the official API docs."
-			/>
-		</ul>
+		<aboutUsPage/>
+		<AboutUs
+			title="About Us"
+			subtitle="the past, present and future of Technolgap!"
+			body1="Technolgap traces its roots back to Carleton University in February 2020, where it originated as a student community for women in tech in Ottawa. Co-founders Alexa Liaskovski and Gina Bak, inspired by their experience at the Grace Hopper Celebration in 2019, noticed a glaring disparity in the availability of information about tech opportunities. Despite the abundance of opportunities in the field, they realized they hadn't heard about many of them. To address this gap, Technolgap was founded as a platform for students to share relevant opportunities with each other, including hackathons, job postings, scholarships, and workshops."
+			body2="As the community grew, it became evident that women in tech, particularly in Canada, faced unique challenges in starting their careers. To meet these challenges head-on, Technolgap expanded its reach across Canada and began offering mentorship programs and workshops tailored to the specific needs of its members."
+			body3="Today, Technolgap boasts a community of over 500 members and continues to evolve. However, in 2022, the community went dormant. It remained inactive until 2024 when one of its former members, Anjali Patel, took the reins. Initially joining Technolgap as an Events Organizer in 2021, Anjali along with her enthusiastic team, is now on a mission to revitalize the community, rebranding it, and rebuilding it into a thriving platform once again!"
+		/>
+		<CoreValues
+			title="Core Values at Technolgap"
+			subtitle1="inclusivity and diversity"
+			body1="We embrace and celebrate the diverse backgrounds, experiences, and perspectives of all our members. By fostering an inclusive community, we ensure that everyone feels valued and respected, and we work to create a supportive environment where women and non-binary individuals in tech can thrive."
+			subtitle2="empowerment through collaboration"
+			body2="We believe in the power of collaboration to drive positive change. By working together, sharing knowledge, and supporting one another, we empower our members to overcome challenges, achieve their goals, and make significant contributions to the tech industry."
+			subtitle3="commitment to growth and learning"
+			body3="We are dedicated to the continuous growth and development of our members. Through mentorship, educational resources, and opportunities for professional and personal advancement, we encourage lifelong learning and strive to help our members reach their full potential in the tech industry."
+		/>
 	</main>
 </PageLayout>
 
