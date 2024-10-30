@@ -1,78 +1,77 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import ExampleCard from '../components/ExampleCard.astro';
+import PageLayout from "../layouts/PageLayout.astro";
+import ExampleCard from "../components/ExampleCard.astro";
 ---
 
 <PageLayout title="Welcome to Technolgap">
-	<main>
-		<h1>Welcome to our Technolgap project!</h1>
-		<p class="message">
-			This is an example page to help understand the structure of Astro.
-		</p>
-		<h2>Some technologies we are using: </h2>
-		<ul role="list" class="link-card-grid">
-			<ExampleCard
-				href="https://docs.astro.build/"
-				title="Astro"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://picocss.com/docs"
-				title="Pico CSS"
-				body="Learn how Pico works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://docs.github.com/en"
-				title="Github"
-				body="Learn how Github works and explore the official API docs."
-			/>
-			<ExampleCard
-				href="https://docs.astro.build/en/guides/typescript/"
-				title="Typescript"
-				body="Learn how Astro Typescript works and explore the official API docs."
-			/>
-		</ul>
-	</main>
+  <main>
+    <h1>Welcome to our Technolgap project!</h1>
+    <p class="message">
+      This is an example page to help understand the structure of Astro.
+    </p>
+    <h2>Some technologies we are using:</h2>
+    <ul role="list" class="link-card-grid">
+      <ExampleCard
+        href="https://docs.astro.build/"
+        title="Astro"
+        body="Learn how Astro works and explore the official API docs."
+      />
+      <ExampleCard
+        href="https://picocss.com/docs"
+        title="Pico CSS"
+        body="Learn how Pico works and explore the official API docs."
+      />
+      <ExampleCard
+        href="https://docs.github.com/en"
+        title="Github"
+        body="Learn how Github works and explore the official API docs."
+      />
+      <ExampleCard
+        href="https://docs.astro.build/en/guides/typescript/"
+        title="Typescript"
+        body="Learn how Astro Typescript works and explore the official API docs."
+      />
+    </ul>
+  </main>
 </PageLayout>
 
 <style>
-	 body {
-		height: 100%;
-		background-color: #64A8A2DD;
-		text-align: center;
-		color: #fbf6ef;
-		font-family: Verdana, Geneva, Tahoma, sans-serif;
-	}
-		
-	.astro-a {
-		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
-	}
-	h1 {
-		color: #FFBCE5;
-		font-size: 3rem;
-		font-weight: bold;
-		margin: 2rem 0;
-	}
-	h2 {
-		font-size: 2rem;
-		margin: 2rem 0;
+  body {
+    height: 100%;
+    background-color: #64a8a2dd;
+    text-align: center;
+    color: #fbf6ef;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
 
-	}
-	.message {
-		font-size: 1rem;
-		margin: 2rem 0;
-	}
-	.link-card-grid {
-		margin: 0 10vw;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
-	}
+  .astro-a {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 220px;
+    height: auto;
+    z-index: -1;
+  }
+  h1 {
+    color: #ffbce5;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 2rem 0;
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+  .message {
+    font-size: 1rem;
+    margin: 2rem 0;
+  }
+  .link-card-grid {
+    margin: 0 10vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 2rem;
+    padding: 0;
+  }
 </style>

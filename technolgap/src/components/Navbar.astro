@@ -1,73 +1,167 @@
-<nav class="navbar">
+<!--DESKTOP NAVBAR LAYOUT -->
+<nav class="desktop-navbar">
+  <!--Main desktop class -->
+  <ul>
+    <!--Adding the logo, redirects to home page. -->
+    <div class="logo">
+      <button class="logo-button" onclick="window.location.href='/'">
+        <img src="src/pages/logo.png" alt="Technolgap" />
+      </button>
+    </div>
+    <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
+    <li><a href="/">HOME</a></li>
+    <li class="desktop-dropdown">
+      <a href="/about-us" class="desktop-dropdown-toggle">ABOUT US</a>
+      <ul class="desktop-dropdown-menu">
+        <li><div class="menu-item"><a href="/our-team">Our Team</a></div></li>
+      </ul>
+    </li>
+    <li><a href="/events">EVENTS</a></li>
+    <li><a href="/resources">RESOURCES</a></li>
+    <li class="desktop-dropdown">
+      <a href="/get-involved" class="desktop-dropdown-toggle">GET INVOLVED</a>
+      <ul class="desktop-dropdown-menu">
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/sponsors">Sponsors</a></li>
+        <li><a href="/collaborators">Collaborators</a></li>
+        <li><a href="/volunteers">Volunteers</a></li>
+      </ul>
+    </li>
+    <button class="custom-button">Contact Us!</button>
+  </ul>
+</nav>
+
+<!--MOBILE NAVBAR LAYOUT -->
+<nav class="mobile-navbar">
+  <div class="logo">
+    <button class="logo-button" onclick="window.location.href='/'">
+      <img src="src/pages/logo.png" alt="Technolgap" />
+    </button>
+  </div>
+  <button class="menu-button" id="menuButton">☰</button>
+
+  <div class="menu" id="mobileMenu">
     <ul>
-        <li><a href="/">HOME</a></li>
-        <li><a href="/about-us">ABOUT US</a></li>
-        <li><a href="/events">EVENTS</a></li>
-        <li><a href="/resources">RESOURCES</a></li>
-        <li class="dropdown">
-          <a href="/get-involved" class="dropdown-toggle">GET INVOLVED</a>
-          <ul class="dropdown-menu">
+      <div class="main-menu"><li><a href="/">HOME</a></li></div>
+      <div class="main-menu">
+        <li class="mobile-dropdown">
+          <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle"
+            >ABOUT US</a
+          >
+
+          <ul class="mobile-dropdown-menu" id="aboutDropdown">
+            <li><a href="/our-team">Our Team</a></li>
+          </ul>
+        </li>
+      </div>
+      <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
+
+      <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
+      <div class="main-menu">
+        <li class="mobile-dropdown">
+          <a href="#" class="mobile-dropdown-toggle" id="getInvolvedToggle"
+            >GET INVOLVED</a
+          >
+          <ul class="mobile-dropdown-menu" id="getInvolvedDropdown">
             <li><a href="/chapters">Chapters</a></li>
             <li><a href="/sponsors">Sponsors</a></li>
             <li><a href="/collaborators">Collaborators</a></li>
             <li><a href="/volunteers">Volunteers</a></li>
           </ul>
         </li>
-        <button class="custom-button">Contact Us!</button>
+      </div>
     </ul>
+  </div>
 </nav>
-
+<!--END HTML -->
 <style>
-  /* Navbar style */
-  .navbar {
-    background-color: #2D6D68DD;
-    padding: 0.5rem;
+  /* DESKTOP Navbar style */
+
+  .logo-button {
+    background: none; /* Remove default button background */
+    border: none; /* Remove default border */
+    color: white; /* Text color */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 1rem 1.5rem; /* Padding to match your original design */
+    text-decoration: none; /* No underline */
+    outline: none; /* Remove focus outline */
+    box-shadow: none;
   }
-  .navbar ul {
+
+  .logo-button:focus {
+    outline: none; /* Remove focus outline on focus */
+    box-shadow: none;
+  }
+
+  .desktop-navbar {
+    background-color: #2d6d68dd;
+    padding: 0.5rem;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    height: 70px; /* Set a fixed height */
+  }
+
+  .desktop-navbar ul {
     list-style-type: none;
     margin: 0;
     margin-left: auto;
     padding: 0;
     gap: 2rem;
   }
-  .navbar li {
+
+  .logo img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin-right: 30px;
+  }
+
+  .desktop-navbar li {
     position: relative;
   }
-  .navbar a {
+  .desktop-navbar a {
     color: white;
     font-size: 1rem;
     text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
+    transition:
+      color 0.3s,
+      text-shadow 0.3s,
+      font-weight 60s;
     font-weight: 400;
     padding: 1rem 1.5rem;
-    display: block;
+    display: flex;
     height: 100%;
     box-sizing: border-box;
   }
-  .navbar a:hover {
+  .desktop-navbar a:hover {
     font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   /* Dropdown style */
-  .dropdown {
+  .desktop-dropdown {
     display: inline-block;
   }
-  .dropdown-menu {
+  .desktop-dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #2D6D68DD;
+    background-color: #2d6d68dd;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    width: auto; 
+    width: 100%;
     border-radius: 0;
   }
-  .dropdown-menu li {
+  .desktop-dropdown-menu li {
     width: 90%;
   }
-  .dropdown-menu li a {
+  .desktop-dropdown-menu li a {
     display: flex;
     justify-content: center;
     padding: 0.75rem 1rem;
@@ -75,17 +169,17 @@
     border-radius: 0;
     text-decoration: none;
   }
-  .dropdown-menu li a:hover {
-    background-color: #64A8A2DD;
+  .desktop-dropdown-menu li a:hover {
+    background-color: #64a8a2dd;
     box-sizing: border-box;
     border: 0.25px solid white;
   }
-  .dropdown:hover .dropdown-menu {
+  .desktop-dropdown:hover .desktop-dropdown-menu {
     display: block;
   }
-  .dropdown:hover .dropdown-toggle {
+  .desktop-dropdown:hover .desktop-dropdown-toggle {
     font-weight: bold;
-    background-color: #64A8A2DD;
+    background-color: #64a8a2dd;
     border-radius: 0;
   }
 
@@ -94,10 +188,168 @@
     margin-right: 2rem;
     border: 0.25px solid white;
     color: white;
-    background-color: #2D6D68DD;
+    background-color: #2d6d68dd;
+    transition: font-weight 60s;
   }
   .custom-button:hover {
     font-weight: bold;
-    background-color: #64A8A2DD;
+    background-color: #64a8a2dd;
+  }
+
+  /*MOBILE NAVBAR DESIGN*/
+  .mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2d6d68dd;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    width: 600px;
+    height: 70px;
+    z-index: 1000;
+  }
+
+  .logo-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .menu-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 85px;
+    right: 0;
+    background-color: #2d6d68dd;
+    width: 50%;
+  }
+
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+  }
+
+  .menu li {
+    border-bottom: none;
+  }
+  .main-menu {
+    width: 90%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .menu a,
+  .menu button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .menu a:hover,
+  .menu button:hover {
+    background-color: #64a8a2dd;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Dropdown menu styles */
+  .mobile-dropdown-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobile-dropdown:hover .mobile-dropdown-menu {
+    display: flex;
+  }
+
+  .mobile-navbar {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .desktop-navbar {
+      display: none;
+    }
+
+    .mobile-navbar {
+      display: flex;
+    }
+    .logo img {
+      margin-right: 100px;
+    }
   }
 </style>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const aboutUsToggle = document.getElementById("aboutUsToggle");
+    const aboutDropdown = document.getElementById("aboutDropdown");
+    const getInvolvedToggle = document.getElementById("getInvolvedToggle");
+    const getInvolvedDropdown = document.getElementById("getInvolvedDropdown");
+
+    const toggleMobileMenu = () => {
+      mobileMenu.style.display =
+        mobileMenu.style.display === "flex" ? "none" : "flex";
+    };
+
+    // Show mobile menu when menu button is clicked
+    menuButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (mobileMenu.style.display === "flex") {
+        mobileMenu.style.display = "none";
+      }
+      aboutDropdown.style.display = "none";
+      getInvolvedDropdown.style.display = "none";
+    });
+
+    aboutUsToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      aboutDropdown.style.display =
+        aboutDropdown.style.display === "flex" ? "none" : "flex";
+    });
+
+    getInvolvedToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      getInvolvedDropdown.style.display =
+        getInvolvedDropdown.style.display === "flex" ? "none" : "flex";
+    });
+
+    document.addEventListener("click", (event) => {
+      if (aboutDropdown.style.display === "flex") {
+        aboutDropdown.style.display = "none";
+      }
+      if (getInvolvedDropdown.style.display === "flex") {
+        getInvolvedDropdown.style.display = "none";
+      }
+    });
+  });
+</script>
