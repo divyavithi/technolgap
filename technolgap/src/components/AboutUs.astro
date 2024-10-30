@@ -1,5 +1,6 @@
 ---
 import whiteStar from "../../public/white-star.png";
+import Subheading from "../components/Subheading.astro"
 
 interface Props {
 	title: string;
@@ -14,7 +15,7 @@ const { title, subtitle, body1, body2, body3 } = Astro.props;
 
 <article class="about-us">
     <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
-    <h2>{title}</h2>
+    <Subheading title={title}/>
     <h3>{subtitle}</h3>
     <p>{body1}</p>
     <p>{body2}</p>
@@ -22,13 +23,6 @@ const { title, subtitle, body1, body2, body3 } = Astro.props;
 </article>
 
 <style>
-    .about-us h2{
-        font-size: 50px;
-        color: #2f605c;
-        margin-bottom: 2rem;
-        text-shadow: 0px 3px 3px #7f7f7f;
-        -webkit-text-stroke: 0.5px #ffffff;
-    }
     .about-us h3{
         font-size: 30px;
         margin-bottom: 3rem;

@@ -2,6 +2,7 @@
 import whiteStar from "../../public/white-star.png";
 import pinkStar from "../../public/pink-star.png";
 import CoreValueCard from "../components/CoreValueCard.astro";
+import Subheading from "../components/Subheading.astro"
 
 interface Props {
     title: string;
@@ -19,7 +20,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
 <article class="core-values">
     <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
     <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-top">
-    <h2>{title}</h2>
+    <Subheading title={title}/>
     <ul role="list" class="value-card-grid">
         <CoreValueCard
             title={subtitle1}
@@ -39,13 +40,13 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
 </article>
 
 <style>
-    .core-values h2{
+    /* .core-values h2{
         font-size: 50px;
         color: #2f605c;
         margin-bottom: 5rem;
         text-shadow: 0px 3px 3px #7f7f7f;
         -webkit-text-stroke: 0.5px #ffffff;
-    }
+    } */
     article{
         padding-top: 7rem;
         padding-bottom: 6rem;
