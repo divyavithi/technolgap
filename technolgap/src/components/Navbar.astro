@@ -5,7 +5,7 @@
     <!--Adding the logo, redirects to home page. -->
     <div class="logo">
       <button class="logo-button" onclick="window.location.href='/'">
-        <img src="src/pages/logo.png" alt="Technolgap" />
+        <img src="public/Logo.png" alt="Technolgap" />
       </button>
     </div>
     <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
@@ -35,7 +35,7 @@
 <nav class="mobile-navbar">
   <div class="logo">
     <button class="logo-button" onclick="window.location.href='/'">
-      <img src="src/pages/logo.png" alt="Technolgap" />
+      <img src="public/Logo.png" alt="Technolgap" />
     </button>
   </div>
   <button class="menu-button" id="menuButton">☰</button>
@@ -103,6 +103,7 @@
     display: flex;
     align-items: center; /* Center items vertically */
     height: 70px; /* Set a fixed height */
+    opacity: 1;
   }
 
   .desktop-navbar ul {
@@ -207,7 +208,8 @@
     top: 0;
     width: 600px;
     height: 70px;
-    z-index: 1000;
+
+    z-index: 10000;
   }
 
   .logo-button {
@@ -232,6 +234,7 @@
     right: 0;
     background-color: #2d6d68dd;
     width: 50%;
+    opacity: 1;
   }
 
   .menu ul {
