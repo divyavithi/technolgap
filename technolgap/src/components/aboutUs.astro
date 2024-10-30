@@ -1,0 +1,28 @@
+---
+// src/components/aboutUs.astro
+import Milestones from "./milestones.astro";
+
+---
+<section id="about-us">
+    <h2>About Us</h2>
+    <p>Our journey is defined by a series of significant milestones and core values that shape who we are.</p>
+    
+    <!-- Milestones Section -->
+    <Milestones />
+</section>
+
+<style>
+    #about-us {
+        padding: 2rem;
+        text-align: center;
+        background: linear-gradient(to bottom, white, #ffebf5, #ffe0f0);
+    }
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+</style>
