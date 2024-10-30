@@ -1,6 +1,7 @@
 ---
 // src/pages/aboutUsPage.astro
 import AboutUs from "../components/aboutUs.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 
 ---
 <!DOCTYPE html>
@@ -8,9 +9,12 @@ import AboutUs from "../components/aboutUs.astro";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <PageLayout>
+        <h1 slot="title">About Us</h1>
+        <AboutUs />
+    </PageLayout>
 </head>
-<body>
+<!-- <body>
     <AboutUs />
-</body>
+</body> -->
 </html>
