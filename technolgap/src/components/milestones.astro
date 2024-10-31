@@ -1,7 +1,7 @@
 ---
 // src/components/milestones.astro
 import { createClient } from "contentful";
-
+import Subheading from "./Subheading.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
@@ -10,88 +10,91 @@ const client = createClient({
 
 // Fetch milestones from Contentful
 const response = await client.getEntries({
-    content_type: "milestone",
-    order: ["fields.year"] // Order milestones by year
+  content_type: "milestone",
+  order: ["fields.year"], // Order milestones by year
 });
 const milestones = response.items;
 ---
 
-<section id="milestones">
-    <h3>Milestones at Technolgap</h3>
+<section id="about-us">
+  <Subheading title="Milestones at Technolgap" />
+  <section id="milestones">
     <div class="timeline">
-        {milestones.map((milestone) => (
-            <div class="milestone">
-                <div class="circle">
-                    <h4>{milestone.fields.year}</h4>
-                    <p>{milestone.fields.description}</p>
-                </div>
+      {
+        milestones.map((milestone) => (
+          <div class="milestone">
+            <div class="circle">
+              <h4>{milestone.fields.year}</h4>
+              <p>{milestone.fields.description}</p>
             </div>
-        ))}
+          </div>
+        ))
+      }
     </div>
+  </section>
 </section>
 
 <style>
-    #milestones {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #2D6D68DD;
-    font-weight: bold; /* Makes the text bold */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adds a shadow */
-    }
-    .timeline {
-        display: grid;
-        gap: 2rem;
-        justify-items: center;
-        position: relative;
-        width: 80%;
-        max-width: 600px;
-    }
-    .milestone {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-    }
-    .circle {
-        background-color: #2e5f3e; /* Green color for circles */
-        background: linear-gradient(135deg, #2D6D68DD,  #64A8A2DD);
-        color: white;
-        width: 170px;
-        height: 170px;
-        border-radius: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 1rem;
-    }
-    .circle h4 {
-        margin: 0;
-        font-size: 1.2rem;
-        color: white;
-    }
-    .circle p {
-        margin: 0.5rem 0 0;
-        font-size: 0.9rem;
-        text-align: center;
-        color: white;
-    }
-    .milestone::before {
-        content: "";
-        position: absolute;
-        top: -2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4px;
-        height: 2rem;
-        background-color: #FFBCE5; /* Pink connecting line */
-    }
-    .milestone:first-of-type::before {
-        display: none; /* No line above the first item */
-    }
+  #about-us {
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(to bottom, white, #ffebf5, #ffe0f0);
+  }
+
+  #milestones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .timeline {
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+  }
+  .milestone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .circle {
+    background-color: #2e5f3e; /* Green color for circles */
+    background: linear-gradient(135deg, #2d6d68dd, #64a8a2dd);
+    color: white;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+  .circle h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+  }
+  .circle p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    text-align: center;
+    color: white;
+  }
+  .milestone::before {
+    content: "";
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 2rem;
+    background-color: #ffbce5; /* Pink connecting line */
+  }
+  .milestone:first-of-type::before {
+    display: none; /* No line above the first item */
+  }
 </style>

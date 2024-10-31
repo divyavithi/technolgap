@@ -1,30 +1,57 @@
 ---
-// src/components/aboutUs.astro
-import Milestones from "./milestones.astro";
+import whiteStar from "../../public/white-star.png";
+import Subheading from "../components/Subheading.astro"
 
+interface Props {
+	title: string;
+    subtitle: string;
+	body1: string;
+    body2: string;
+    body3: string;
+}
+
+const { title, subtitle, body1, body2, body3 } = Astro.props;
 ---
-<section id="about-us">
-    <h2>About Us</h2>
-    
-    <!-- Milestones Section -->
-    <Milestones />
-</section>
+
+<article class="about-us">
+    <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
+    <Subheading title={title}/>
+    <h3>{subtitle}</h3>
+    <p>{body1}</p>
+    <p>{body2}</p>
+    <p>{body3}</p>
+</article>
 
 <style>
-    #about-us {
-        padding: 2rem;
-        text-align: center;
-        background: linear-gradient(to bottom, white, #ffebf5, #ffe0f0);
+    .about-us h3{
+        font-size: 30px;
+        margin-bottom: 3rem;
+        color: #2f605c;
     }
-    h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #2D6D68DD;
-        font-weight: bold; /* Makes the text bold */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adds a shadow */
-    }
-    p {
-        font-size: 1.2rem;
+    .about-us p{
+        color: #2f605c;
+        font-size: 18px;
+        text-align: left;
+        margin-left: 12rem;
         margin-bottom: 2rem;
+        margin-right: 12rem;
+    }
+
+    article{
+        padding-top: 8rem;
+        padding-bottom: 5rem;
+        background: linear-gradient(#ffffff, #f7d7ea);
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .about-us .white-star-top {
+        position: absolute;
+        width: 163.48px;
+        height: 169.42px;
+        top: 510px;
+        left: 540px;
+        z-index: 0;
     }
 </style>
