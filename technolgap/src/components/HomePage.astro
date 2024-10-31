@@ -1,0 +1,237 @@
+---
+import greenline from "../../public/line-design.png";
+// import ellipseline from "../../public/line-design-ellipse-highlight.png";
+import pinkstar from "../../public/pink-star.png";
+import whitestar from "../../public/white-star.png";
+---
+<div class="homepage-container">
+
+<div class="text-container">
+  <h1><span class="pink-shadow">technolgap</span></h1>
+  <h2>Welcome to Technolgap!</h2>
+  <p class="message">
+    At Technolgap, we're on a mission to bridge the gender gap in the technology
+    sector across Canada. Our community is dedicated to creating opportunities
+    and empowering women and non-binary individuals in the Canadian tech
+    industry. We believe that by fostering inclusivity and collaboration, we can
+    drive positive change in the industry.
+  </p>
+  <div class="buttons-container">
+    <button class="sponsor-button">SPONSOR</button>
+    <button class="conference-button">CONFERENCE</button>
+  </div>
+</div>
+<img src={greenline.src} alt="Green Line Design" class="greenline-image" />
+<!-- <img
+    src={ellipseline.src}
+    alt="Ellipse for Green Line Design"
+    class="ellipseline-image"
+  /> -->
+<img
+  src={greenline.src}
+  alt="Green Line Design"
+  class="greenline-image-rotated"
+/>
+<!-- <img
+    src={ellipseline.src}
+    alt="Ellipse for Green Line Design"
+    class="ellipseline-image-rotated"
+  /> -->
+
+<img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-top" />
+<img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-bottom" />
+<img src={whitestar.src} alt="White Star Design" class="whitestar-image-top" />
+<img
+  src={whitestar.src}
+  alt="White Star Design"
+  class="whitestar-image-bottom"
+/>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(
+      90deg,
+      rgba(45, 109, 104, 0.866667) 23%,
+      rgba(73, 139, 133, 0.866667) 56%,
+      rgba(100, 168, 162, 0.866667) 75.5%
+    );
+    color: #fbf6ef;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .homepage-container {
+    min-height: 100vh;
+
+  }
+  .text-container {
+    position: absolute;
+    width: 809px;
+    top: 250px;
+    left: 3%;
+    transform-origin: left;
+  }
+  h1 {
+    font-size: 128px;
+    margin-left: -5px;
+  }
+  .pink-shadow {
+    text-shadow: 4px 0px 0px #ffbce5;
+  }
+  h2 {
+    font-size: 36px;
+    color: #ffbce5;
+  }
+  .message {
+    font-size: 22px;
+  }
+  .buttons-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .sponsor-button,
+  .conference-button {
+    width: 168px;
+    height: 64px;
+    border: 4px solid white;
+    color: white;
+    font-size: 18px;
+    background-color: transparent;
+    border-radius: 36px;
+  }
+  .sponsor-button:hover,
+  .conference-button:hover {
+    background-color: #64a8a2dd;
+  }
+  .ellipseline-image {
+    position: absolute;
+    width: 117.85px;
+    height: 81.69px;
+    top: 488px;
+    right: 370px;
+    z-index: 1;
+  }
+  .ellipseline-image-rotated {
+    position: absolute;
+    width: 117.85px;
+    height: 81.69px;
+    top: 15px;
+    left: 110px;
+    z-index: -1;
+    transform: rotate(65deg);
+  }
+  .greenline-image {
+    position: absolute;
+    width: 522px;
+    height: 642.71px;
+    top: 125px;
+    right: 0px;
+    transform-origin: right;
+  }
+  .greenline-image-rotated {
+    position: absolute;
+    width: 522px; /* 3/4 of the original image size */
+    height: 642.71px; /* 3/4 of the original image size */
+    top: -390px;
+    left: 170px;
+    z-index: -1;
+    transform: rotate(55deg);
+    transform-origin: left;
+  }
+  .pinkstar-image-top {
+    position: absolute;
+    width: 259px;
+    height: 258px;
+    top: 275px;
+    right: 475px;
+    z-index: 1;
+  }
+  .pinkstar-image-bottom {
+    position: absolute;
+    width: 194.25px;
+    height: 193.5px;
+    top: 675px;
+    right: 320px;
+    z-index: 0;
+  }
+  .whitestar-image-top {
+    position: absolute;
+    width: 159.82px;
+    height: 172.91px;
+    top: 118px;
+    left: 656px;
+    z-index: 1;
+    transform: rotate(-20deg);
+  }
+  .whitestar-image-bottom {
+    position: absolute;
+    width: 87.51px;
+    height: 99px;
+    top: 200px;
+    right: 400px;
+    z-index: 1;
+    transform: rotate(10deg);
+    transform-origin: right;
+  }
+
+  @media (max-width: 1500px) {
+    .whitestar-image-bottom,
+    .greenline-image,
+    .pinkstar-image-bottom,
+    .ellipseline-image {
+      scale: 90%; /* Smaller font size for small devices */
+    }
+
+    .pinkstar-image-bottom {
+      top: 630px;
+      right: 290px;
+    }
+
+    .pinkstar-image-top {
+      top: 180px;
+      right: 350px;
+      scale: 90%;
+    }
+    .whitestar-image-bottom {
+      right: 200px;
+      top: 120px;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    h1 {
+      font-size: 100px;
+    }
+    .text-container {
+      width: 600px;
+    }
+    .greenline-image-rotated {
+      scale: 80%;
+      left: 150px;
+    }
+    .whitestar-image-top {
+      top: 50px;
+      left: 500px;
+      scale: 80%;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    .greenline-image {
+      scale: 70%;
+      top: 150px;
+    }
+    .pinkstar-image-bottom {
+      right: 215px;
+      top: 600px;
+    }
+    .pinkstar-image-top {
+      top: 160px;
+      right: 200px;
+      scale: 80%;
+    }
+    .text-container {
+        width: 55%;
+    }
+  }
+</style>
