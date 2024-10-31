@@ -1,0 +1,57 @@
+---
+import whiteStar from "../../public/white-star.png";
+import Subheading from "../components/Subheading.astro"
+
+interface Props {
+	title: string;
+    subtitle: string;
+	body1: string;
+    body2: string;
+    body3: string;
+}
+
+const { title, subtitle, body1, body2, body3 } = Astro.props;
+---
+
+<article class="about-us">
+    <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
+    <Subheading title={title}/>
+    <h3>{subtitle}</h3>
+    <p>{body1}</p>
+    <p>{body2}</p>
+    <p>{body3}</p>
+</article>
+
+<style>
+    .about-us h3{
+        font-size: 30px;
+        margin-bottom: 3rem;
+        color: #2f605c;
+    }
+    .about-us p{
+        color: #2f605c;
+        font-size: 18px;
+        text-align: left;
+        margin-left: 12rem;
+        margin-bottom: 2rem;
+        margin-right: 12rem;
+    }
+
+    article{
+        padding-top: 8rem;
+        padding-bottom: 5rem;
+        background: linear-gradient(#ffffff, #f7d7ea);
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .about-us .white-star-top {
+        position: absolute;
+        width: 163.48px;
+        height: 169.42px;
+        top: 510px;
+        left: 540px;
+        z-index: 0;
+    }
+</style>

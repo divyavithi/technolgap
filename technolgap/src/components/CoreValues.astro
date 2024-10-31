@@ -1,0 +1,102 @@
+---
+import whiteStar from "../../public/white-star.png";
+import pinkStar from "../../public/pink-star.png";
+import CoreValueCard from "../components/CoreValueCard.astro";
+import Subheading from "../components/Subheading.astro"
+
+interface Props {
+    title: string;
+	subtitle1: string;
+	body1: string;
+    subtitle2: string;
+	body2: string;
+    subtitle3: string;
+	body3: string;
+}
+
+const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.props;
+---
+
+<article class="core-values">
+    <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
+    <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-top">
+    <Subheading title={title}/>
+    <ul role="list" class="value-card-grid">
+        <CoreValueCard
+            title={subtitle1}
+            body={body1}
+        />
+        <CoreValueCard
+            title={subtitle2}
+            body={body2}
+        />
+        <CoreValueCard
+            title={subtitle3}
+            body={body3}
+        />
+    </ul>
+    <img src={whiteStar.src} alt="White Star Design" class="white-star-bottom">
+    <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-bottom">
+</article>
+
+<style>
+    /* .core-values h2{
+        font-size: 50px;
+        color: #2f605c;
+        margin-bottom: 5rem;
+        text-shadow: 0px 3px 3px #7f7f7f;
+        -webkit-text-stroke: 0.5px #ffffff;
+    } */
+    article{
+        padding-top: 7rem;
+        padding-bottom: 6rem;
+        background: linear-gradient(#f7d7ea, #fef8fc);
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .value-card-grid {
+		margin: 0 10vw;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+
+    .core-values .white-star-top {
+        position: absolute;
+        width: 113.48px;
+        height: 119.42px;
+        top: 1410px;
+        left: 190px;
+        z-index: 0;
+    }
+
+    .core-values .pink-star-top {
+        position: absolute;
+        width: 155.48px;
+        height: 175.42px;
+        top: 1440px;
+        left: 111px;
+        z-index: 0;
+    }
+
+    .core-values .pink-star-bottom {
+        position: absolute;
+        width: 113.48px;
+        height: 119.42px;
+        top: 1860px;
+        right: 250px;
+        z-index: 0;
+    }
+
+    .core-values .white-star-bottom {
+        position: absolute;
+        width: 155.48px;
+        height: 185.42px;
+        top: 1840px;
+        right: 103px;
+        z-index: 0;
+    }
+</style>
