@@ -1,6 +1,5 @@
 ---
 import greenline from "../../public/line-design.png";
-// import ellipseline from "../../public/line-design-ellipse-highlight.png";
 import pinkstar from "../../public/pink-star.png";
 import whitestar from "../../public/white-star.png";
 ---
@@ -21,22 +20,14 @@ import whitestar from "../../public/white-star.png";
     <button class="conference-button">CONFERENCE</button>
   </div>
 </div>
-<img src={greenline.src} alt="Green Line Design" class="greenline-image" />
-<!-- <img
-    src={ellipseline.src}
-    alt="Ellipse for Green Line Design"
-    class="ellipseline-image"
-  /> -->
+<div class="greenline-container">
+  <img src={greenline.src} alt="Green Line Design" class="greenline-image" />
+</div>
 <img
   src={greenline.src}
   alt="Green Line Design"
   class="greenline-image-rotated"
 />
-<!-- <img
-    src={ellipseline.src}
-    alt="Ellipse for Green Line Design"
-    class="ellipseline-image-rotated"
-  /> -->
 
 <img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-top" />
 <img src={pinkstar.src} alt="Pink Star Design" class="pinkstar-image-bottom" />
@@ -88,7 +79,7 @@ import whitestar from "../../public/white-star.png";
   }
   .buttons-container {
     display: flex;
-    gap: 40px;
+    gap: 5%;
     margin-top: 40px;
   }
   .sponsor-button,
@@ -105,23 +96,6 @@ import whitestar from "../../public/white-star.png";
   .conference-button:hover {
     background-color: #64a8a2dd;
   }
-  .ellipseline-image {
-    position: absolute;
-    width: 117.85px;
-    height: 81.69px;
-    top: 488px;
-    right: 370px;
-    z-index: 1;
-  }
-  .ellipseline-image-rotated {
-    position: absolute;
-    width: 117.85px;
-    height: 81.69px;
-    top: 15px;
-    left: 110px;
-    z-index: -1;
-    transform: rotate(65deg);
-  }
   .greenline-image {
     position: absolute;
     width: 522px;
@@ -129,6 +103,8 @@ import whitestar from "../../public/white-star.png";
     top: 125px;
     right: 0px;
     transform-origin: right;
+    width: auto;
+    max-width: none;
   }
   .greenline-image-rotated {
     position: absolute;
@@ -139,6 +115,9 @@ import whitestar from "../../public/white-star.png";
     z-index: -1;
     transform: rotate(55deg);
     transform-origin: left;
+    
+    width: auto;
+    max-width: none;
   }
   .pinkstar-image-top {
     position: absolute;
@@ -160,8 +139,8 @@ import whitestar from "../../public/white-star.png";
     position: absolute;
     width: 159.82px;
     height: 172.91px;
-    top: 118px;
-    left: 656px;
+    top: 75px;
+    left: 640px;
     z-index: 1;
     transform: rotate(-20deg);
   }
@@ -179,13 +158,12 @@ import whitestar from "../../public/white-star.png";
   @media (max-width: 1500px) {
     .whitestar-image-bottom,
     .greenline-image,
-    .pinkstar-image-bottom,
-    .ellipseline-image {
+    .pinkstar-image-bottom {
       scale: 90%;
     }
     .pinkstar-image-bottom {
       top: 630px;
-      right: 290px;
+      right: 270px;
     }
     .pinkstar-image-top {
       top: 180px;
@@ -228,7 +206,7 @@ import whitestar from "../../public/white-star.png";
       left: 150px;
     }
     .whitestar-image-top {
-      top: 50px;
+      top: 30px;
       left: 500px;
     }
   }
@@ -246,8 +224,8 @@ import whitestar from "../../public/white-star.png";
       top: 150px;
     }
     .pinkstar-image-bottom {
-      right: 215px;
       top: 600px;
+      right: 190px;
     }
     .pinkstar-image-top {
       top: 160px;
@@ -256,6 +234,10 @@ import whitestar from "../../public/white-star.png";
     .whitestar-image-bottom {
       top: 95px;
       right: 125px;
+    }
+    .whitestar-image-top {
+      left: 510px;
+      top: 33px;
     }
   }
 
@@ -267,7 +249,7 @@ import whitestar from "../../public/white-star.png";
     }
     .pinkstar-image-bottom {
       top: 580px;
-      right: 185px;
+      right: 165px;
     }
     .pinkstar-image-top {
       top: 240px;
@@ -305,12 +287,12 @@ import whitestar from "../../public/white-star.png";
       left: 115px;
     }
     .whitestar-image-top {
-      top: 60px;
-      left: 425px;
+      top: 45px;
+      left: 415px;
     }
     .pinkstar-image-bottom {
       top: 575px;
-      right: 170px;
+      right: 150px;
     }
   }
 
@@ -336,20 +318,20 @@ import whitestar from "../../public/white-star.png";
       left: 115px;
     }
     .whitestar-image-top {
-      top: 65px;
-      left: 375px;
+      top: 50px;
+      left: 365px;
     }
     .pinkstar-image-top {
       top: 200px;
       right: 65px;
     }
     .whitestar-image-bottom {
-      top: 175px;
-      right: 40px;
+      top: 190px;
+      right: 10px;
     }
     .pinkstar-image-bottom {
-      top: 545px;
-      right: 140px;
+      top: 550px;
+      right: 130px;
     }
   }
 
@@ -387,8 +369,8 @@ import whitestar from "../../public/white-star.png";
       left: 95px;
     }
     .whitestar-image-top {
-      top: 55px;
-      left: 300px;
+      top: 35px;
+      left: 290px;
     }
     .greenline-image {
       top: 105px;
@@ -398,8 +380,8 @@ import whitestar from "../../public/white-star.png";
       right: 65px;
     }
     .pinkstar-image-bottom {
-      top: 500px;
-      right: 120px;
+      top: 490px;
+      right: 110px;
     }
     .whitestar-image-bottom {
       top: 175px;
@@ -422,78 +404,67 @@ import whitestar from "../../public/white-star.png";
     .pinkstar-image-top {
       top: 225px;
       right: 5px;
+      scale: 30%;
     }
     .pinkstar-image-bottom {
       top: 465px;
-      right: 53.5px;
+      right: 65px;
     }
     .whitestar-image-top {
-      top: 35px;
+      top: 45px;
       left: 210px;
     }
   }
 
-  @media (max-width: 540px) {
-    .greenline-image-rotated,
-    .greenline-image,
-    .pinkstar-image-top,
-    .whitestar-image-bottom,
-    .pinkstar-image-bottom {
-      scale: 40%;
-    }
-    .greenline-image-rotated {
-      top: -275px;
-      left: 80px;
-    }
-    .pinkstar-image-top {
-      top: 225px;
-      right: 5px;
-    }
-    .pinkstar-image-bottom {
-      top: 465px;
-      right: 80px;
-    }
-    .whitestar-image-top {
-      top: 35px;
-      left: 210px;
-    }
-  }
 
-  @media (max-width: 425px) {
+  @media (max-width: 426px) {
     h1 {
       font-size: 50px;
     }
     .whitestar-image-top {
-      scale: 45%;
-      left: 200px;
+      scale: 35%;
+      left: 140px;
+      top: 50px;
+    }
+    .greenline-image-rotated {
+      top: -250px;
+      left: 60px;
+      scale: 30%;
     }
     .pinkstar-image-bottom {
-      top: 465px;
-      right: 50px;
+      right: 20px;
+      top: 460px;
+    }
+    .greenline-image {
+      top: 0px;
+      right: -50px;
+    }
+    .greenline-container {
+      overflow: hidden; 
+      position: relative;
+      height: 100vh;
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 376px) {
     h1 {
       font-size: 50px;
     }
     h2 {
-      font-size: 14px;
+      font-size: 13px;
     }
     .message {
       font-size: 10px;
     }
-    .greenline-image-rotated {
-      top: -260px;
-      left: 80px;
+    .buttons-container {
+      scale: 70%;
     }
     .whitestar-image-top {
-      top: 35px;
-      left: 190px;
+      top: 50px;
+      left: 140px;
     }
-    .pinkstar-image-bottom {
-      top: 465px;
-      right: 35px;
+    .pinkstar-image-top {
+      right: -25px;
     }
   }
 </style>
