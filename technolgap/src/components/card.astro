@@ -1,0 +1,129 @@
+---
+import linkedinLogo from "../../public/linkedin-logo.png";
+import whiteStar from "../../public/white-star.png";
+import pinkStar from "../../public/pink-star.png";
+
+interface Props {
+	name: string;
+    headshot: string;
+	position: string;
+    link: string;
+    bio: string;
+}
+
+const { name, headshot, position, link, bio } = Astro.props;
+---
+
+<article class="card">
+    <!-- Front -->
+     <section class="card-content">
+        <section class="front-card">
+            <img src={headshot} alt="Headshot photo" class="card-headshot">
+            <h3>{name}</h3>
+            <h4>{position}</h4>
+        </section>
+
+        <!-- Back -->
+        <section class="back-card">
+            <img src={whiteStar.src} alt="White Star Design" class="white-star">
+            <p>{bio}</p>
+            <p>
+                <a href={link} target="_blank">
+                    <img src={linkedinLogo.src} alt="linkedin logo" class="card-linkedin-logo">
+                </a>
+            </p>
+            <img src={pinkStar.src} alt="Pink Star Design" class="pink-star">
+        </section>
+    </section>
+</article>
+
+<style>
+    .card-headshot {
+        margin: 1.2rem;
+        height: 210px;
+        border-radius: 50%;
+        border-width: 5px;
+        border-color: white;
+        border-style: solid;
+    }
+
+    .card-linkedin-logo {
+        position: absolute; /* Position the logo absolutely within the .back-card */
+        bottom: 15px; /* Distance from the bottom */
+        right: 15px; /* Distance from the right */
+        height: 48px;
+    }
+
+    .pink-star, .white-star{
+        opacity: 0.7;
+    }
+
+    .pink-star{
+        height: 80px;
+        position: absolute;
+        bottom: 0;
+        left: 0px;
+    }
+
+    .white-star{
+        height: 90px;
+        position: absolute;
+        top: 0;
+        right: 0px;
+    }
+
+    .card {
+        background-color: transparent;
+        width: 280px;
+        height: 375px;
+        perspective: 1000px;
+    }
+
+    .card-content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        background-color: transparent;
+        box-shadow: 2px 7px 7px 2px #424242;
+        border-radius: 15px;
+    }
+
+    .card:hover .card-content {
+        transform: rotateY(180deg);
+        /* transition: transform 0.6s; */
+    }
+
+    .back-card, .front-card {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* -webkit-backface-visibility: hidden; */
+        backface-visibility: hidden;
+
+        background-color: #2f605c;
+        color: white;
+        border-color: #fee8f5;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 15px;
+    }
+
+    .back-card {
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+    }
+
+    .back-card p {
+        
+    }
+
+    .card h3, h4, p {
+        color: white;
+    }
+</style>
