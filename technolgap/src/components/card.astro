@@ -26,7 +26,7 @@ const { name, headshot, position, link, bio } = Astro.props;
         <!-- Back -->
         <section class="back-card">
             <img src={whiteStar.src} alt="White Star Design" class="white-star">
-            <p>{bio}</p>
+            <h5>{bio}</h5>
             <p>
                 <a href={link} target="_blank">
                     <img src={linkedinLogo.src} alt="linkedin logo" class="card-linkedin-logo">
@@ -59,17 +59,17 @@ const { name, headshot, position, link, bio } = Astro.props;
     }
 
     .pink-star{
-        height: 80px;
+        height: 95px;
         position: absolute;
-        bottom: 0;
-        left: 0px;
+        bottom: -26px;
+        left: -20px;
     }
 
     .white-star{
-        height: 90px;
+        height: 110px;
         position: absolute;
-        top: 0;
-        right: 0px;
+        top: -20px;
+        right: -26px;
     }
 
     .card {
@@ -77,6 +77,8 @@ const { name, headshot, position, link, bio } = Astro.props;
         width: 280px;
         height: 375px;
         perspective: 1000px;
+        box-shadow: none;
+        /* set paading to 0 for no extra space */
     }
 
     .card-content{
@@ -87,13 +89,18 @@ const { name, headshot, position, link, bio } = Astro.props;
         transition: transform 0.8s;
         transform-style: preserve-3d;
         background-color: transparent;
-        box-shadow: 2px 7px 7px 2px #424242;
         border-radius: 15px;
     }
 
     .card:hover .card-content {
         transform: rotateY(180deg);
-        /* transition: transform 0.6s; */
+        box-shadow: 2px 7px 7px 2px #424242;
+    }
+    .front-card {
+        background-color: transparent;
+        color: white;
+        border-style: none;
+        border-radius: 15px;
     }
 
     .back-card, .front-card {
@@ -102,13 +109,6 @@ const { name, headshot, position, link, bio } = Astro.props;
         height: 100%;
         /* -webkit-backface-visibility: hidden; */
         backface-visibility: hidden;
-
-        background-color: #2f605c;
-        color: white;
-        border-color: #fee8f5;
-        border-width: 2px;
-        border-style: solid;
-        border-radius: 15px;
     }
 
     .back-card {
@@ -117,13 +117,21 @@ const { name, headshot, position, link, bio } = Astro.props;
         flex-direction: column;
         justify-content: center; /* Center vertically */
         align-items: center; /* Center horizontally */
+
+        background-color: #2f605c;
+        color: white;
+        border-color: #fee8f5;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 15px;
+        box-shadow: 2px 7px 7px 2px #424242;
     }
 
     .back-card p {
         
     }
 
-    .card h3, h4, p {
+    .card h3, h4, h5, p {
         color: white;
     }
 </style>
