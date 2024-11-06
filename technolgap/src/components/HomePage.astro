@@ -2,23 +2,21 @@
 
 ---
 <div class="homepage-container">
-
-<div class="text-container">
-  <h1><span class="pink-shadow">technolgap</span></h1>
-  <h2>Welcome to Technolgap!</h2>
-  <p class="message">
-    At Technolgap, we're on a mission to bridge the gender gap in the technology
-    sector across Canada. Our community is dedicated to creating opportunities
-    and empowering women and non-binary individuals in the Canadian tech
-    industry. We believe that by fostering inclusivity and collaboration, we can
-    drive positive change in the industry.
-  </p>
-  <div class="buttons-container">
-    <button class="sponsor-button">SPONSOR</button>
-    <button class="conference-button">CONFERENCE</button>
+  <div class="text-container">
+    <h1><span class="pink-shadow">technolgap</span></h1>
+    <h2>Welcome to Technolgap!</h2>
+    <p class="message">
+      At Technolgap, we're on a mission to bridge the gender gap in the technology
+      sector across Canada. Our community is dedicated to creating opportunities
+      and empowering women and non-binary individuals in the Canadian tech
+      industry. We believe that by fostering inclusivity and collaboration, we can
+      drive positive change in the industry.
+    </p>
+    <div class="buttons-container">
+      <button class="sponsor-button">SPONSOR</button>
+      <button class="conference-button">CONFERENCE</button>
+    </div>
   </div>
-</div>
-
 </div>
 
 <style>
@@ -51,7 +49,7 @@
   }
   h1 {
     font-size: 128px;
-    margin-left: -5px;
+    /* margin-left: -5px; */
   }
   .pink-shadow {
     text-shadow: 4px 0px 0px #ffbce5;
@@ -89,6 +87,7 @@
     }
     h1 {
       font-size: 96px;
+      margin-left: -5px;
     }
     h2 {
       font-size: 32px;
@@ -107,6 +106,7 @@
   @media (max-width: 1000px) {
     h1 {
       font-size: 90px;
+      margin-left: -5px;
     }
     h2 {
       font-size: 26px;
@@ -122,6 +122,7 @@
   @media (max-width: 855px) {
     h1 {
       font-size: 80px;
+      margin-left: -5px;
     }
     h2 {
       font-size: 24px;
@@ -140,6 +141,7 @@
     }
     h1 {
       font-size: 65px;
+      margin-left: -5px;
     }
     h2 {
       font-size: 22px;
@@ -148,7 +150,6 @@
       font-size: 13px;
       line-height: 1.2;
       letter-spacing: -0.5px;
-      color: white;
     }
     .conference-button, .sponsor-button {
       scale: 80%;
@@ -158,13 +159,12 @@
   @media (max-width: 700px) {
     .text-container {
       top: 37vw;
-        /* width: 80vw; */
-        /* scale: 0%; */
     }
     h1 {
       font-size: 9vw;
+      margin-left: -5px;
     }
-    /* .pink-shadow {
+    .pink-shadow {
       text-shadow: 3px 0px 0px #ffbce5;
     }
     h2 {
@@ -176,26 +176,147 @@
     .buttons-container {
       position: relative;
       margin-top: 20px;
-      scale: 80%;
+      scale: 90%;
       left: -30px;
-    } */
-  }
-
-  @media (max-width: 426px) {
-    h1 {
-      font-size: 50px;
     }
   }
 
-  @media (max-width: 376px) {
+  @media (max-width: 600px) {
+    .text-container {
+      top: 40vw;
+    }
     h1 {
-      font-size: 50px;
+      font-size: 8vw;
+      margin-left: 0px;
+    }
+    .pink-shadow {
+      text-shadow: 3px 0px 0px #ffbce5;
+    }
+    h2 {
+      font-size: 16px;
+    }
+    .message {
+      font-size: 11px;
+    }
+    .conference-button, .sponsor-button {
+      scale: 75%;
+    }
+    .buttons-container {
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 537px) {
+    h1 {
+      font-size: 7.5vw;
+    }
+    .pink-shadow {
+      text-shadow: 2px 0px 0px #ffbce5;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    .message {
+      font-size: 10px;
+      line-height: 1.2;
+    }
+    .conference-button, .sponsor-button {
+      scale: 70%;
+    }
+    .buttons-container {
+      margin-top: 10px;
+      left: -25px;
+    }
+  }
+
+  @media (max-width: 485px) {
+    .text-container {
+      top: 42vw;
+      scale: 95%;
+    }
+    h1 {
+      font-size: 7vw;
+      margin-bottom: 12.5px;
+    }
+    h2 {
+      font-size: 14px;
+      margin-bottom: 12.5px;
+    }
+    .message {
+      font-size: 9px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .buttons-container {
+      left: -25px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .text-container {
+      top: 45vw;
+      scale: 90%;
+    }
+    h1 {
+      font-size: 7vw;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .message {
+      font-size: 9px;
+      line-height: 1.2;
+      margin-bottom: 0px;
+    }
+    .buttons-container {
+      margin-top: 0px;
+      scale: 80%;
+      left: -35px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .text-container {
+      /* top: 50vw; */
+      scale: 85%;
+    }
+    h1 {
+      font-size: 7vw;
     }
     h2 {
       font-size: 13px;
     }
     .message {
-      font-size: 10px;
+      font-size: 9px;
+    }
+    .conference-button, .sponsor-button {
+      scale: 65%;
+    }
+  }
+
+  @media (max-width: 355px) {
+    .text-container {
+      scale: 80%;
+    }
+  }
+
+  @media (max-width: 325px) {
+    .text-container {
+      top: 50vw;
+    }
+    h1 {
+      font-size: 6.5vw;
+    }
+    h2 {
+      font-size: 12px;
+    }
+    .message {
+      font-size: 8px;
+    }
+    .conference-button, .sponsor-button {
+      scale: 60%;
     }
     .buttons-container {
       scale: 70%;
