@@ -3,6 +3,8 @@ import whiteStar from "../../public/white-star.png";
 import pinkStar from "../../public/pink-star.png";
 import bigPinkStar from "../../public/bigPink-star.png";
 import bigWhiteStar from "../../public/bigWhite-star.png";
+import pinkBow from "../../public/pink-bow.png";
+import pinkBow1 from "../../public/pink-bow1.png";
 import CoreValueCard from "../components/CoreValueCard.astro";
 import Subheading from "../components/Subheading.astro"
 
@@ -42,6 +44,8 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
     <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-bottom">
     <img src={bigPinkStar.src} alt="Big Pink Star Design" class="bigPink-star-bottom">
     <img src={bigWhiteStar.src} alt="Big White Star Design" class="bigWhite-star-bottom">
+    <img src={pinkBow.src} alt="Pink Bow Design" class="pink-bow">
+    <img src={pinkBow1.src} alt="Pink Bow 1 Design" class="pink-bow1">
 </article>
 
 <style>
@@ -118,5 +122,16 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
         position: absolute;
         top: 3000px;
         left: 0px;
+    }
+
+    .core-values .pink-bow{
+        position: absolute;
+        top: 4400px;
+        left: 0px;
+    }
+    .core-values .pink-bow1{
+        position: absolute;
+        top: 4270px;
+        right: 0px;
     }
 </style>
