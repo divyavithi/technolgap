@@ -1,6 +1,8 @@
 ---
 import whiteStar from "../../public/white-star.png";
 import pinkStar from "../../public/pink-star.png";
+import bigPinkStar from "../../public/bigPink-star.png";
+import bigWhiteStar from "../../public/bigWhite-star.png";
 import CoreValueCard from "../components/CoreValueCard.astro";
 import Subheading from "../components/Subheading.astro"
 
@@ -38,6 +40,8 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
     <img src={whiteStar.src} alt="White Star Design" class="white-star-bottom">
     <img src={whiteStar.src} alt="White Star Design" class="white-star-milestones">
     <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-bottom">
+    <img src={bigPinkStar.src} alt="Big Pink Star Design" class="bigPink-star-bottom">
+    <img src={bigWhiteStar.src} alt="Big White Star Design" class="bigWhite-star-bottom">
 </article>
 
 <style>
@@ -102,5 +106,17 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
         top: 2860px;
         right: 686.5px;
         z-index: 0;
+    }
+
+    .core-values .bigPink-star-bottom{
+        position: absolute;
+        top: 3800px;
+        right: 0px;
+    }
+
+    .core-values .bigWhite-star-bottom{
+        position: absolute;
+        top: 3000px;
+        left: 0px;
     }
 </style>
