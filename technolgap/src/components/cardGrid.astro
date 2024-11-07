@@ -1,0 +1,78 @@
+---
+import Card from '../components/card.astro';
+import headShot from "../../public/headshot.png";
+
+import { createClient } from "contentful";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Fetch Person from Contentful
+const response = await client.getEntries({
+  content_type: "milestone",
+  order: ["fields.year"], // Order milestones by year
+});
+const milestones = response.items;
+
+---
+<!-- probably needs to import pico css to work? -> https://www.google.com/search?q=using+pico+css+grid&rlz=1C5GCEA_enCA1043CA1045&oq=using+pico+css+grid&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRifBTIHCAQQIRifBdIBCDYxNjlqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:e22747fb,vid:68co8rNMpn0,st:0 -->
+
+<section class="cards">
+<div class="grid">
+  <div>
+    <Card
+      name="Jo Po"
+      headshot={headShot.src}
+      position="President"
+      bio="1st year at Carleton Uni"
+      link="https://www.linkedin.com/in/jo-po-8a0b6835/"
+    />
+</div>
+<div>
+  <Card
+    name="Jo Po"
+    headshot={headShot.src}
+    position="President"
+    bio="1st year at Carleton Uni"
+    link="https://www.linkedin.com/in/jo-po-8a0b6835/"
+  />
+</div>
+  <Card
+    name="Jo Po"
+    headshot={headShot.src}
+    position="President"
+    bio="1st year at Carleton Uni"
+    link="https://www.linkedin.com/in/jo-po-8a0b6835/"
+  />
+  <div> 
+  <Card
+    name="Jo Po"
+    headshot={headShot.src}
+    position="President"
+    bio="1st year at Carleton Uni"
+    link="https://www.linkedin.com/in/jo-po-8a0b6835/"
+  />
+</div>
+</div>
+</section>
+
+<style>
+    .grid {
+        background-color: #64A8A2;
+        width: 88%;
+        border-radius: 20px;
+
+        gap: 2rem;
+        justify-items: center;
+        align-items: center;
+        max-width: 1060px;
+        display: grid;
+    }
+
+    .cards{
+        justify-items: center;
+        align-items: center;
+    }
+</style>
