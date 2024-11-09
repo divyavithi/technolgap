@@ -1,7 +1,4 @@
 ---
-import linkedinLogo from "../../public/linkedin-logo.png";
-import whiteStar from "../../public/white-star.png";
-import pinkStar from "../../public/pink-star.png";
 
 interface Props {
 	name: string;
@@ -25,14 +22,14 @@ const { name, headshot, position, link, bio } = Astro.props;
 
         <!-- Back -->
         <section class="back-card">
-            <img src={whiteStar.src} alt="White Star Design" class="white-star">
+            <img src="/white-star.png" alt="White Star Design" class="white-star">
             <h5>{bio}</h5>
             <p>
                 <a href={link} target="_blank">
-                    <img src={linkedinLogo.src} alt="linkedin logo" class="card-linkedin-logo">
+                    <img src="/linkedin-logo.png" alt="linkedin logo" class="card-linkedin-logo">
                 </a>
             </p>
-            <img src={pinkStar.src} alt="Pink Star Design" class="pink-star">
+            <img src="/pink-star.png" alt="Pink Star Design" class="pink-star">
         </section>
     </section>
 </article>

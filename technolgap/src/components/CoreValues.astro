@@ -1,10 +1,4 @@
 ---
-import whiteStar from "../../public/white-star.png";
-import pinkStar from "../../public/pink-star.png";
-import bigPinkStar from "../../public/bigPink-star.png";
-import bigWhiteStar from "../../public/bigWhite-star.png";
-import pinkBow from "../../public/pink-bow.png";
-import pinkBow1 from "../../public/pink-bow1.png";
 import CoreValueCard from "../components/CoreValueCard.astro";
 import Subheading from "../components/Subheading.astro"
 
@@ -22,8 +16,8 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
 ---
 
 <article class="core-values">
-    <img src={whiteStar.src} alt="White Star Design" class="white-star-top">
-    <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-top">
+    <img src="/white-star.png" alt="White Star Design" class="white-star-top">
+    <img src="/pink-star.png" alt="Pink Star Design" class="pink-star-top">
     <Subheading title={title}/>
     <ul role="list" class="value-card-grid">
         <CoreValueCard
@@ -39,13 +33,12 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
             body={body3}
         />
     </ul>
-    <img src={whiteStar.src} alt="White Star Design" class="white-star-bottom">
-    <img src={whiteStar.src} alt="White Star Design" class="white-star-milestones">
-    <img src={pinkStar.src} alt="Pink Star Design" class="pink-star-bottom">
-    <img src={bigPinkStar.src} alt="Big Pink Star Design" class="bigPink-star-bottom">
-    <img src={bigWhiteStar.src} alt="Big White Star Design" class="bigWhite-star-bottom">
-    <img src={pinkBow.src} alt="Pink Bow Design" class="pink-bow">
-    <img src={pinkBow1.src} alt="Pink Bow 1 Design" class="pink-bow1">
+    <img src="/white-star.png" alt="White Star Design" class="white-star-bottom">
+    <img src="/pink-star.png" alt="Pink Star Design" class="pink-star-bottom">
+    <img src="/bigPink-star.png" alt="Big Pink Star Design" class="bigPink-star-bottom">
+    <img src="/bigWhite-star.png" alt="Big White Star Design" class="bigWhite-star-bottom">
+    <img src="pink-bow.png" alt="Pink Bow Design" class="pink-bow">
+    <img src="/pink-bow1.png" alt="Pink Bow 1 Design" class="pink-bow1">
 </article>
 
 <style>
@@ -100,15 +93,6 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } = Astro.pr
         height: 185.42px;
         top: 2550px;
         right: 50px;
-        z-index: 0;
-    }
-
-    .core-values .white-star-milestones {
-        position: absolute;
-        width: 70px;
-        height: 70px;
-        top: 2860px;
-        right: 686.5px;
         z-index: 0;
     }
 

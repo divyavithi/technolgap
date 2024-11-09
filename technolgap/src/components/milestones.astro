@@ -14,18 +14,22 @@ const response = await client.getEntries({
   order: ["fields.year"], // Order milestones by year
 });
 const milestones = response.items;
+const increment = 68/(milestones.length);
 ---
 
-<section id="about-us">
+<section id="milestones-section">
   <Subheading title="Milestones at Technolgap" />
+  <img src="/white-star.png" alt="White Star Design" class="white-star" />
   <section id="milestones">
     <div class="timeline">
       {
-        milestones.map((milestone) => (
+        milestones.map((milestone, index) => (
           <div class="milestone">
-            <div class="circle">
-              <h4>{milestone.fields.year}</h4>
-              <p>{milestone.fields.description}</p>
+            <div class="circle" style={`background-color: rgb(${45 + increment*index},${109 + increment*index},${104 + increment*index});`}>
+              <div class="circle-text">
+                <h4>{milestone.fields.year}</h4>
+                <p>{milestone.fields.description}</p>
+              </div>
             </div>
           </div>
         ))
@@ -35,10 +39,10 @@ const milestones = response.items;
 </section>
 
 <style>
-  #about-us {
+  #milestones-section {
     padding-top: 7rem;
     padding-bottom: 6rem;
-    background: linear-gradient(#fef8fc,#f7d7ea);
+    background: linear-gradient(#fef8fc, #f7d7ea);
     margin-bottom: 0;
     border: none;
     border-radius: 0;
@@ -58,6 +62,11 @@ const milestones = response.items;
     width: 80%;
     max-width: 600px;
   }
+  .white-star {
+    margin-right: 5px;
+    margin-bottom: 10px;
+    width: 100px;
+  }
   .milestone {
     display: flex;
     flex-direction: column;
@@ -65,8 +74,6 @@ const milestones = response.items;
     position: relative;
   }
   .circle {
-    background-color: #2f605c; /* Green color for circles */
-    background: linear-gradient(135deg, #2f605c, #64a8a2dd);
     color: white;
     width: 300px;
     height: 300px;
@@ -75,10 +82,13 @@ const milestones = response.items;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    border: white solid 2px;
+    box-shadow: 0 5px 8px 1px rgb(147, 147, 147);
+  }
+  .circle-text {
+    padding: 50px;
   }
   .circle h4 {
-    margin-top: 2rem;
     color: white;
     font-weight: bold;
     text-shadow: 0px 2px 2px #353535;
@@ -100,7 +110,4 @@ const milestones = response.items;
     height: 2rem;
     background-color: #ffbce5; /* Pink connecting line */
   }
-  /* .milestone:first-of-type::before {
-    display: none; /* No line above the first item
-  } */
 </style>
