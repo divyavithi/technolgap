@@ -30,6 +30,7 @@ interface TeamMemberFields {
     position: string;
     institution: string;
     linkedin2?: string;
+    programYear: string;
     memberDegree: string;
     teamYearMany: [string];
     bio?: string;
@@ -105,3 +106,9 @@ const [teamMembers, years] = await Promise.all([
   
   <CardGrid entries={teamMembers}/>
 </PageLayout>
+
+<style>
+  body {
+    background-color: #fee8f5;
+  }
+</style>

@@ -22,6 +22,7 @@ interface member {
     position: string;
     institution: string;
     linkedin2?: string;
+    programYear: string;
     memberDegree: string;
     teamYearMany: [string];
     bio?: string;
@@ -38,38 +39,41 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<!-- probably needs to import pico css to work? -> https://www.google.com/search?q=using+pico+css+grid&rlz=1C5GCEA_enCA1043CA1045&oq=using+pico+css+grid&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRifBTIHCAQQIRifBdIBCDYxNjlqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:e22747fb,vid:68co8rNMpn0,st:0 -->
-<section class="cards">
-  <div class="grid overflow-auto">
-    {
-      entries.map((member) => (
-          <Card 
-            name={member.fields.name ?? ""}
-            headshot={member.fields.headshot.fields.file.url}
-            position={member.fields.position}
-            link={member.fields.linkedin2 ?? "/"}
-            bio={member.fields.bio ? member.fields.bio+"what" : " "}
-          />
-      ))
-    }
-  </div>
+<section class="grid overflow-auto">
+  {
+    entries.map((member) => (
+      <Card
+        name={(member.fields.name as unknown) as string}
+        headshot={(member.fields.headshot?.fields as any)?.file?.url ?? ""} 
+        position={(member.fields.position as unknown) as string}
+        link={(member.fields.linkedin2 as unknown) as string ?? "none"}
+        studentInfo={
+          member.fields.programYear +
+          " " +
+          member.fields.memberDegree +
+          " at " +
+          member.fields.institution
+        }
+        bio={(member.fields.bio as unknown) as string ?? "none"}
+      />
+    ))
+  }
 </section>
 
 <style>
   .grid {
     background-color: #64a8a2;
     border-radius: 20px;
-    gap: 16rem;
-    
-    /* width: 88%; */
-    /* justify-items: center; */
-    /* align-items: center; */
-    /* max-width: 1060px; */
-    /* display: grid; */
+    row-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    box-shadow: 0 7px 10px 1px #898989;
+    margin: 0 50px;
+    border: solid 5px #fee8f5;
   }
 
-  .cards {
-    /* justify-items: center; */
-    /* align-items: center; */
+  @media (max-width: 1200px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(18rem, 1fr));
+    }
   }
 </style>
