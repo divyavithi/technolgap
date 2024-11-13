@@ -43,10 +43,10 @@ const { entries } = Astro.props;
   {
     entries.map((member) => (
       <Card
-        name={member.fields.name ?? ""}
-        headshot={member.fields.headshot.fields.file.url}
-        position={member.fields.position}
-        link={member.fields.linkedin2 ?? "none"}
+        name={(member.fields.name as unknown) as string}
+        headshot={(member.fields.headshot?.fields as any)?.file?.url ?? ""} 
+        position={(member.fields.position as unknown) as string}
+        link={(member.fields.linkedin2 as unknown) as string ?? "none"}
         studentInfo={
           member.fields.programYear +
           " " +
@@ -54,7 +54,7 @@ const { entries } = Astro.props;
           " at " +
           member.fields.institution
         }
-        bio={member.fields.bio ?? "none"}
+        bio={(member.fields.bio as unknown) as string ?? "none"}
       />
     ))
   }
