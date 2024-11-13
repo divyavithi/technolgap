@@ -22,6 +22,7 @@ interface member {
     position: string;
     institution: string;
     linkedin2?: string;
+    programYear: string;
     memberDegree: string;
     teamYearMany: [string];
     bio?: string;
@@ -38,20 +39,25 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<section class="cards">
-  <div class="grid overflow-auto">
-    {
-      entries.map((member) => (
-        <Card
-          name={member.fields.name ?? ""}
-          headshot={member.fields.headshot.fields.file.url}
-          position={member.fields.position}
-          link={member.fields.linkedin2 ?? "/"}
-          bio={member.fields.bio ? member.fields.bio + "what" : " "}
-        />
-      ))
-    }
-  </div>
+<section class="grid overflow-auto">
+  {
+    entries.map((member) => (
+      <Card
+        name={member.fields.name ?? ""}
+        headshot={member.fields.headshot.fields.file.url}
+        position={member.fields.position}
+        link={member.fields.linkedin2 ?? "none"}
+        studentInfo={
+          member.fields.programYear +
+          " " +
+          member.fields.memberDegree +
+          " at " +
+          member.fields.institution
+        }
+        bio={member.fields.bio ?? "none"}
+      />
+    ))
+  }
 </section>
 
 <style>
@@ -60,15 +66,14 @@ const { entries } = Astro.props;
     border-radius: 20px;
     row-gap: 15px;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  }
-
-  .cards {
+    box-shadow: 0 7px 10px 1px #898989;
     margin: 0 50px;
+    border: solid 5px #fee8f5;
   }
 
-  @media (max-width: 1200px){
+  @media (max-width: 1200px) {
     .grid {
-      grid-template-columns: repeat(3, minmax(18rem, 1fr)); 
+      grid-template-columns: repeat(3, minmax(18rem, 1fr));
     }
   }
 </style>

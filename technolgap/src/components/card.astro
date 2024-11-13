@@ -1,134 +1,151 @@
 ---
-
 interface Props {
-	name: string;
-    headshot: string;
-	position: string;
-    link: string;
-    bio: string;
+  name: string;
+  headshot: string;
+  position: string;
+  link: string;
+  studentInfo: string;
+  bio: string;
 }
 
-const { name, headshot, position, link, bio } = Astro.props;
+const { name, headshot, position, link, studentInfo, bio } = Astro.props;
 ---
 
 <article class="card">
-    <!-- Front -->
-     <section class="card-content">
-        <section class="front-card">
-            <img src={headshot} alt="Headshot photo" class="card-headshot">
-            <h3>{name}</h3>
-            <h4>{position}</h4>
-        </section>
-
-        <!-- Back -->
-        <section class="back-card">
-            <img src="/white-star.png" alt="White Star Design" class="white-star">
-            <h5>{bio}</h5>
-            <p>
-                <a href={link} target="_blank">
-                    <img src="/linkedin-logo.png" alt="linkedin logo" class="card-linkedin-logo">
-                </a>
-            </p>
-            <img src="/pink-star.png" alt="Pink Star Design" class="pink-star">
-        </section>
+  <!-- Front -->
+  <section class="card-content">
+    <section class="front-card">
+      <img src={headshot} alt="Headshot photo" class="card-headshot" />
+      <h3>{name}</h3>
+      <h4>{position}</h4>
     </section>
+
+    <!-- Back -->
+    <section class="back-card">
+      <img src="/white-star.png" alt="White Star Design" class="white-star" />
+      <h5 class="bio">
+        <span>{studentInfo}</span>
+        <br><br>
+        {bio != "none" && (<span>{bio}</span>)}
+      </h5>
+      {
+        link != "none" && (
+          <p>
+            <a href={link} target="_blank">
+              <img
+                src="/linkedin-logo.png"
+                alt="linkedin logo"
+                class="card-linkedin-logo"
+              />
+            </a>
+          </p>
+        )
+      }
+      <img src="/pink-star.png" alt="Pink Star Design" class="pink-star" />
+    </section>
+  </section>
 </article>
 
 <style>
-    .card-headshot {
-        margin: 1.2rem;
-        height: 13.1rem; /*210px*/
-        border-radius: 50%;
-        border-width: 5px;
-        border-color: white;
-        border-style: solid;
-    }
+  .card-headshot {
+    margin: 1.2rem;
+    height: 13.1rem; /*210px*/
+    border-radius: 50%;
+    border-width: 5px;
+    border-color: white;
+    border-style: solid;
+  }
 
-    .card-linkedin-logo {
-        position: absolute; /* Position the logo absolutely within the .back-card */
-        bottom: 15px; /* Distance from the bottom */
-        right: 15px; /* Distance from the right */
-        height: 48px;
-    }
+  .card-linkedin-logo {
+    position: absolute; /* Position the logo absolutely within the .back-card */
+    bottom: 15px; /* Distance from the bottom */
+    right: 15px; /* Distance from the right */
+    height: 48px;
+  }
 
-    .pink-star, .white-star{
-        opacity: 0.8;
-    }
+  .pink-star,
+  .white-star {
+    opacity: 0.8;
+  }
 
-    .pink-star{
-        height: 95px;
-        position: absolute;
-        bottom: -26px;
-        left: -20px;
-    }
+  .pink-star {
+    height: 95px;
+    position: absolute;
+    bottom: -26px;
+    left: -20px;
+  }
 
-    .white-star{
-        height: 110px;
-        position: absolute;
-        top: -20px;
-        right: -26px;
-    }
+  .white-star {
+    height: 110px;
+    position: absolute;
+    top: -25px;
+    right: -26px;
+  }
 
-    .card {
-        background-color: transparent;
-        width: 280px;
-        height: 375px;
-        perspective: 1000px;
-        box-shadow: none;
-        /* set paading to 0 for no extra space */
-    }
+  .card {
+    background-color: transparent;
+    width: 280px;
+    height: 375px;
+    perspective: 1000px;
+    box-shadow: none;
+    /* set paading to 0 for no extra space */
+  }
 
-    .card-content{
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.8s;
-        transform-style: preserve-3d;
-        background-color: transparent;
-        border-radius: 15px;
-    }
+  .card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    background-color: transparent;
+    border-radius: 15px;
+  }
 
-    .card:hover .card-content {
-        transform: rotateY(180deg);
-        box-shadow: 2px 7px 7px 2px #424242;
-    }
-    .front-card {
-        background-color: transparent;
-        color: white;
-        border-style: none;
-        border-radius: 15px;
-    }
+  .card:hover .card-content {
+    transform: rotateY(180deg);
+    box-shadow: 2px 7px 7px 2px #424242;
+  }
+  .front-card {
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    border-radius: 15px;
+  }
 
-    .back-card, .front-card {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        /* -webkit-backface-visibility: hidden; */
-        backface-visibility: hidden;
-    }
+  .back-card,
+  .front-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* -webkit-backface-visibility: hidden; */
+    backface-visibility: hidden;
+  }
 
-    .back-card {
-        transform: rotateY(180deg);
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Center vertically */
-        align-items: center; /* Center horizontally */
+  .back-card {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
 
-        background-color: #2f605c;
-        color: white;
-        border-color: #fee8f5;
-        border-width: 2px;
-        border-style: solid;
-        border-radius: 15px;
-        box-shadow: 2px 7px 7px 2px #424242;
-    }
+    background-color: #2f605c;
+    color: white;
+    border-color: #fee8f5;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    box-shadow: 2px 7px 7px 2px #424242;
+  }
 
-    .back-card p {
-        
-    }
+  .card h3,
+  h4,
+  h5,
+  p {
+    color: white;
+  }
 
-    .card h3, h4, h5, p {
-        color: white;
-    }
+  .bio {
+    padding: 15px;
+  }
 </style>
