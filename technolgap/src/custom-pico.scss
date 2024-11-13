@@ -2,4 +2,8 @@ $modules: (
     "layout/document": false,
 );
 
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 @import "../node_modules/@picocss/pico/scss/pico.scss"

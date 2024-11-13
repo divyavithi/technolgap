@@ -38,18 +38,17 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<!-- probably needs to import pico css to work? -> https://www.google.com/search?q=using+pico+css+grid&rlz=1C5GCEA_enCA1043CA1045&oq=using+pico+css+grid&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRifBTIHCAQQIRifBdIBCDYxNjlqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:e22747fb,vid:68co8rNMpn0,st:0 -->
 <section class="cards">
   <div class="grid overflow-auto">
     {
       entries.map((member) => (
-          <Card 
-            name={member.fields.name ?? ""}
-            headshot={member.fields.headshot.fields.file.url}
-            position={member.fields.position}
-            link={member.fields.linkedin2 ?? "/"}
-            bio={member.fields.bio ? member.fields.bio+"what" : " "}
-          />
+        <Card
+          name={member.fields.name ?? ""}
+          headshot={member.fields.headshot.fields.file.url}
+          position={member.fields.position}
+          link={member.fields.linkedin2 ?? "/"}
+          bio={member.fields.bio ? member.fields.bio + "what" : " "}
+        />
       ))
     }
   </div>
@@ -59,17 +58,17 @@ const { entries } = Astro.props;
   .grid {
     background-color: #64a8a2;
     border-radius: 20px;
-    gap: 16rem;
-    
-    /* width: 88%; */
-    /* justify-items: center; */
-    /* align-items: center; */
-    /* max-width: 1060px; */
-    /* display: grid; */
+    row-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   }
 
   .cards {
-    /* justify-items: center; */
-    /* align-items: center; */
+    margin: 0 50px;
+  }
+
+  @media (max-width: 1200px){
+    .grid {
+      grid-template-columns: repeat(3, minmax(18rem, 1fr)); 
+    }
   }
 </style>
