@@ -95,7 +95,7 @@
   }
 
   .desktop-navbar {
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     padding: 0.5rem;
     width: 100%;
     position: sticky;
@@ -104,6 +104,7 @@
     align-items: center; /* Center items vertically */
     height: 70px; /* Set a fixed height */
     opacity: 1;
+    z-index: 5000;;
   }
 
   .desktop-navbar ul {
@@ -152,7 +153,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -171,7 +172,7 @@
     text-decoration: none;
   }
   .desktop-dropdown-menu li a:hover {
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     box-sizing: border-box;
     border: 0.25px solid white;
   }
@@ -180,7 +181,7 @@
   }
   .desktop-dropdown:hover .desktop-dropdown-toggle {
     font-weight: bold;
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     border-radius: 0;
   }
 
@@ -189,12 +190,12 @@
     margin-right: 2rem;
     border: 0.25px solid white;
     color: white;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     transition: font-weight 60s;
   }
   .custom-button:hover {
     font-weight: bold;
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
   }
 
   /*MOBILE NAVBAR DESIGN*/
@@ -202,7 +203,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     padding: 0.5rem;
     position: sticky;
     top: 0;
@@ -235,9 +236,8 @@
     position: absolute;
     top: 85px;
     right: 0;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     width: 50%;
-    opacity: 1;
   }
 
   .menu ul {
@@ -274,7 +274,7 @@
 
   .menu a:hover,
   .menu button:hover {
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     font-weight: bold;
   }
 
@@ -315,60 +315,19 @@
 
 .mobile-navbar {
   display: none;
+  opacity: 1;
+
   }
 
-@media(max-width:700px){
-  .desktop-navbar{
-    display: none;
-  }
+@media (max-width:768px){
   .mobile-navbar{
     display: flex;
   }
-  .logo img{
-    margin-right: 100px;
+  .desktop-navbar{
+    display: none;
   }
 }
-  @media (min-width: 769px) and (max-width: 913px) {
-  /* Scale the logo slightly larger */
-  .logo img {
-    width: 100px; /* Adjust logo size */
-    height: auto;
-    margin-right: 400px;
-  }
-  .desktop-navbar{
-    width: 1300px;
-  }
 
-  /* Adjust the padding and layout of navbar items */
-  .desktop-navbar ul {
-    gap: 1rem; /* Reduce gap between navbar items */
-  }
-
-  .desktop-navbar li {
-    flex: 1 1 auto; /* Allow items to flex and prevent squishing */
-    text-align: center; /* Center align the items */
-  }
-
-  .desktop-navbar a {
-    font-size: 0.9rem; /* Slightly smaller font size for better spacing */
-    padding: 0.8rem 1rem; /* Reduce padding to prevent items from being squished */
-  }
-
-  .custom-button {
-    padding: 0.8rem 1rem; /* Reduce padding of the custom button */
-    white-space: nowrap;
-  }
-  
-  .desktop-dropdown{
-    white-space: nowrap;
-  }
-
-  .desktop-dropdown-menu li{
-    display: inline;
-  }
-
-  
-  }
 @media(min-width:1280px) and (max-width:1280px){
   .desktop-navbar{
     width: 1500px;
@@ -463,6 +422,7 @@
 }
 
   
+
 </style>
 
 <script type="module">
