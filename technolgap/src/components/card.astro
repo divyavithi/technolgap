@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { name, headshot, position, link, studentInfo, bio } = Astro.props;
+const [program, institution] = studentInfo.split('\n');
 ---
 
 <article class="card">
@@ -23,10 +24,10 @@ const { name, headshot, position, link, studentInfo, bio } = Astro.props;
     <!-- Back -->
     <section class="back-card">
       <img src="/white-star.png" alt="White Star Design" class="white-star" />
-      <h5 class="bio">
-        <span>{studentInfo}</span>
+      <h5 class="back-text">
+        <span><span class="pink-text">{program}</span><br>{institution}</span>
         <br><br>
-        {bio != "none" && (<span>{bio}</span>)}
+        {bio != "none" && (<span class="bio"><span class="pink-text">Fun Fact:</span><br>{bio}</span>)}
       </h5>
       {
         link != "none" && (
@@ -146,6 +147,17 @@ const { name, headshot, position, link, studentInfo, bio } = Astro.props;
   }
 
   .bio {
-    padding: 15px;
+    font-weight: 400;
   }
+  
+  .back-text {
+    padding: 15px;
+    white-space: 'pre-line';
+  }
+
+  .pink-text {
+    color: #ffbce5;
+    font-weight: 700;
+  }
+  
 </style>
