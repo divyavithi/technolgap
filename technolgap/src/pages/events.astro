@@ -72,8 +72,6 @@ function compareDates(eventDate: string): number {
 async function getUpcomingAndPastEvents() {
   const events = await fetchEvents();
 
-  console.log("Fetched Events:", events);  // Log the fetched events to check the raw data
-
   // Sort events by date
   const sortedEvents = events.sort((a, b) => {
     const dateA = a.fields.date && typeof a.fields.date === 'string' ? a.fields.date : ""; // Ensure dateA is a string
@@ -118,9 +116,6 @@ const eventType = url.searchParams.get("eventType") || "upcoming";
         const date = event.fields.date ?? "No Date"; // Ensure the date is a string
         const eventSummary = event.fields.eventSummary?? "No Event Summary";
         const time = event.fields.time?? "No time available";
-  
-        // Debug: Log the raw date value
-        console.log("Event Date (raw):", date);
   
         // Handle invalid or missing date
         if (typeof date !== "string" || date === "No Date" || !date) {
