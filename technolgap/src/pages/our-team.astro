@@ -89,7 +89,7 @@ const [teamMembers, years] = await Promise.all([
 // console.log(teamMembers[0].fields.teamYearMany)
 ---
 
-<PageLayout>
+<PageLayout title="Our Team">
   <h1>Team Members for {teamYear}</h1>
   <form action={Astro.request.url} method="GET">
     <select name="year">
