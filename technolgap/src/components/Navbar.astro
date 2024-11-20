@@ -325,7 +325,7 @@
       toggleMobileMenu();
     });
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", () => {
       if (mobileMenu.style.display === "flex") {
         mobileMenu.style.display = "none";
       }
@@ -347,7 +347,7 @@
         getInvolvedDropdown.style.display === "flex" ? "none" : "flex";
     });
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", () => {
       if (aboutDropdown.style.display === "flex") {
         aboutDropdown.style.display = "none";
       }

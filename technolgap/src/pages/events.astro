@@ -1,0 +1,169 @@
+---
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+import PageLayout from "../layouts/PageLayout.astro";
+
+// Initialize Contentful client
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Define the event fields interface
+interface EventFields {
+  fields: {
+    eventName: string | undefined;
+    poster: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    date: string | undefined; // Ensure date is expected to be a string
+    venue: string | undefined;
+    eventType: string | undefined;
+    eventSummary: string | undefined;
+    time: string | undefined;
+    registrationLink: string | undefined;
+  };
+  contentTypeId: "event";
+}
+
+type Event = Entry<EventFields>;
+
+// Helper function to fetch events from Contentful
+async function fetchEvents(): Promise<Event[]> {
+  const response = await client.getEntries({
+    content_type: "event",
+  });
+  return response.items as Event[];
+}
+
+// Utility function to compare event dates with today's date (ignoring time)
+function compareDates(eventDate: string): number {
+  const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
+  
+  if (!today) {
+    throw new Error("Today is undefined, unable to compare dates.");
+  }
+
+  // Create a new Date object for the event date
+  const eventDateObj = new Date(eventDate);
+
+  // If the eventDate is invalid, return a default comparison result
+  if (isNaN(eventDateObj.getTime())) {
+    throw new Error(`Invalid date provided: ${eventDate}`);
+  }
+
+  // Compare event date with today
+  if (eventDate === today) return 0; // Same day
+  return eventDateObj > new Date(today) ? 1 : -1; // Future or past
+}
+
+// Fetch and classify events into past and upcoming
+async function getUpcomingAndPastEvents() {
+  const events = await fetchEvents();
+
+  // Sort events by date
+  const sortedEvents = events.sort((a, b) => {
+    const dateA = a.fields.date && typeof a.fields.date === 'string' ? a.fields.date : ""; // Ensure dateA is a string
+    const dateB = b.fields.date && typeof b.fields.date === 'string' ? b.fields.date : ""; // Ensure dateB is a string
+
+    return compareDates(dateA) - compareDates(dateB);
+  });
+
+  // Filter events into upcoming and past
+  // @ts-ignore
+  const upcomingEvents = sortedEvents.filter(event => compareDates(event.fields.date ?? "") >= 0); // On or after today
+  // @ts-ignore
+  const pastEvents = sortedEvents.filter(event => compareDates(event.fields.date ?? "") < 0); // Before today
+
+  return { upcomingEvents, pastEvents };
+}
+
+// Fetch events asynchronously in the Astro script block
+const { upcomingEvents, pastEvents } = await getUpcomingAndPastEvents();
+
+// Get the user-selected event type from the query string (defaults to "upcoming")
+const url = new URL(Astro.request.url);
+const eventType = url.searchParams.get("eventType") || "upcoming";
+---
+
+<PageLayout>
+    <h1>{eventType === "upcoming" ? "Upcoming Events" : "Past Events"}</h1>
+  
+    <!-- Form to select event type -->
+    <form action={Astro.request.url} method="GET">
+      <select name="eventType">
+        <option value="upcoming" selected={eventType === "upcoming"}>Upcoming</option>
+        <option value="past" selected={eventType === "past"}>Past</option>
+      </select>
+      <button type="submit">Show Events</button>
+    </form>
+  
+    <ul>
+      {(eventType === "upcoming" ? upcomingEvents : pastEvents).map((event) => {
+        const eventName = event.fields.eventName ?? "No Event Name";
+        const venue = event.fields.venue ?? "No Venue";
+        const date = event.fields.date ?? "No Date"; // Ensure the date is a string
+        const eventSummary = event.fields.eventSummary?? "No Event Summary";
+        const time = event.fields.time?? "No time available";
+  
+        // Handle invalid or missing date
+        if (typeof date !== "string" || date === "No Date" || !date) {
+          return (
+            <li>
+              <h2>{eventName}</h2>
+              <p>{venue}</p>
+              <p>Invalid Date</p>
+            </li>
+          );
+        }
+  
+        // If the date is valid, process it as a string
+        // @ts-ignore: TypeScript error on split, but we know date is a string here
+        const dateParts = date.split("-");  // split the string into parts (YYYY-MM-DD)    
+        // Convert the date parts into a Date object (using UTC)
+        const utcDate = new Date(Date.UTC(Number(dateParts[0]), Number(dateParts[1]) - 1, Number(dateParts[2])));
+  
+        // Convert the UTC date to local timezone
+        const localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
+  
+        // Format the local date as dd/mm/yyyy
+        const formattedDate = localDate.toLocaleDateString('en-GB');
+  
+        return (
+          <li>
+            <h2>{eventName}</h2>
+            {event.fields.poster && event.fields.poster.fields && (
+            // @ts-ignore
+            <img
+              width="100px"
+              src={event.fields.poster.fields.file.url}
+              alt="Headshot"
+            />
+          )}
+            <p>Location: {venue}</p>
+            <p>Date: {formattedDate}</p>
+            <p>About the Event: {eventSummary}</p>
+            <p>Time: {time}</p>
+            {typeof event.fields.registrationLink === "string" && (
+            <p>
+              <a href={event!.fields!.registrationLink || "#"}>Register Here</a>
+            </p>
+          )}
+          
+          </li>
+        );
+      })}
+    </ul>
+  </PageLayout>
+  
