@@ -1,0 +1,235 @@
+---
+interface Props {
+  number1: string;
+  value1: string;
+  number2: string;
+  value2: string;
+  number3: string;
+  value3: string;
+  number4: string;
+  value4: string;
+}
+
+const { number1, value1, number2, value2, number3, value3, number4, value4 } = Astro.props;
+---
+
+<!-- still need to update alt tags, and edit size of media for phone -->
+
+<!-- <article class="statistics-class"> -->
+  <section class="statistics-class">
+    <section class="first-card" alt="Image indicating there's " >
+      <h2>{number1}</h2>
+      <h2>{value1}</h2>
+    </section>
+
+    <section class="second-card">
+        <h2>{number2}</h2>
+        <h2>{value2}</h2>
+    </section>
+
+    <section class="third-card">
+        <h2>{number3}</h2>
+        <h2>{value3}</h2>
+    </section>
+
+    <section class="fourth-card">
+        <h2>{number4}</h2>
+        <h2>{value4}</h2>
+      </section>
+  </section>
+<!-- </article> -->
+
+<style>
+    .statistics-class {
+        background-color: transparent;
+        margin-bottom: 0;
+        border-radius: 0;
+        box-shadow: 0;
+        position: relative;
+        height: 600px;
+        /* comment out */
+        background-color: #f7d7ea;
+    }
+    h2 {
+        color: white;
+        font-size: 38px;
+    }
+    .first-card, .second-card, .third-card, .fourth-card {
+        border-radius: 50%;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: white solid 11px;
+        box-shadow: 1px 2px 2px 1px #9a9a9a;
+        position: absolute;
+    }
+    /* set individual circle's colours, positions, and sizes */
+    .first-card {
+        background-color: #3f746f;
+        width: 380px;
+        height: 380px;
+        top: 16%;
+        left: 12%;
+    }
+    .second-card {
+        background-color: rgb(92, 144, 139);
+        width: 265px;
+        height: 265px;
+        top: 8%;
+        left: 40%;
+    }
+    .third-card {
+        background-color: rgba(115, 178, 172, 0.962);
+        width: 250px;
+        height: 250px;
+        bottom: 1%;
+        right: 30%;
+    }
+    .fourth-card {
+        background-color: #2f605c;
+        width: 330px;
+        height: 330px;
+        top: 5%;
+        right: 12%;
+    }
+    /* set individual circle's text size */
+    .first-card h2 {
+        font-size: 55px;
+    }
+
+    /* do media sizes */
+    @media (max-width: 1285px) {
+        /* set individual circle's positions, and sizes */
+        .first-card {
+            width: 350px;
+            height: 350px;
+            top: 16%;
+            left: 10%;
+        }
+        .second-card {
+            width: 230px;
+            height: 230px;
+            top: 8%;
+            left: 40%;
+        }
+        .third-card {
+            width: 220px;
+            height: 220px;
+            bottom: 1%;
+            right: 30%;
+        }
+        .fourth-card {
+            width: 300px;
+            height: 300px;
+            top: 5%;
+            right: 10%;
+        }
+    }
+
+    @media (max-width: 1180px) {
+        h2 {
+            font-size: 36px;
+        }
+        /* set individual circle's positions, and sizes */
+        .first-card {
+            width: 320px;
+            height: 320px;
+            top: 16%;
+            left: 10%;
+        }
+        .second-card {
+            width: 200px;
+            height: 200px;
+            top: 8%;
+            left: 40%;
+        }
+        .third-card {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            right: 30%;
+        }
+        .fourth-card {
+            width: 280px;
+            height: 280px;
+            top: 5%;
+            right: 10%;
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .statistics-class {
+            height: 550px;
+        }
+        /* set individual circle's positions, and sizes */
+        h2 {
+            font-size: 32px;
+        }
+        .first-card {
+            width: 300px;
+            height: 300px;
+            top: 16%;
+            left: 10%;
+        }
+        .second-card {
+            width: 185px;
+            height: 185px;
+            top: 8%;
+            left: 40%;
+        }
+        .third-card {
+            width: 170px;
+            height: 170px;
+            bottom: 10%;
+            right: 30%;
+        }
+        .fourth-card {
+            width: 260px;
+            height: 260px;
+            top: 5%;
+            right: 10%;
+        }
+        .first-card h2 {
+        font-size: 48px;
+        }
+    }
+
+    @media (max-width: 1020px) {
+        .statistics-class {
+            height: 500px;
+        }
+        /* set individual circle's positions, and sizes */
+        h2 {
+            font-size: 30px;
+        }
+        .first-card {
+            width: 280px;
+            height: 280px;
+            top: 16%;
+            left: 10%;
+        }
+        .second-card {
+            width: 165px;
+            height: 165px;
+            top: 8%;
+            left: 40%;
+        }
+        .third-card {
+            width: 155px;
+            height: 155px;
+            bottom: 10%;
+            right: 30%;
+        }
+        .fourth-card {
+            width: 240px;
+            height: 240px;
+            top: 5%;
+            right: 10%;
+        }
+        .first-card h2 {
+        font-size: 46px;
+        }
+    }
+</style>
