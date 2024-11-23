@@ -1,5 +1,6 @@
 ---
 import Subheading from "../components/Subheading.astro";
+import Statistics from "./Statistics.astro";
 
 interface Props {
   title: string;
@@ -11,19 +12,35 @@ interface Props {
 const { title, body1, body2, body3 } = Astro.props;
 ---
 
-<article class="about-us">
-  <Subheading title={title} />
-  <h3>
-    The <span class="pink-span">past,</span>
-    <span class="pink-span">present,</span> and
-    <span class="pink-span">future</span> of Technolgap!
-  </h3>
-  <p>{body1}</p>
-  <p>{body2}</p>
-  <p>{body3}</p>
-</article>
+<div class="about-us-statistics">
+  <article class="about-us">
+    <Subheading title={title} />
+    <h3>
+      The <span class="pink-span">past,</span>
+      <span class="pink-span">present,</span> and
+      <span class="pink-span">future</span> of Technolgap!
+    </h3>
+    <p>{body1}</p>
+    <p>{body2}</p>
+    <p>{body3}</p>
+  </article>
+  <Statistics
+    number1="500 +"
+    value1="members"
+    number2="35 +"
+    value2="campuses"
+    number3="25 +"
+    value3="speakers"
+    number4="150 +"
+    value4="mentorship program participants"
+  />
+</div>
 
 <style>
+  .about-us-statistics {
+    background-image: linear-gradient(#fff, #f7e1ee);
+  }
+
   article {
     padding-top: 8rem;
     padding-bottom: 5rem;
@@ -32,8 +49,11 @@ const { title, body1, body2, body3 } = Astro.props;
     border-radius: 0;
     text-align: center;
     background-image: url("/abtus-bg.png");
-    background-color:white;
     background-size: cover;
+    background-color: transparent;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
   }
 
   .about-us h3 {
@@ -53,5 +73,28 @@ const { title, body1, body2, body3 } = Astro.props;
 
   .about-us .pink-span {
     color: #ffbce5;
+  }
+
+  @media (max-width: 1000px) {
+
+    .about-us p {
+      font-size: 16px;
+      margin-left: 8rem;
+      margin-right: 8rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    
+    .about-us h3 {
+      font-size: 20px;
+      margin-bottom: 2rem;
+    }
+
+    .about-us p {
+      font-size: 14px;
+      margin-left: 4rem;
+      margin-right: 4rem;
+    }
   }
 </style>
