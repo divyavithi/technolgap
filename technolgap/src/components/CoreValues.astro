@@ -1,7 +1,7 @@
 ---
 import CoreValueCard from "../components/CoreValueCard.astro";
 import Subheading from "../components/Subheading.astro";
-import Milestones from "../components/Milestones.astro";
+import Milestones from "./Milestones.astro";
 
 interface Props {
   title: string;
@@ -31,30 +31,36 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     src="/white-star.png"
     alt="White Star Design"
     class="white-star-bottom"
-  />
-
-  <img src="/pink-star.png" alt="Pink Star Design" class="pink-star-bottom" />
-
-  <Milestones />
-
-  <!-- <img src="/bigPink-star.png" alt="Big Pink Star Design" class="bigPink-star-bottom">
-    <img src="/bigWhite-star.png" alt="Big White Star Design" class="bigWhite-star-bottom">
-    <img src="pink-bow.png" alt="Pink Bow Design" class="pink-bow">
-    <img src="/pink-bow1.png" alt="Pink Bow 1 Design" class="pink-bow1"> -->
+    />
+    
+    <img src="/pink-star.png" alt="Pink Star Design" class="pink-star-bottom" />
+    
+    <!-- <img src="pink-bow.png" alt="Pink Bow Design" class="pink-bow"/>
+    <img src="/pink-bow1.png" alt="Pink Bow 1 Design" class="pink-bow1" > -->
+    <img
+    src="/bigPink-star.png"
+    alt="Big Pink Star Design"
+    class="bigPink-star-bottom"
+    />
+    <img
+    src="/bigWhite-star.png"
+    alt="Big White Star Design"
+    class="bigWhite-star-bottom"
+    />
 </article>
+<Milestones />
 
 <style>
   article {
     padding-top: 7rem;
     padding-bottom: 6rem;
-    background-image: url("/milestones-bg.png");
-    /* background: linear-gradient(#f7d7ea, #fef8fc); */
-    background-size: cover;
-    background-size: 100% 100%;
+
     margin-bottom: 0;
     border: none;
     border-radius: 0;
     text-align: center;
+
+    background-color: transparent;
   }
 
   .value-card-grid {
@@ -99,27 +105,51 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     right: -42%;
     z-index: 0;
   }
-  /*
-    .core-values .bigPink-star-bottom{
-        position: absolute;
-        top: 3800px;
-        right: 0px;
-    }
+  
+  .core-values .bigWhite-star-bottom {
+    position: absolute;
+    top: 4000px;
+    left: 0px;
+  }
 
-    .core-values .bigWhite-star-bottom{
+  .core-values .bigPink-star-bottom {
+    position: absolute;
+    top: 5000px;
+    right: 0px;
+  }
+  
+  @media (max-width: 1100px){
+      
+      .core-values .bigWhite-star-bottom {
+          top: 4200px;
+        }
+        
+        .core-values .bigPink-star-bottom {
+            top: 5200px;
+        }
+    } 
+    
+    
+    
+    @media (max-width: 850px){
+        
+        .core-values .bigWhite-star-bottom {
+          top: 4200px;
+        }
+      
+        .core-values .bigPink-star-bottom {
+          top: 5200px;
+        }
+    } 
+    
+  /* .core-values .pink-bow {
+    position: relative;
+    bottom: 0;
+    left: 0px;
+  }
+  .core-values .pink-bow1{
         position: absolute;
-        top: 3000px;
-        left: 0px;
-    }
-
-    .core-values .pink-bow{
-        position: absolute;
-        top: 4400px;
-        left: 0px;
-    }
-    .core-values .pink-bow1{
-        position: absolute;
-        top: 4270px;
-        right: 0px;
+        bottom: 0;
+        right:0
     } */
 </style>

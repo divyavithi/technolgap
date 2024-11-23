@@ -1,66 +1,68 @@
 ---
-
-import HomePage from '../components/HomePage.astro';
+import HomePage from "../components/HomePage.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import AboutUs from "../components/AboutUs.astro";
 import CoreValues from "../components/CoreValues.astro";
-import Milestones from "../components/Milestones.astro";
 ---
 
 <PageLayout title="Technolgap">
-  <HomePage/>
-  <AboutUs
-    title="About Us"
-    body1="Technolgap traces its roots back to Carleton University in February 2020, where it originated as a student community for women in tech in Ottawa. Co-founders Alexa Liaskovski and Gina Bak, inspired by their experience at the Grace Hopper Celebration in 2019, noticed a glaring disparity in the availability of information about tech opportunities. Despite the abundance of opportunities in the field, they realized they hadn't heard about many of them. To address this gap, Technolgap was founded as a platform for students to share relevant opportunities with each other, including hackathons, job postings, scholarships, and workshops."
-    body2="As the community grew, it became evident that women in tech, particularly in Canada, faced unique challenges in starting their careers. To meet these challenges head-on, Technolgap expanded its reach across Canada and began offering mentorship programs and workshops tailored to the specific needs of its members."
-    body3="Today, Technolgap boasts a community of over 500 members and continues to evolve. However, in 2022, the community went dormant. It remained inactive until 2024 when one of its former members, Anjali Patel, took the reins. Initially joining Technolgap as an Events Organizer in 2021, Anjali along with her enthusiastic team, is now on a mission to revitalize the community, rebranding it, and rebuilding it into a thriving platform once again!"
-  />
-  <CoreValues
-    title="Core Values at Technolgap"
-    subtitle1="inclusivity and diversity"
-    body1="We embrace and celebrate the diverse backgrounds, experiences, and perspectives of all our members. By fostering an inclusive community, we ensure that everyone feels valued and respected, and we work to create a supportive environment where women and non-binary individuals in tech can thrive."
-    subtitle2="empowerment through collaboration"
-    body2="We believe in the power of collaboration to drive positive change. By working together, sharing knowledge, and supporting one another, we empower our members to overcome challenges, achieve their goals, and make significant contributions to the tech industry."
-    subtitle3="commitment to growth and learning"
-    body3="We are dedicated to the continuous growth and development of our members. Through mentorship, educational resources, and opportunities for professional and personal advancement, we encourage lifelong learning and strive to help our members reach their full potential in the tech industry."
-  >
-  <Milestones/>
-</PageLayout>
+  <HomePage />
+  <div class="everything">
+    <AboutUs
+      title="About Us"
+      body1="Technolgap traces its roots back to Carleton University in February 2020, where it originated as a student community for women in tech in Ottawa. Co-founders Alexa Liaskovski and Gina Bak, inspired by their experience at the Grace Hopper Celebration in 2019, noticed a glaring disparity in the availability of information about tech opportunities. Despite the abundance of opportunities in the field, they realized they hadn't heard about many of them. To address this gap, Technolgap was founded as a platform for students to share relevant opportunities with each other, including hackathons, job postings, scholarships, and workshops."
+      body2="As the community grew, it became evident that women in tech, particularly in Canada, faced unique challenges in starting their careers. To meet these challenges head-on, Technolgap expanded its reach across Canada and began offering mentorship programs and workshops tailored to the specific needs of its members."
+      body3="Today, Technolgap boasts a community of over 500 members and continues to evolve. However, in 2022, the community went dormant. It remained inactive until 2024 when one of its former members, Anjali Patel, took the reins. Initially joining Technolgap as an Events Organizer in 2021, Anjali along with her enthusiastic team, is now on a mission to revitalize the community, rebranding it, and rebuilding it into a thriving platform once again!"
+    />
+    <CoreValues
+      title="Core Values at Technolgap"
+      subtitle1="inclusivity and diversity"
+      body1="We embrace and celebrate the diverse backgrounds, experiences, and perspectives of all our members. By fostering an inclusive community, we ensure that everyone feels valued and respected, and we work to create a supportive environment where women and non-binary individuals in tech can thrive."
+      subtitle2="empowerment through collaboration"
+      body2="We believe in the power of collaboration to drive positive change. By working together, sharing knowledge, and supporting one another, we empower our members to overcome challenges, achieve their goals, and make significant contributions to the tech industry."
+      subtitle3="commitment to growth and learning"
+      body3="We are dedicated to the continuous growth and development of our members. Through mentorship, educational resources, and opportunities for professional and personal advancement, we encourage lifelong learning and strive to help our members reach their full potential in the tech industry."
+    />
+  </div>
 
-<style>
-  body {
-    height: 100%;
-    color: #fbf6ef;
-  }
-/* navbar branch additions */
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    color: #ffbce5;
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 2rem 0;
-  }
-  h2 {
-    font-size: 2rem;
-    margin: 2rem 0;
-  }
-  .message {
-    font-size: 1rem;
-    margin: 2rem 0;
-  }
-  .link-card-grid {
-    margin: 0 10vw;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-</style>
+  <style>
+    .everything {
+      background-image: linear-gradient(#fff, #f7e1ee, #fff,  #FAF2F7, #FAF2F7); 
+    }
+    body {
+      height: 100%;
+      color: #fbf6ef;
+    }
+    /* navbar branch additions */
+    .astro-a {
+      position: absolute;
+      top: -32px;
+      left: 50%;
+      transform: translatex(-50%);
+      width: 220px;
+      height: auto;
+      z-index: -1;
+    }
+    h1 {
+      color: #ffbce5;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 2rem 0;
+    }
+    h2 {
+      font-size: 2rem;
+      margin: 2rem 0;
+    }
+    .message {
+      font-size: 1rem;
+      margin: 2rem 0;
+    }
+    .link-card-grid {
+      margin: 0 10vw;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+      gap: 2rem;
+      padding: 0;
+    }
+  </style>
+</PageLayout>
