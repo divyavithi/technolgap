@@ -25,9 +25,13 @@ const { title, body } = Astro.props;
 		transition: background-color 0.5s;
 		border-radius: 90px;
         border-color: #fbf6ef;
-        border-width: 2px;
+        border-width: 7px;
         border-style: solid;
-        box-shadow: 2px 4px 4px 2px #9a9a9a;
+        box-shadow: 0 4px 2px #2f605c;
+    }
+    
+    .value-card:hover {
+        box-shadow: 10px 10px 0 0 #2f605c;
     }
 
     .value-card > a {
@@ -35,6 +39,7 @@ const { title, body } = Astro.props;
 		text-decoration: none;
 		line-height: 1.4;
 		padding: calc(1.5rem - 1px);
+        padding-bottom: 3rem;
 	}
 
     h3 {
@@ -49,4 +54,10 @@ const { title, body } = Astro.props;
 		margin-bottom: 0;
 		color: #fbf6ef;
 	}
+
+    @media (max-width: 1200px) {
+        p {
+            font-size: 14px;
+        }
+    }
 </style>
