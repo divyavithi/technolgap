@@ -17,7 +17,7 @@ const milestones = response.items;
 const increment = 68/(milestones.length);
 ---
 
-<section id="milestones-section">
+<article id="milestones-section">
   <Subheading title="Milestones at Technolgap" />
   <img src="/white-star.png" alt="White Star Design" class="white-star" />
   <section id="milestones">
@@ -37,23 +37,24 @@ const increment = 68/(milestones.length);
     </div>
   </section>
 
-</section>
+</article>
 
 <style>
 
   #milestones-section {
-    padding-top: 7rem;
+    padding-top: 3rem;
     padding-bottom: 6rem;
     margin-bottom: 0;
     border: none;
     border-radius: 0;
     text-align: center;
 
-    
     background-image: url("/milestones-bows.png");
     background-position: bottom;
     background-size: cover;
     background-color: transparent;
+    box-shadow: none;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: 100% auto;
   }

@@ -15,7 +15,7 @@ const { number1, value1, number2, value2, number3, value3, number4, value4 } = A
 
 <!-- still need to update alt tags, and edit size of media for phone -->
 
-  <section class="statistics-class">
+  <article class="statistics-class">
     <section class="first-card" >
       <h2>{number1}</h2>
       <h2>{value1}</h2>
@@ -35,14 +35,17 @@ const { number1, value1, number2, value2, number3, value3, number4, value4 } = A
         <h2>{number4}</h2>
         <h2>{value4}</h2>
       </section>
-  </section>
+    </article>
 
 <style>
     .statistics-class {
         background-color: transparent;
-        margin-bottom: 0;
-        border-radius: 0;
-        box-shadow: 0;
+        box-shadow: none;
+        width: 100%;
+        border: none;
+
+        margin-bottom: 0px;
+        border-radius: 0px;
         position: relative;
         height: 600px;
     }

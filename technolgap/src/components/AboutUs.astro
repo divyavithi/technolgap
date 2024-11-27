@@ -39,6 +39,8 @@ const { title, body1, body2, body3 } = Astro.props;
 <style>
   .about-us-statistics {
     /* background-image: linear-gradient(#fff, #f7e1ee); */
+    padding-top: 0px;
+    box-shadow: none;
   }
 
   article {
@@ -50,10 +52,19 @@ const { title, body1, body2, body3 } = Astro.props;
     text-align: center;
     background-image: url("/abtus-bg.png");
     background-size: cover;
+
     background-color: transparent;
+    border: none;
+    box-shadow: none;
+
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100% auto;
+    width: 100%;
+  }
+
+  .about-us{
+    box-shadow: none;
   }
 
   .about-us h3 {
