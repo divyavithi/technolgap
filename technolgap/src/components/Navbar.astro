@@ -94,7 +94,7 @@
   }
 
   .desktop-navbar {
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     padding: 0.5rem;
     position: sticky;
     top: 0;
@@ -102,8 +102,7 @@
     align-items: center; /* Center items vertically */
     height: 70px; /* Set a fixed height */
     opacity: 1;
-    z-index: 99;
-    /* added the z index here because the navbar wasn't sticking over the stats and milestones page */
+    z-index: 5000;
   }
 
   .desktop-navbar ul {
@@ -152,7 +151,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -170,7 +169,7 @@
     text-decoration: none;
   }
   .desktop-dropdown-menu li a:hover {
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     box-sizing: border-box;
     border: 0.25px solid white;
   }
@@ -179,7 +178,7 @@
   }
   .desktop-dropdown:hover .desktop-dropdown-toggle {
     font-weight: bold;
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     border-radius: 0;
   }
 
@@ -188,12 +187,12 @@
     margin-right: 2rem;
     border: 0.25px solid white;
     color: white;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     transition: font-weight 60s;
   }
   .custom-button:hover {
     font-weight: bold;
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
   }
 
   /*MOBILE NAVBAR DESIGN*/
@@ -201,11 +200,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     padding: 0.5rem;
     position: sticky;
     top: 0;
-    width: 600px;
+
+    width: 110%;
     height: 70px;
 
     z-index: 10000;
@@ -231,9 +231,8 @@
     position: absolute;
     top: 85px;
     right: 0;
-    background-color: #2d6d68dd;
+    background-color: #2d6d68;
     width: 50%;
-    opacity: 1;
   }
 
   .menu ul {
@@ -268,9 +267,8 @@
 
   .menu a:hover,
   .menu button:hover {
-    background-color: #64a8a2dd;
+    background-color: #64a8a2;
     font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   /* Dropdown menu styles */
@@ -280,27 +278,138 @@
     align-items: center;
   }
 
-  .mobile-dropdown:hover .mobile-dropdown-menu {
+  .mobile-dropdown-toggle {
+    background-color: #64a8a2;
+    border-radius: 0;
+  }
+
+  .mobile-dropdown-menu li {
+    list-style-type: none;
+    margin: 5px 0; /* Add vertical space between the boxes */
+    width: 150%; /* Adjust the width of each box relative to the parent */
     display: flex;
+    justify-content: center; /* Center text inside the box */
+  }
+  .mobile-dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block; /* Make the link a block element so it fills the box */
+    width: 80%; /* Make the link fill the whole list item */
+    padding: 10px 20px; /* Add padding to create space inside each box */
+    background-color: #64a8a2; /* Background color for the box */
+    text-align: center; /* Center the text */
+    box-sizing: border-box; /* Ensure padding is included in the width/height calculation */
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
 
   .mobile-navbar {
     display: none;
+    opacity: 1;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
+    .mobile-navbar {
+      display: flex;
+    }
+    .desktop-navbar {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1280px) and (max-width: 1280px) {
+    .desktop-navbar {
+      width: 1500px;
+    }
+    .logo img {
+      margin-right: 350px;
+    }
+    .desktop-dropdown {
+      white-space: nowrap;
+    }
+    .custom-button {
+      white-space: nowrap;
+    }
+    .desktop-dropdown-menu li {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1024px) {
+    .desktop-navbar {
+      width: 100%;
+    }
+
+    .logo img {
+      width: 99px;
+    }
+    .desktop-dropdown {
+      white-space: nowrap;
+    }
+    .custom-button {
+      white-space: nowrap;
+    }
+
+    .desktop-navbar ul {
+      gap: 0.5rem;
+    }
+
+    .desktop-dropdown-menu li {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 855px) {
     .desktop-navbar {
       display: none;
     }
 
     .mobile-navbar {
       display: flex;
+      /* width: 835px; */
     }
     .logo img {
       margin-right: 100px;
     }
   }
-  
+
+  @media (max-width: 825px) {
+    .desktop-navbar {
+      display: none;
+    }
+
+    .mobile-navbar {
+      display: flex;
+      /* width: 805px; */
+    }
+    .logo img {
+      margin-right: 100px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1024px) and (min-height: 600px) and (max-height: 600px) {
+    .desktop-navbar {
+      width: 1300px;
+    }
+
+    .logo img {
+      width: 100px;
+      margin-right: 300px;
+    }
+    .desktop-dropdown {
+      white-space: nowrap;
+    }
+    .custom-button {
+      white-space: nowrap;
+    }
+
+    .desktop-navbar ul {
+      gap: 0.5rem;
+    }
+
+    .desktop-dropdown-menu li {
+      display: inline;
+    }
+  }
 </style>
 
 <script type="module">
