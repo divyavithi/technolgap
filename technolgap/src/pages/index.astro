@@ -3,11 +3,12 @@ import HomePage from "../components/HomePage.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import AboutUs from "../components/AboutUs.astro";
 import CoreValues from "../components/CoreValues.astro";
+import ScrollArrow from "../components/ScrollArrow.astro";
 ---
 
 <PageLayout title="Technolgap">
   <HomePage />
-  <div class="everything">
+  <div id="about-us-page">
     <AboutUs
       title="About Us"
       body1="Technolgap traces its roots back to Carleton University in February 2020, where it originated as a student community for women in tech in Ottawa. Co-founders Alexa Liaskovski and Gina Bak, inspired by their experience at the Grace Hopper Celebration in 2019, noticed a glaring disparity in the availability of information about tech opportunities. Despite the abundance of opportunities in the field, they realized they hadn't heard about many of them. To address this gap, Technolgap was founded as a platform for students to share relevant opportunities with each other, including hackathons, job postings, scholarships, and workshops."
@@ -22,11 +23,14 @@ import CoreValues from "../components/CoreValues.astro";
       body2="We believe in the power of collaboration to drive positive change. By working together, sharing knowledge, and supporting one another, we empower our members to overcome challenges, achieve their goals, and make significant contributions to the tech industry."
       subtitle3="commitment to growth and learning"
       body3="We are dedicated to the continuous growth and development of our members. Through mentorship, educational resources, and opportunities for professional and personal advancement, we encourage lifelong learning and strive to help our members reach their full potential in the tech industry."
-    />
-  </div>
-
+      />
+    </div>
+    <ScrollArrow href="#navbar"/>
+  </PageLayout>
+    
   <style>
-    .everything {
+
+    #about-us-page {
       background-image: linear-gradient(#fff, #f7e1ee, #fff,  #FAF2F7, #FAF2F7); 
     }
     body {
@@ -65,4 +69,5 @@ import CoreValues from "../components/CoreValues.astro";
       padding: 0;
     }
   </style>
-</PageLayout>
+
+  

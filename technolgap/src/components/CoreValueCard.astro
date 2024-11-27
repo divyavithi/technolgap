@@ -35,7 +35,6 @@ const { title, body } = Astro.props;
     }
 
     .value-card > a {
-		width: 100%;
 		text-decoration: none;
 		line-height: 1.4;
 		padding: calc(1.5rem - 1px);
@@ -58,6 +57,16 @@ const { title, body } = Astro.props;
     @media (max-width: 1200px) {
         p {
             font-size: 14px;
+        }
+    }
+
+    @media (max-width: 800px) {
+        p {
+		    margin-top: 1rem;
+	    }
+        h3 {
+            margin-top: 1rem;
+            font-size: 18px;
         }
     }
 </style>

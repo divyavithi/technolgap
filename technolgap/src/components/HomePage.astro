@@ -1,7 +1,7 @@
 ---
 
 ---
-<div class="homepage-container">
+<article id="homepage">
   <div class="text-container">
     <h1><span class="pink-shadow">technolgap</span></h1>
     <h2>Welcome to Technolgap!</h2>
@@ -17,15 +17,15 @@
       <button class="conference-button">CONFERENCE</button>
     </div>
   </div>
-</div>
+</article>
 
 <style>
   body {
     color: #fbf6ef;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
-  .homepage-container {
-    width: 100vw;
+  #homepage {
+    border-radius: 0;
     background-image: 
         url("/homepage-bg.png"), 
         linear-gradient(
@@ -38,6 +38,8 @@
     background-position: top center; 
     background-repeat: no-repeat;
     background-size: 100% auto;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
     aspect-ratio: 45 / 32;
   }
   .text-container {

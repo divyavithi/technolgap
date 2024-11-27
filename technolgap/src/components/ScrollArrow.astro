@@ -1,0 +1,47 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a id="scroll-to-top" href={href}>
+  <img src="/scroll-arrow-green.png" />
+</a>
+
+<style>
+  #scroll-to-top {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    z-index: 10000;
+    background-color: #faf2f7;
+    padding: 10px;
+    box-shadow: 0 2px 5px 1px rgb(197, 197, 197);
+    display: block;
+  }
+  #scroll-to-top:hover {
+    background-color: #f7e1ee;
+  }
+
+  @media (max-width: 800px) {
+    #scroll-to-top {
+      right: 30px;
+      bottom: 30px;
+    }
+  }
+</style>
+
+<script>
+  const scrollToTopButton = document.getElementById("scroll-to-top");
+
+  window.addEventListener("scroll", () => {
+    if (scrollToTopButton) {
+      scrollToTopButton.style.display = window.scrollY > 200 ? "block" : "none";
+    }
+  });
+</script>

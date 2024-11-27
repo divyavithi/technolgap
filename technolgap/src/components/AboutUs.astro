@@ -13,7 +13,7 @@ const { title, body1, body2, body3 } = Astro.props;
 ---
 
 <div class="about-us-statistics">
-  <article class="about-us">
+  <article id="about-us">
     <Subheading title={title} />
     <h3>
       The <span class="pink-span">past,</span>
@@ -39,6 +39,8 @@ const { title, body1, body2, body3 } = Astro.props;
 <style>
   .about-us-statistics {
     /* background-image: linear-gradient(#fff, #f7e1ee); */
+    padding-top: 0px;
+    box-shadow: none;
   }
 
   article {
@@ -48,21 +50,29 @@ const { title, body1, body2, body3 } = Astro.props;
     border: none;
     border-radius: 0;
     text-align: center;
-    background-image: url("/abtus-bg.png");
+    /* background-image: url("/abtus-bg.png"); */
     background-size: cover;
+
     background-color: transparent;
+    border: none;
+    box-shadow: none;
+
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100% auto;
   }
 
-  .about-us h3 {
+  #about-us{
+    box-shadow: none;
+  }
+
+  #about-us h3 {
     font-size: 30px;
     margin-bottom: 3rem;
     color: #2f605c;
   }
 
-  .about-us p {
+  #about-us p {
     color: #2f605c;
     font-size: 18px;
     text-align: left;
@@ -71,13 +81,13 @@ const { title, body1, body2, body3 } = Astro.props;
     margin-right: 12rem;
   }
 
-  .about-us .pink-span {
+  #about-us .pink-span {
     color: #ffbce5;
   }
 
   @media (max-width: 1000px) {
 
-    .about-us p {
+    #about-us p {
       font-size: 16px;
       margin-left: 8rem;
       margin-right: 8rem;
@@ -86,12 +96,12 @@ const { title, body1, body2, body3 } = Astro.props;
 
   @media (max-width: 800px) {
     
-    .about-us h3 {
+    #about-us h3 {
       font-size: 20px;
       margin-bottom: 2rem;
     }
 
-    .about-us p {
+    #about-us p {
       font-size: 14px;
       margin-left: 4rem;
       margin-right: 4rem;
