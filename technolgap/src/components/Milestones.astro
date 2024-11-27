@@ -17,10 +17,10 @@ const milestones = response.items;
 const increment = 68/(milestones.length);
 ---
 
-<article id="milestones-section">
+<article id="milestones">
   <Subheading title="Milestones at Technolgap" />
   <img src="/white-star.png" alt="White Star Design" class="white-star" />
-  <section id="milestones">
+  <section id="milestones-timeline">
     <div class="timeline">
       {
         milestones.map((milestone, index) => (
@@ -41,7 +41,7 @@ const increment = 68/(milestones.length);
 
 <style>
 
-  #milestones-section {
+  #milestones {
     padding-top: 3rem;
     padding-bottom: 6rem;
     margin-bottom: 0;
@@ -58,7 +58,7 @@ const increment = 68/(milestones.length);
     background-size: 100% auto;
   }
 
-  #milestones {
+  #milestones-timeline {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,8 +84,10 @@ const increment = 68/(milestones.length);
   }
   .circle {
     color: white;
-    width: 300px;
-    height: 300px;
+    width: 50vw;
+    height: 50vw;
+    max-width: 300px;
+    max-height: 300px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -118,5 +120,26 @@ const increment = 68/(milestones.length);
     width: 8px;
     height: 2rem;
     background-color: #ffbce5; 
+  }
+
+  @media (max-width: 800px) {
+    .circle p {
+      font-size: 18px;
+    }
+    .circle-text {
+      padding: 50px 20px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .circle h4 {
+      font-size: 1.5rem;
+    }
+    .circle p {
+      font-size: 14px;
+    }
+    .circle-text {
+      padding: 50px 10px;
+    }
   }
 </style>

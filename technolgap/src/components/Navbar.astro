@@ -1,78 +1,83 @@
-<!--DESKTOP NAVBAR LAYOUT -->
-<nav class="desktop-navbar">
-  <!--Main desktop class -->
-  <ul>
-    <!--Adding the logo, redirects to home page. -->
+<div id="navbar">
+  <!--DESKTOP NAVBAR LAYOUT -->
+  <nav class="desktop-navbar">
+    <!--Main desktop class -->
+    <ul>
+      <!--Adding the logo, redirects to home page. -->
+      <div class="logo">
+        <button class="logo-button" onclick="window.location.href='/'">
+          <img src="/logo.png" alt="Technolgap" />
+        </button>
+      </div>
+      <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
+      <li><a href="/">HOME</a></li>
+      <li class="desktop-dropdown">
+        <a href="#about-us" class="desktop-dropdown-toggle">ABOUT US</a>
+        <ul class="desktop-dropdown-menu">
+          <li><a href="#core-values">Core Values</a></li>
+          <li><a href="#milestones">Milestones</a></li>
+          <li><a href="/our-team">Our Team</a></li>
+        </ul>
+      </li>
+      <li><a href="/events">EVENTS</a></li>
+      <li><a href="/resources">RESOURCES</a></li>
+      <li class="desktop-dropdown">
+        <a href="/get-involved" class="desktop-dropdown-toggle">GET INVOLVED</a>
+        <ul class="desktop-dropdown-menu">
+          <li><a href="/chapters">Chapters</a></li>
+          <li><a href="/sponsors">Sponsors</a></li>
+          <li><a href="/collaborators">Collaborators</a></li>
+          <li><a href="/volunteers">Volunteers</a></li>
+        </ul>
+      </li>
+      <button class="custom-button">Contact Us!</button>
+    </ul>
+  </nav>
+
+  <!--MOBILE NAVBAR LAYOUT -->
+  <nav class="mobile-navbar">
     <div class="logo">
       <button class="logo-button" onclick="window.location.href='/'">
         <img src="/logo.png" alt="Technolgap" />
       </button>
     </div>
-    <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
-    <li><a href="/">HOME</a></li>
-    <li class="desktop-dropdown">
-      <a href="/about-us" class="desktop-dropdown-toggle">ABOUT US</a>
-      <ul class="desktop-dropdown-menu">
-        <li><div class="menu-item"><a href="/our-team">Our Team</a></div></li>
+    <button class="menu-button" id="menuButton">☰</button>
+
+    <div class="menu" id="mobileMenu">
+      <ul>
+        <div class="main-menu"><li><a href="/">HOME</a></li></div>
+        <div class="main-menu">
+          <li class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle"
+              >ABOUT US</a
+            >
+
+            <ul class="mobile-dropdown-menu" id="aboutDropdown">
+              <li><a href="/our-team">Our Team</a></li>
+            </ul>
+          </li>
+        </div>
+        <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
+
+        <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
+        <div class="main-menu">
+          <li class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle" id="getInvolvedToggle"
+              >GET INVOLVED</a
+            >
+            <ul class="mobile-dropdown-menu" id="getInvolvedDropdown">
+              <li><a href="/chapters">Chapters</a></li>
+              <li><a href="/sponsors">Sponsors</a></li>
+              <li><a href="/collaborators">Collaborators</a></li>
+              <li><a href="/volunteers">Volunteers</a></li>
+            </ul>
+          </li>
+        </div>
       </ul>
-    </li>
-    <li><a href="/events">EVENTS</a></li>
-    <li><a href="/resources">RESOURCES</a></li>
-    <li class="desktop-dropdown">
-      <a href="/get-involved" class="desktop-dropdown-toggle">GET INVOLVED</a>
-      <ul class="desktop-dropdown-menu">
-        <li><a href="/chapters">Chapters</a></li>
-        <li><a href="/sponsors">Sponsors</a></li>
-        <li><a href="/collaborators">Collaborators</a></li>
-        <li><a href="/volunteers">Volunteers</a></li>
-      </ul>
-    </li>
-    <button class="custom-button">Contact Us!</button>
-  </ul>
-</nav>
+    </div>
+  </nav>
+</div>
 
-<!--MOBILE NAVBAR LAYOUT -->
-<nav class="mobile-navbar">
-  <div class="logo">
-    <button class="logo-button" onclick="window.location.href='/'">
-      <img src="/logo.png" alt="Technolgap" />
-    </button>
-  </div>
-  <button class="menu-button" id="menuButton">☰</button>
-
-  <div class="menu" id="mobileMenu">
-    <ul>
-      <div class="main-menu"><li><a href="/">HOME</a></li></div>
-      <div class="main-menu">
-        <li class="mobile-dropdown">
-          <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle"
-            >ABOUT US</a
-          >
-
-          <ul class="mobile-dropdown-menu" id="aboutDropdown">
-            <li><a href="/our-team">Our Team</a></li>
-          </ul>
-        </li>
-      </div>
-      <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
-
-      <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
-      <div class="main-menu">
-        <li class="mobile-dropdown">
-          <a href="#" class="mobile-dropdown-toggle" id="getInvolvedToggle"
-            >GET INVOLVED</a
-          >
-          <ul class="mobile-dropdown-menu" id="getInvolvedDropdown">
-            <li><a href="/chapters">Chapters</a></li>
-            <li><a href="/sponsors">Sponsors</a></li>
-            <li><a href="/collaborators">Collaborators</a></li>
-            <li><a href="/volunteers">Volunteers</a></li>
-          </ul>
-        </li>
-      </div>
-    </ul>
-  </div>
-</nav>
 <style>
   /* DESKTOP Navbar style */
 
@@ -96,7 +101,6 @@
   .desktop-navbar {
     background-color: #2d6d68;
     padding: 0.5rem;
-    position: sticky;
     top: 0;
     display: flex;
     align-items: center; /* Center items vertically */
@@ -118,7 +122,6 @@
     height: auto;
     display: block;
     margin-right: 20px;
-
   }
 
   .desktop-navbar li {
@@ -203,7 +206,6 @@
     align-items: center;
     background-color: #2d6d68;
     padding: 0.5rem;
-    position: sticky;
     top: 0;
 
     /* width: 110%; */

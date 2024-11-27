@@ -18,7 +18,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
   Astro.props;
 ---
 
-<article class="core-values">
+<article id="core-values">
   <img src="/white-star.png" alt="White Star Design" class="white-star-top" />
   <img src="/pink-star.png" alt="Pink Star Design" class="pink-star-top" />
   <Subheading title={title} />
@@ -72,7 +72,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     padding: 0;
   }
 
-  .core-values .white-star-top {
+  #core-values .white-star-top {
     position: relative;
     width: 100px;
     top: 200px;
@@ -80,7 +80,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     z-index: 0;
   }
 
-  .core-values .pink-star-top {
+  #core-values .pink-star-top {
     position: relative;
     width: 155.48px;
     height: 175.42px;
@@ -89,7 +89,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     z-index: 0;
   }
 
-  .core-values .pink-star-bottom {
+  #core-values .pink-star-bottom {
     position: relative;
     width: 113.48px;
     height: 119.42px;
@@ -98,7 +98,7 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     z-index: 0;
   }
 
-  .core-values .white-star-bottom {
+  #core-values .white-star-bottom {
     position: relative;
     width: 155.48px;
     height: 185.42px;
@@ -107,25 +107,27 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     z-index: 0;
   }
   
-  .core-values .bigWhite-star-bottom {
+  #core-values .bigWhite-star-bottom {
     position: absolute;
     top: 4000px;
     left: 0px;
+    z-index: 0;
   }
 
-  .core-values .bigPink-star-bottom {
+  #core-values .bigPink-star-bottom {
     position: absolute;
     top: 5000px;
     right: 0px;
+    z-index: 0;
   }
   
   @media (max-width: 1100px){
       
-      .core-values .bigWhite-star-bottom {
+      #core-values .bigWhite-star-bottom {
           top: 4200px;
         }
         
-        .core-values .bigPink-star-bottom {
+        #core-values .bigPink-star-bottom {
             top: 5200px;
         }
     } 
@@ -134,23 +136,13 @@ const { title, subtitle1, body1, subtitle2, body2, subtitle3, body3 } =
     
     @media (max-width: 850px){
         
-        .core-values .bigWhite-star-bottom {
+        #core-values .bigWhite-star-bottom {
           top: 4200px;
         }
       
-        .core-values .bigPink-star-bottom {
+        #core-values .bigPink-star-bottom {
           top: 5200px;
         }
     } 
     
-  /* .core-values .pink-bow {
-    position: relative;
-    bottom: 0;
-    left: 0px;
-  }
-  .core-values .pink-bow1{
-        position: absolute;
-        bottom: 0;
-        right:0
-    } */
 </style>
