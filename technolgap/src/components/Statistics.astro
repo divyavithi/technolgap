@@ -97,8 +97,9 @@ const { number1, value1, number2, value2, number3, value3, number4, value4 } = A
         font-size: 55px;
     }
 
+
     /* do media sizes */
-    @media (max-width: 1285px) {
+    @media (min-width: 1285px), (max-width: 1285px) { /*if its less than or greater than 1285px*/
         /* set individual circle's positions, and sizes */
         .first-card {
             width: 350px;
