@@ -1,0 +1,21 @@
+---
+import "../custom-pico.css"
+import ComingSoon from "../components/ComingSoon.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+
+const pathname = Astro.url.pathname;
+const validPaths = ["Resources", "Get-Involved", "Chapters", "Sponsors", "Collaborators", "Volunteers", "Contact-Us"]
+let title = "404 Error"
+let subtitle = "Page Not Found"
+for (const path of validPaths) {
+  if (pathname.slice(1) == path.toLowerCase()){
+    title = path + " Page Coming Soon"
+    subtitle = pathname + " is currently under construction. Stay tuned for updates!"
+    break 
+  }
+}
+---
+
+<PageLayout>
+  <ComingSoon title={title} subtitle={subtitle}/>
+</PageLayout>

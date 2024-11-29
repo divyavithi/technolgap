@@ -1,0 +1,66 @@
+---
+interface Props {
+    title: string,
+    subtitle?: string,
+}
+
+const {title, subtitle} = Astro.props;
+---
+
+<div id="coming-soon">
+    <h1 id="title">{title}</h1>
+    <h3 id="subtitle">{subtitle}</h3>
+    <img id="logo" src="\logo.png" width="200px"/>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #27504c, #2f605c, #64a8a2);
+        text-align: center;
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    #coming-soon {
+        min-height: 79vh;
+        color: #fff;
+    }
+
+    #title {
+        padding-top: 15vh;
+        font-size: 60px;
+        margin-bottom: 1rem;
+        text-shadow: 0px 0px 10px #ffbce5;
+        -webkit-text-stroke: 0.2px #ffbce5;
+    }
+
+    #subtitle {
+        padding: 0 10px;
+        margin-bottom: 5rem;
+    }
+    
+    #logo {
+        transition: box-shadow 2s ease;
+        transition: scale 1s ease;
+    }
+
+    #logo:hover {
+        box-shadow: 0px 0px 20px 2px #ffcfec;
+        scale: 105%;
+        border-radius: 50%;
+    }
+
+    @media (max-width: 800px) {
+        #title {
+            font-size: 7vw;
+        }
+
+        #subtitle {
+            font-size: 5vw;
+        }
+
+        #logo {
+            width: 25vw;
+        }
+    }
+</style>
