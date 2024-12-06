@@ -1,9 +1,10 @@
 ---
-//importing relevant libraries
 import { createClient } from "contentful";
 import type { Entry } from "contentful";
 import PageLayout from "../layouts/PageLayout.astro";
 import CardGrid from "../components/CardGrid.astro"
+import Dropdown from '../components/Dropdown.astro';
+import Subheading from "../components/Subheading.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
@@ -60,8 +61,6 @@ async function fetchteamYears(): Promise<string[]> {
       // order: "fields.teamYearMany",
     });
 
-    // console.log(response.items[0].fields)
-
     const yearsSet = new Set<string>();
 
     // Loop through the items and add each year to the Set
@@ -86,29 +85,49 @@ const [teamMembers, years] = await Promise.all([
   fetchTeamMembers(teamYear),
   fetchteamYears(),
 ]);
-// console.log(teamMembers[0].fields.teamYearMany)
 ---
 
-<PageLayout title="Our Team">
-  <h1>Team Members for {teamYear}</h1>
-  <form action={Astro.request.url} method="GET">
-    <select name="year">
-      {
-        years.map((yr) => (
-          <option value={yr} selected={yr === teamYear}>
-            {yr}
-          </option>
-        ))
-      }
-    </select>
-    <button type="submit">Show Members</button>
-  </form>
-  
-  <CardGrid entries={teamMembers}/>
+<PageLayout>
+  <article class="our-team">
+    <Subheading title={"Our Team"} />
+    <form action={Astro.request.url} method="GET">
+      <div class="dropdown-container">
+        <Dropdown name="year" options={years} selected={teamYear || "2024-2025"}/>
+      </div>
+      <CardGrid entries={teamMembers}/>
+    </form>
+  </article>
 </PageLayout>
 
 <style>
   body {
     background-color: #fee8f5;
   }
+
+  form {
+    position: relative;
+    margin-top: -4em;
+  }
+
+  .card-grid {
+    width: 100%;
+  }
+
+  .dropdown-container {
+    position: relative;
+    top: 85px; 
+    left: 75px;
+    z-index: 1;
+  }
+
+  article {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: #ffffff;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+  }
+
 </style>
