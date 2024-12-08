@@ -78,14 +78,15 @@ async function fetchteamYears(): Promise<string[]> {
   }
 }
 
-const url = new URL(Astro.request.url);
-const teamYear = url.searchParams.get("year") || "None";
+// fetch years
+const years = await fetchteamYears()
+const defaultYear = years[years.length-1]
 
-// Fetch both team members and years
-const [teamMembers, years] = await Promise.all([
-  fetchTeamMembers(teamYear),
-  fetchteamYears(),
-]);
+const url = new URL(Astro.request.url);
+const teamYear = url.searchParams.get("year") || defaultYear || "None";
+
+// Fetch team members
+const teamMembers = await fetchTeamMembers(teamYear)
 ---
 
 <PageLayout>
@@ -93,16 +94,15 @@ const [teamMembers, years] = await Promise.all([
     <Subheading title={"Our Team"} />
     <form action={Astro.request.url} method="GET">
       <div class="dropdown-container">
-        <Dropdown name="year" options={years} selected={teamYear || "2024-2025"}/>
+        <Dropdown name="year" options={years} selected={teamYear}/>
       </div>
-      <CardGrid entries={teamMembers}/>
     </form>
+    <CardGrid entries={teamMembers}/>
   </article>
 </PageLayout>
 
 <style>
   body {
-    background-color: #fee8f5;
   }
 
   form {
@@ -124,11 +124,24 @@ const [teamMembers, years] = await Promise.all([
   article {
     padding-top: 5rem;
     padding-bottom: 5rem;
-    background: #ffffff;
     margin-bottom: 0;
     border: none;
     border-radius: 0;
     text-align: center;
+    
+    background-image: url("/team-bg.png");
+    background-size: cover; 
+    background-position: top center; 
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    min-height: 100vh;
+    background-color: white;
+  }
+
+  @media (max-width: 770px) {
+    article {
+      background-size: 770px auto;
+    }
   }
 
 </style>
