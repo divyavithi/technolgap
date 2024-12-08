@@ -41,15 +41,13 @@ interface TeamMemberFields {
 
 type TeamMember = Entry<TeamMemberFields>;
 
-const url = new URL(Astro.request.url);
-const teamYear = url.searchParams.get("year") || "Technolgap";
-
-async function fetchTeamMembers(year: string): Promise<TeamMember[]> {
-  const response = await client.getEntries({
+  
+  async function fetchTeamMembers(year: string): Promise<TeamMember[]> {
+    const response = await client.getEntries({
     content_type: "teamMember",
     "fields.teamYearMany[in]": year,
   });
-
+  
   return response.items as unknown as TeamMember[];
 }
 async function fetchteamYears(): Promise<string[]> {
@@ -60,25 +58,28 @@ async function fetchteamYears(): Promise<string[]> {
       // @ts-ignore
       // order: "fields.teamYearMany",
     });
-
+    
     const yearsSet = new Set<string>();
-
-    // Loop through the items and add each year to the Set
-    response.items.forEach((item: {fields: {teamYearMany: [string]}}) => {
-      item.fields?.teamYearMany.forEach((year: string) => {
-        yearsSet.add(year); // Add each year to the Set
+      
+      // Loop through the items and add each year to the Set
+      response.items.forEach((item: {fields: {teamYearMany: [string]}}) => {
+        item.fields?.teamYearMany.forEach((year: string) => {
+          yearsSet.add(year); // Add each year to the Set
+        });
       });
-    });
 
     return Array.from(yearsSet).sort((a, b) => {
       return parseInt(a) - parseInt(b); // Sort numerically
     });
-
+    
   } catch (error) {
     console.error("Error fetching years:", error);
     return [];
   }
 }
+
+const url = new URL(Astro.request.url);
+const teamYear = url.searchParams.get("year") || "None";
 
 // Fetch both team members and years
 const [teamMembers, years] = await Promise.all([
