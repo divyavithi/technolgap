@@ -7,7 +7,7 @@ const { href } = Astro.props;
 ---
 
 <a id="scroll-to-top" href={href}>
-  <img src="/scroll-arrow-green.png" />
+  <img src="/scroll-arrow-green.png" alt="up arrow"/>
 </a>
 
 <style>
@@ -41,7 +41,7 @@ const { href } = Astro.props;
 
   window.addEventListener("scroll", () => {
     if (scrollToTopButton) {
-      scrollToTopButton.style.display = window.scrollY > 200 ? "block" : "none";
+      scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
     }
   });
 </script>
