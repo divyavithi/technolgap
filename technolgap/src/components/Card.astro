@@ -10,6 +10,11 @@ interface Props {
 
 const { name, headshot, position, link, studentInfo, bio } = Astro.props;
 const [program, institution] = studentInfo.split('\n');
+let linkedinHover = false
+function setLinkedinHover() {
+  
+  console.log(linkedinHover)  
+}
 ---
 
 <article class="card">
@@ -34,9 +39,11 @@ const [program, institution] = studentInfo.split('\n');
           <p>
             <a href={link} target="_blank">
               <img
-                src="/linkedin-logo.png"
+                src="/linkedin-logo-black.png"
                 alt="linkedin logo"
                 class="card-linkedin-logo"
+                onmouseover="this.src='/linkedin-logo-pink.png'"
+                onmouseout="this.src='/linkedin-logo-black.png'"
               />
             </a>
           </p>
@@ -46,6 +53,7 @@ const [program, institution] = studentInfo.split('\n');
     </section>
   </section>
 </article>
+
 
 <style>
   .card-headshot {
@@ -62,7 +70,13 @@ const [program, institution] = studentInfo.split('\n');
     bottom: 15px; /* Distance from the bottom */
     right: 15px; /* Distance from the right */
     height: 48px;
+    border-radius: 10px;
   }
+
+  .card-linkedin-logo:hover {
+    box-shadow: 0 0 10px 3px #20423f;
+  }
+
 
   .pink-star,
   .white-star {
