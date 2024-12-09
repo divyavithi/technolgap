@@ -10,11 +10,6 @@ interface Props {
 
 const { name, headshot, position, link, studentInfo, bio } = Astro.props;
 const [program, institution] = studentInfo.split('\n');
-let linkedinHover = false
-function setLinkedinHover() {
-  
-  console.log(linkedinHover)  
-}
 ---
 
 <article class="card">
