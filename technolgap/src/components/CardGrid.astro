@@ -40,8 +40,22 @@ const { entries } = Astro.props;
 ---
 
 <section class="grid overflow-auto">
-  {
-    entries.map((member) => (
+  {entries.map((member, index) => (
+    index === 0 ? (
+      <div class="first-entry">
+        <Card
+          name={(member.fields.name as unknown) as string}
+          headshot={(member.fields.headshot?.fields as any)?.file?.url ?? ""} 
+          position={(member.fields.position as unknown) as string}
+          link={(member.fields.linkedin2 as unknown) as string ?? "none"}
+          studentInfo={member.fields.memberDegree +
+            "\n" +
+            member.fields.institution
+          }
+          bio={(member.fields.bio as unknown) as string ?? "none"}
+        />
+      </div>
+    ) : (
       <Card
         name={(member.fields.name as unknown) as string}
         headshot={(member.fields.headshot?.fields as any)?.file?.url ?? ""} 
@@ -53,20 +67,34 @@ const { entries } = Astro.props;
         }
         bio={(member.fields.bio as unknown) as string ?? "none"}
       />
-    ))
-  }
+    )
+  ))}
 </section>
 
 <style>
   .grid {
+    display: grid;
     background-color: #64a8a2;
     border-radius: 20px;
     row-gap: 15px;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     box-shadow: 0 7px 10px 1px #898989;
-    margin: 0 50px;
+    /* margin: 0 50px; */
     border: solid 5px #fee8f5;
   }
+
+  /* Target the first entry specifically */
+  .first-entry {
+    grid-column: 1 / -1; /* Span the entire row */
+    justify-self: center; /* Center horizontally */
+    margin-top: 50px;
+  }
+
+    @media (max-width: 620px) {
+      .first-entry {
+        justify-self: left;
+      }
+    }
 
   @media (max-width: 1200px) {
     .grid {
