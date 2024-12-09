@@ -3,18 +3,77 @@
 ---
 
 <footer>
-    <p>© Technolgap.</p>
-    <!-- Additional footer elements can go here -->
-  </footer>
+      <div id="links-container">
+        <a class="link" href="/code-of-conduct">Code of Conduct</a>
+        <a class="link" href="/privacy-policy">Privacy Policy</a>
+      </div>
+      <img alt="Made with Love by Carleton Blueprint" src="/made-with-cublueprint.png"/>
+</footer>
   
   <style>
     footer {
-      background-color: #282c34; /* Dark background */
+      background-color: #2f605c; /* Dark background */
       color: white;
       padding: 1rem;
       text-align: center;
       position: relative;
       bottom: 0;
+    }
+
+    footer > img {
+      position: absolute;
+      right: 20px;
+      bottom: 30px;
+      height: 50px;
+    }
+
+    #links-container {
+      text-align: left;
+      margin: 20px 0;
+    }
+    
+    .link {
+      display: block;
+      text-decoration: none;
+      color: white;
+      margin: 20px 50px;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+      color: #fee8f5;
+    }
+
+    @media (max-width: 800px) {
+      .link {
+        margin-left: 10px;
+      }
+    }
+    @media (max-width: 600px) {
+      footer > img {
+        height: 40px;
+        left: 20px;
+      }
+
+      #links-container {
+        margin-bottom: 80px;
+      }
+    }
+    @media (max-width: 400px) {
+      footer > img {
+        height: 30px;
+      }
+
+      .link {
+        font-size: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      #links-container {
+        margin-top: 0;
+        margin-bottom: 60px;
+      }
     }
   </style>
   
