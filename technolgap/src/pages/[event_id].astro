@@ -1,0 +1,46 @@
+---
+import { createClient } from "contentful";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+const { eventId } = Astro.params;
+const response = await client.getEntry(eventId);
+
+if (!response) {
+  throw new Error(`Event with ID ${eventId} not found.`);
+}
+
+const event = response.fields;
+---
+
+<style>
+  h1 {
+    margin-bottom: 10px;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+</style>
+
+<h1>{event.eventName}</h1>
+{event.poster && event.poster.fields && (
+  <img src={event.poster.fields.file.url} alt={event.poster.fields.title} />
+)}
+<p><strong>Date:</strong> {event.date ?? "No Date Available"}</p>
+<p><strong>Venue:</strong> {event.venue ?? "No Venue Available"}</p>
+<p><strong>Time:</strong> {event.time ?? "No Time Available"}</p>
+<p>{event.eventSummary ?? "No Event Summary Available"}</p>
+{event.registrationLink && (
+  <p>
+    <a href={event.registrationLink} target="_blank">Register Here</a>
+  </p>
+)}
