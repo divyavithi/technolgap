@@ -1,0 +1,43 @@
+---
+import EventCard from "./EventCard.astro";
+import type { Entry } from "contentful";
+
+interface Event {
+  sys: { id: string };
+  fields: {
+    eventName: string;
+    date: string;
+    time: string;
+    eventType?: string;
+  };
+}
+
+interface Props {
+  events: Entry<Event>[];
+}
+
+const { events } = Astro.props;
+---
+
+<section class="events-grid">
+  {events.map((event) => (
+    <EventCard
+      eventId={event.sys.id}
+      eventName={event.fields.eventName}
+      date={event.fields.date}
+      time={event.fields.time}
+      eventType={event.fields.eventType}
+    />
+  ))}
+</section>
+
+<style>
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ensures cards are side-by-side */
+    gap: 20px; /* Spacing between the cards */
+    padding: 20px; /* Padding around the grid */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the grid within the page */
+  }
+</style>

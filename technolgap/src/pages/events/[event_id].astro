@@ -1,0 +1,147 @@
+---
+import { createClient } from "contentful";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Fetch the eventId from the route parameters
+const { eventId } = Astro.params;
+
+// Fetch the specific event's details using the eventId
+const event = await (async () => {
+  try {
+    const response = await client.getEntry(eventId);
+    return response.fields;
+  } catch (err) {
+    console.error("Error fetching event details:", err);
+    return null;
+  }
+})();
+
+// Define getStaticPaths to generate the paths for each event
+export async function getStaticPaths() {
+  try {
+    const response = await client.getEntries({ content_type: "event" });
+    return response.items.map((event) => ({
+      params: { eventId: event.sys.id },
+    }));
+  } catch (err) {
+    console.error("Error fetching events for static paths:", err);
+    return [];
+  }
+}
+---
+
+{!event && (
+  <PageLayout title="Event Not Found">
+    <h1>Event Not Found</h1>
+    <p>Sorry, we couldn't find the event you're looking for.</p>
+  </PageLayout>
+)}
+
+{event && (
+  <PageLayout title={event.eventName}>
+    <div class="event-container">
+      <h1 class="event-title">{event.eventName}</h1>
+      <p><strong>Date:</strong> {event.date ?? "TBA"}</p>
+      <p><strong>Time:</strong> {event.time ?? "TBA"}</p>
+      <p><strong>Venue:</strong> {event.venue ?? "TBA"}</p>
+      {event.registrationLink && (
+        <a href={event.registrationLink} target="_blank" class="register-button">Register</a>
+      )}
+    </div>
+  </PageLayout>
+)}
+
+<style>
+  .event-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .event-title {
+    font-size: 36px;
+    color: #275950;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .details-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .details-box {
+    flex: 1;
+    border: 2px solid #275950;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #ffd9e8;
+    color: #275950;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .badge {
+    background-color: #ffc2dc;
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+
+  .event-image-placeholder {
+    background-color: #ffc2dc;
+    height: 180px;
+    border-radius: 10px;
+    margin: 15px 0;
+  }
+
+  .button-container {
+    margin-top: 20px;
+  }
+
+  .register-button {
+    background-color: #0c5027;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .register-button:hover {
+    background-color: #064024;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    background-color: #60a0a1;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
