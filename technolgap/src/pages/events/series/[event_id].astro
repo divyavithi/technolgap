@@ -11,14 +11,34 @@ const client = createClient({
 });
 
 // Define the event fields interface
-interface EventFields {
+interface EventInterface {
   fields: {
     eventName: string;
-    subEvents: [Object];
+    poster: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    date: string; // Ensure date is expected to be a string
+    venue: string;
+    eventType: string;
+    eventSummary: string;
+    time: string | undefined;
+    registrationLink: string | undefined;
   };
   contentTypeId: "event";
 }
-type Event = Entry<EventFields>;
+
+type Events = Entry<EventInterface>[];
 
 
 const { event_id } = Astro.params;
@@ -47,12 +67,14 @@ export async function getStaticPaths() {
   }
 }
 
+console.log(event)
+
 ---
 
 <PageLayout>
     <div class="container">
         <Subheading title={event?.eventName} />
-        <EventGrid events={event?.subEvents}/>
+        <EventGrid events={event?.subEvents as Events}/>
     </div>
 </PageLayout>
 
