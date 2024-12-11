@@ -1,0 +1,74 @@
+---
+import EventGrid from "../../../components/EventGrid.astro";
+import Subheading from "../../../components/Subheading.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import { createClient } from "contentful";
+import type {Entry} from "contentful";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Define the event fields interface
+interface EventFields {
+  fields: {
+    eventName: string;
+    subEvents: [Object];
+  };
+  contentTypeId: "event";
+}
+type Event = Entry<EventFields>;
+
+
+const { event_id } = Astro.params;
+
+// Fetch the specific event's details using the eventId
+const event = await (async () => {
+  try {
+    const response = await client.getEntry(event_id);
+    return response.fields;
+  } catch (err) {
+    console.error("Error fetching event details:", err);
+    return null;
+  }
+})();
+
+// Define getStaticPaths to generate the paths for each event
+export async function getStaticPaths() {
+  try {
+    const response = await client.getEntries({ content_type: "event" });
+    return response.items.map((event) => ({
+      params: { event_id: event.sys.id },
+    }));
+  } catch (err) {
+    console.error("Error fetching events for static paths:", err);
+    return [];
+  }
+}
+
+---
+
+<PageLayout>
+    <div class="container">
+        <Subheading title={event?.eventName} />
+        <EventGrid events={event?.subEvents}/>
+    </div>
+</PageLayout>
+
+<style>
+    body {
+        background-image: url("/events-page-bg.png");
+        background-color: white;
+        background-size: cover;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+    }
+
+    .container {
+        justify-items: center;
+        padding-top: 70px;
+        min-height: 100vh;
+    }
+</style>

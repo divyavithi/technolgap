@@ -8,12 +8,12 @@ const client = createClient({
 });
 
 // Fetch the eventId from the route parameters
-const { eventId } = Astro.params;
+const { event_id } = Astro.params;
 
 // Fetch the specific event's details using the eventId
 const event = await (async () => {
   try {
-    const response = await client.getEntry(eventId);
+    const response = await client.getEntry(event_id);
     return response.fields;
   } catch (err) {
     console.error("Error fetching event details:", err);
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   try {
     const response = await client.getEntries({ content_type: "event" });
     return response.items.map((event) => ({
-      params: { eventId: event.sys.id },
+      params: { event_id: event.sys.id },
     }));
   } catch (err) {
     console.error("Error fetching events for static paths:", err);

@@ -5,6 +5,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 import EventsGrid from "../components/EventGrid.astro";
 import Dropdown from "../components/Dropdown.astro";
 import TextBox from "../components/TextBox.astro";
+import Subheading from "../components/Subheading.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
@@ -94,7 +95,7 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
 <PageLayout title="Events">
   <div class="container">
     <div class="header">
-      <h1>Events</h1>
+      <Subheading title="Events"/>
       <TextBox heading="Join us at Technolgap events!" text="Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement."/>
     </div>
     <form action={Astro.request.url} method="GET">
@@ -113,7 +114,6 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
 
 <style>
   body {
-    font-family: Arial, sans-serif;
     background-image: url("/events-page-bg.png");
     background-color: white;
     background-size: cover;
@@ -134,16 +134,9 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     text-align: center;
     padding: 60px 20px;
     border-radius: 15px;
-    margin-bottom: 30px;
     overflow: hidden;
   }
 
-  .header h1 {
-    font-size: 48px;
-    font-weight: bold;
-    color: #2d6d68dd;
-    margin-bottom: 20px;
-  }
 
   
 </style>

@@ -11,7 +11,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
 ---
 
 <li class="event-card">
-  <a href={`/events/${eventId}`} class="event-link">
+  <a href={eventType == "series" ? `/events/series/${eventId}` : `/events/${eventId}` } class="event-link">
     <img class="poster" src={poster}>
     <div class="event-card-content">
       <div class="event-card-header">
@@ -22,7 +22,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
         <div class="date-container">
             <p class="month">{new Date(date).toLocaleString("en-US", { month: "long" }).toUpperCase()}</p>
             <p class="day">{new Date(date).getDate()}</p>
-            <p class="time">@{time}</p>
+            <p class="time">{time}</p>
           </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
   text-transform: uppercase; 
   font-weight: bold; 
   font-size: 12px; 
-  color: white;
+  color: #2D6D68;
   background-color: #ffbce5; 
   border-radius: 5px; 
   padding: 5px 10px; 

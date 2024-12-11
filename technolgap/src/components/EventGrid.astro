@@ -33,7 +33,7 @@ const { events } = Astro.props;
       eventId={event.sys.id}
       eventName={event.fields.eventName as unknown as string}
       date={event.fields.date as unknown as string}
-      time={event.fields.time == undefined ? "All Day" : event.fields.time as unknown as string}
+      time={event.fields.time == undefined ? "All Day" : (event.fields.time as unknown as string)}
       poster={(event.fields.poster?.fields as any)?.file?.url ?? ""}
       eventType={event.fields.eventType as unknown as string}
     />
