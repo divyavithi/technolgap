@@ -71,7 +71,7 @@ console.log(event)
 
 ---
 
-<PageLayout>
+<PageLayout title={event?.eventName}>
     <div class="container">
         <Subheading title={event?.eventName} />
         <EventGrid events={event?.subEvents as Events}/>
