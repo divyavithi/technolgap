@@ -4,6 +4,7 @@ import type { Entry } from "contentful";
 import PageLayout from "../layouts/PageLayout.astro";
 import EventsGrid from "../components/EventGrid.astro";
 import Dropdown from "../components/Dropdown.astro";
+import TextBox from "../components/TextBox.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
@@ -94,13 +95,7 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
   <div class="container">
     <div class="header">
       <h1>Events</h1>
-      <p>
-        <span class="highlight">Join us at Technolgap events!</span>
-        Stay updated on our latest events, workshops, and networking opportunities
-        designed to support and empower women and non-binary individuals in tech.
-        From panel discussions to hackathons, our events are aimed at fostering skill
-        development, career advancement, and community engagement.
-      </p>
+      <TextBox heading="Join us at Technolgap events!" text="Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement."/>
     </div>
     <form action={Astro.request.url} method="GET">
       <Dropdown
@@ -111,7 +106,7 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     </form>
     <!-- Use the EventsGrid component -->
     <EventsGrid
-      events={eventType == "upcoming" ? upcomingEvents : pastEvents}
+      events={eventType == "past" ? pastEvents : upcomingEvents}
     />
   </div>
 </PageLayout>
@@ -150,24 +145,5 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     margin-bottom: 20px;
   }
 
-  .header p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #fff;
-    background-color: #2d6d68;
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 50px;
-    max-width: 800px;
-    height: 170px;
-    box-shadow: 10px 10px 0px #f7deed;
-  }
-
-  .highlight {
-    font-size: 30px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
+  
 </style>
