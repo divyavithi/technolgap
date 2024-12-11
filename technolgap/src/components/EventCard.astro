@@ -12,9 +12,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
 
 <li class="event-card">
   <a href={`/events/${eventId}`} class="event-link">
-    <!-- <div class="event-image-placeholder"> -->
-      <img class="poster" src={poster}>
-    <!-- </div> -->
+    <img class="poster" src={poster}>
     <div class="event-card-content">
       <div class="event-card-header">
         <span class="badge">{eventType ?? "Event"}</span>
@@ -39,9 +37,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
     flex-direction: column;
     justify-content: space-between;
     background-color: #2D6D68;
-    ;
     border-radius: 20px;
-    padding: 15px;
     width: 300px;
     height: 400px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -53,23 +49,24 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
     color: inherit;
   }
   
+  .event-link:hover > img{
+    box-shadow: 0px 0px 3px 2px #ffbce5ac;
+  }
+  
   .event-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
   }
   
-  .event-image-placeholder {
-    background-color: #F7DFEE;
-    height: 200px;
-    border-radius: 15px;
-  }
   
   .poster {
-    width: 100%;
+    box-sizing: border-box;
+    margin: 10px auto 10px auto;
+    max-width: 270px;
     border: 5px solid #ffbce5;
     border-radius: 15px;
-    margin-bottom: 10px;
     display: block;
+    box-shadow: 0px 5px 3px -2px rgba(0, 0, 0, 0.347);
   }
 
   .event-card-content {
@@ -78,7 +75,7 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 10px;
-    height: 100%;
+    padding: 20px;
   }
 
   .event-card-header {
@@ -97,13 +94,17 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
   border-radius: 5px; 
   padding: 5px 10px; 
   display: inline-block; 
+  box-shadow: 0px 3px 5px 0.5px rgba(0, 0, 0, 0.347);
 }
 
   .event-name {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: -60px;
     color: white;
+    position: relative;
+    top: 80px;
+    max-width: 140px;
   }
 
   .event-details {

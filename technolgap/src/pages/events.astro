@@ -3,36 +3,91 @@ import { createClient } from "contentful";
 import type { Entry } from "contentful";
 import PageLayout from "../layouts/PageLayout.astro";
 import EventsGrid from "../components/EventGrid.astro";
+import Dropdown from "../components/Dropdown.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
   accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
 });
 
-interface event {
-  sys: { id: string };
+// Define the event fields interface
+interface EventFields {
   fields: {
     eventName: string;
-    date: string;
-    time: string;
-    position: {
+    poster: {
+      metadata: { tags: [] };
+      sys: object;
       fields: {
+        title: string;
+        description: string;
         file: {
           url: string;
-        } 
-      }
-    }
-    eventType?: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    date: string; // Ensure date is expected to be a string
+    venue: string;
+    eventType: string;
+    eventSummary: string;
+    time: string | undefined;
+    registrationLink: string | undefined;
   };
   contentTypeId: "event";
 }
+type Event = Entry<EventFields>;
+// Helper function to fetch events from Contentful
+async function fetchEvents(): Promise<Event[]> {
+  const response = await client.getEntries({
+    content_type: "event",
+  });
+  return response.items as Event[];
+}
+// Utility function to compare event dates with today's date (ignoring time)
+function compareDates(eventDate: string): number {
+  const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
 
-type Events = Entry<event>[];
+  if (!today) {
+    throw new Error("Today is undefined, unable to compare dates.");
+  }
+  // Create a new Date object for the event date
+  const eventDateObj = new Date(eventDate);
+  // If the eventDate is invalid, return a default comparison result
+  if (isNaN(eventDateObj.getTime())) {
+    throw new Error(`Invalid date provided: ${eventDate}`);
+  }
+  // Compare event date with today
+  if (eventDate === today) return 0; // Same day
+  return eventDateObj > new Date(today) ? 1 : -1; // Future or past
+}
+// Fetch and classify events into past and upcoming
+async function getUpcomingAndPastEvents() {
+  const events = await fetchEvents();
+  // Sort events by date
+  const sortedEvents = events.sort((a, b) => {
+    const dateA =
+      a.fields.date && typeof a.fields.date === "string" ? a.fields.date : ""; // Ensure dateA is a string
+    const dateB =
+      b.fields.date && typeof b.fields.date === "string" ? b.fields.date : ""; // Ensure dateB is a string
+    return compareDates(dateA) - compareDates(dateB);
+  });
+  // Filter events into upcoming and past
+  const upcomingEvents = sortedEvents.filter(
+    (event) => compareDates(event.fields.date as unknown as string) >= 0
+  ); // On or after today
+  const pastEvents = sortedEvents.filter(
+    (event) => compareDates(event.fields.date as unknown as string) < 0
+  ); // Before today
+  return { upcomingEvents, pastEvents };
+}
+// Fetch events asynchronously in the Astro script block
+const { upcomingEvents, pastEvents } = await getUpcomingAndPastEvents();
+// Get the user-selected event type from the query string (defaults to "upcoming")
+const url = new URL(Astro.request.url);
+const eventType = url.searchParams.get("eventType") || "Upcoming";
 
-const upcomingEvents = await (async () => {
-  const response = await client.getEntries({ content_type: "event" });
-  return (response.items as unknown as Events);
-})();
 ---
 
 <PageLayout title="Events">
@@ -47,18 +102,17 @@ const upcomingEvents = await (async () => {
         development, career advancement, and community engagement.
       </p>
     </div>
-
-    <div class="filter">
-      <select name="year" id="year">
-        <option value="" disabled selected>Year</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-      </select>
-    </div>
-
+    <form action={Astro.request.url} method="GET">
+      <Dropdown
+        name="eventType"
+        options={["upcoming", "past"]}
+        selected={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
+      />
+    </form>
     <!-- Use the EventsGrid component -->
-    <EventsGrid events={upcomingEvents} />
+    <EventsGrid
+      events={eventType == "upcoming" ? upcomingEvents : pastEvents}
+    />
   </div>
 </PageLayout>
 
@@ -72,13 +126,13 @@ const upcomingEvents = await (async () => {
     background-repeat: no-repeat;
     background-size: 100% auto;
   }
-
+  
   .container {
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px;
-    border-radius: 50px;
     min-height: 100vh;
+    padding-bottom: 100px;
   }
 
   .header {
@@ -109,34 +163,6 @@ const upcomingEvents = await (async () => {
     box-shadow: 10px 10px 0px #f7deed;
   }
 
-  .filter {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 20px;
-    right: -25px;
-    width: 100px;
-  }
-
-  .filter select {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
-    background-color: #2d6d68;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .filter::after {
-    content: "▼";
-    font-size: 14px;
-    color: #fff;
-    position: absolute;
-    right: 5px;
-    top: 40%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
   .highlight {
     font-size: 30px;
     font-weight: bold;
