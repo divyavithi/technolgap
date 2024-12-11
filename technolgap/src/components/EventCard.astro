@@ -80,17 +80,20 @@ const { eventId, eventName, date, time, eventType } = Astro.props;
   }
 
   .badge {
-    background-color: #ffbce5;
-    color: #000;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
+  text-transform: uppercase; 
+  font-weight: bold; 
+  font-size: 12px; 
+  color: white;
+  background-color: #ffbce5; 
+  border-radius: 5px; 
+  padding: 5px 10px; 
+  display: inline-block; 
+}
 
   .event-name {
     font-size: 18px;
     font-weight: bold;
+    margin-top: 10px;
     color: white;
   }
 
@@ -110,7 +113,9 @@ const { eventId, eventName, date, time, eventType } = Astro.props;
   font-family: Arial, sans-serif; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: inline-block;
-  width: 120px; 
+  width: 90px; 
+  height: 70px;
+  margin-top: -20px;
 }
 
 .date-container .month {

@@ -27,7 +27,7 @@ const { upcomingEvents } = await (async () => {
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px;
-    border-radius: 10px;
+    border-radius: 50px;
   }
 
   .header {
@@ -41,7 +41,7 @@ const { upcomingEvents } = await (async () => {
   .header h1 {
     font-size: 48px;
     font-weight: bold;
-    color: #2d6d68; 
+    color: #2D6D68DD;
     margin-bottom: 20px;
   }
 
@@ -52,15 +52,18 @@ const { upcomingEvents } = await (async () => {
     background-color: #2d6d68;
     display: inline-block;
     padding: 15px 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
     max-width: 800px;
+    height: 170px;
+    box-shadow: 10px 10px 0px #f7deed; 
   }
 
   .filter {
     position: relative;
     display: inline-block;
     margin-bottom: 20px;
+    right: -25px;
+    width: 100px;
   }
 
   .filter select {
@@ -71,12 +74,6 @@ const { upcomingEvents } = await (async () => {
     color: #fff;
     font-size: 16px;
     font-weight: bold;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
   }
 
   .filter::after {
@@ -84,11 +81,18 @@ const { upcomingEvents } = await (async () => {
     font-size: 14px;
     color: #fff;
     position: absolute;
-    right: 15px;
-    top: 50%;
+    right: 5px;
+    top: 40%;
     transform: translateY(-50%);
     pointer-events: none;
   }
+  .highlight {
+  font-size: 30px; 
+  font-weight: bold; 
+  display: block; 
+  margin-bottom: 10px; 
+  color: #ffffff; 
+}
 </style>
 
 <PageLayout title="Events">
