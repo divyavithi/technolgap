@@ -2,18 +2,26 @@
 import EventCard from "./EventCard.astro";
 import type { Entry } from "contentful";
 
-interface Event {
+interface event {
   sys: { id: string };
   fields: {
     eventName: string;
     date: string;
     time: string;
+    poster: {
+      fields: {
+        file: {
+          url: string;
+        } 
+      }
+    }
     eventType?: string;
   };
+  contentTypeId: "event";
 }
 
 interface Props {
-  events: Entry<Event>[];
+  events: Entry<event>[];
 }
 
 const { events } = Astro.props;
@@ -23,10 +31,11 @@ const { events } = Astro.props;
   {events.map((event) => (
     <EventCard
       eventId={event.sys.id}
-      eventName={event.fields.eventName}
-      date={event.fields.date}
-      time={event.fields.time}
-      eventType={event.fields.eventType}
+      eventName={event.fields.eventName as unknown as string}
+      date={event.fields.date as unknown as string}
+      time={event.fields.time as unknown as string}
+      poster={(event.fields.poster?.fields as any)?.file?.url ?? ""}
+      eventType={event.fields.eventType as unknown as string}
     />
   ))}
 </section>

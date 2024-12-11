@@ -1,26 +1,76 @@
 ---
 import { createClient } from "contentful";
+import type { Entry } from "contentful";
 import PageLayout from "../layouts/PageLayout.astro";
-import EventsGrid from "../components/EventGrid.astro"; 
+import EventsGrid from "../components/EventGrid.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
   accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
 });
 
-const { upcomingEvents } = await (async () => {
+interface event {
+  sys: { id: string };
+  fields: {
+    eventName: string;
+    date: string;
+    time: string;
+    position: {
+      fields: {
+        file: {
+          url: string;
+        } 
+      }
+    }
+    eventType?: string;
+  };
+  contentTypeId: "event";
+}
+
+type Events = Entry<event>[];
+
+const upcomingEvents = await (async () => {
   const response = await client.getEntries({ content_type: "event" });
-  return { upcomingEvents: response.items };
+  return (response.items as unknown as Events);
 })();
 ---
+
+<PageLayout title="Events">
+  <div class="container">
+    <div class="header">
+      <h1>Events</h1>
+      <p>
+        <span class="highlight">Join us at Technolgap events!</span>
+        Stay updated on our latest events, workshops, and networking opportunities
+        designed to support and empower women and non-binary individuals in tech.
+        From panel discussions to hackathons, our events are aimed at fostering skill
+        development, career advancement, and community engagement.
+      </p>
+    </div>
+
+    <div class="filter">
+      <select name="year" id="year">
+        <option value="" disabled selected>Year</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+      </select>
+    </div>
+
+    <!-- Use the EventsGrid component -->
+    <EventsGrid events={upcomingEvents} />
+  </div>
+</PageLayout>
 
 <style>
   body {
     font-family: Arial, sans-serif;
-    background-image: url('/events-page-bg.png');
+    background-image: url("/events-page-bg.png");
+    background-color: white;
     background-size: cover;
+    background-position: top center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: 100% auto;
   }
 
   .container {
@@ -28,6 +78,7 @@ const { upcomingEvents } = await (async () => {
     margin: 0 auto;
     max-width: 1200px;
     border-radius: 50px;
+    min-height: 100vh;
   }
 
   .header {
@@ -41,7 +92,7 @@ const { upcomingEvents } = await (async () => {
   .header h1 {
     font-size: 48px;
     font-weight: bold;
-    color: #2D6D68DD;
+    color: #2d6d68dd;
     margin-bottom: 20px;
   }
 
@@ -55,7 +106,7 @@ const { upcomingEvents } = await (async () => {
     border-radius: 50px;
     max-width: 800px;
     height: 170px;
-    box-shadow: 10px 10px 0px #f7deed; 
+    box-shadow: 10px 10px 0px #f7deed;
   }
 
   .filter {
@@ -77,7 +128,7 @@ const { upcomingEvents } = await (async () => {
   }
 
   .filter::after {
-    content: '▼';
+    content: "▼";
     font-size: 14px;
     color: #fff;
     position: absolute;
@@ -87,34 +138,10 @@ const { upcomingEvents } = await (async () => {
     pointer-events: none;
   }
   .highlight {
-  font-size: 30px; 
-  font-weight: bold; 
-  display: block; 
-  margin-bottom: 10px; 
-  color: #ffffff; 
-}
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
 </style>
-
-<PageLayout title="Events">
-  <div class="container">
-    <div class="header">
-      <h1>Events</h1>
-      <p>
-        <span class="highlight">Join us at Technolgap events!</span>
-        Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement.
-      </p>
-    </div>
-
-    <div class="filter">
-      <select name="year" id="year">
-        <option value="" disabled selected>Year</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-      </select>
-    </div>
-
-    <!-- Use the EventsGrid component -->
-    <EventsGrid events={upcomingEvents} />
-  </div>
-</PageLayout>

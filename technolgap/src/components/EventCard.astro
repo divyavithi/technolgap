@@ -4,14 +4,17 @@ interface Props {
   eventName: string;
   date: string;
   time: string;
+  poster: string;
   eventType?: string;
 }
-const { eventId, eventName, date, time, eventType } = Astro.props;
+const { eventId, eventName, date, time, poster, eventType } = Astro.props;
 ---
 
 <li class="event-card">
   <a href={`/events/${eventId}`} class="event-link">
-    <div class="event-image-placeholder"></div>
+    <!-- <div class="event-image-placeholder"> -->
+      <img class="poster" src={poster}>
+    <!-- </div> -->
     <div class="event-card-content">
       <div class="event-card-header">
         <span class="badge">{eventType ?? "Event"}</span>
@@ -29,6 +32,8 @@ const { eventId, eventName, date, time, eventType } = Astro.props;
 </li>
 
 <style>
+
+  
   .event-card {
     display: flex;
     flex-direction: column;
@@ -42,25 +47,29 @@ const { eventId, eventName, date, time, eventType } = Astro.props;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
   }
-
+  
   .event-link {
     text-decoration: none;
     color: inherit;
   }
-
+  
   .event-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
   }
-
+  
   .event-image-placeholder {
     background-color: #F7DFEE;
-    ;
-    height: 180px;
+    height: 200px;
+    border-radius: 15px;
+  }
+  
+  .poster {
     width: 100%;
+    border: 5px solid #ffbce5;
     border-radius: 15px;
     margin-bottom: 10px;
-    border: 5px solid #ffbce5;
+    display: block;
   }
 
   .event-card-content {
