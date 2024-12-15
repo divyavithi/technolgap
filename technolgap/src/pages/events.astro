@@ -90,6 +90,7 @@ const { upcomingEvents, pastEvents } = await getUpcomingAndPastEvents();
 const url = new URL(Astro.request.url);
 const eventType = url.searchParams.get("eventType") || "Upcoming";
 
+
 ---
 
 <PageLayout title="Events">
@@ -100,27 +101,23 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     </div>
     <form action={Astro.request.url} method="GET">
       <Dropdown
-        name="eventType"
-        options={["upcoming", "past"]}
-        selected={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
+      name="eventType"
+      options={["upcoming", "past"]}
+      selected={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
       />
     </form>
     <!-- Use the EventsGrid component -->
     <EventsGrid
-      events={eventType == "past" ? pastEvents : upcomingEvents}
+    events={eventType == "past" ? pastEvents : upcomingEvents}
     />
   </div>
 </PageLayout>
 
+<script>
+  document.querySelector("main")?.classList.add("classic-bg")
+</script>
+
 <style>
-  body {
-    background-image: url("/team-bg.png");
-    background-color: white;
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-  }
   
   .container {
     padding: 20px;

@@ -67,8 +67,6 @@ export async function getStaticPaths() {
   }
 }
 
-console.log(event)
-
 ---
 
 <PageLayout title={event?.eventName}>
@@ -78,15 +76,11 @@ console.log(event)
     </div>
 </PageLayout>
 
+<script>
+  document.querySelector("main")?.classList.add("classic-bg")
+</script>
+
 <style>
-    body {
-        background-image: url("/events-page-bg.png");
-        background-color: white;
-        background-size: cover;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-    }
 
     .container {
         justify-items: center;
