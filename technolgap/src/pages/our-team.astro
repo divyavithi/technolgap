@@ -88,7 +88,7 @@ const teamMembers = await fetchTeamMembers(teamYear)
 ---
 
 <PageLayout title="Our Team">
-  <article class="our-team">
+  <article class="our-team classic-bg">
     <Subheading title={"Our Team"} />
     <form action={Astro.request.url} method="GET">
       <div class="dropdown-container">
@@ -126,20 +126,6 @@ const teamMembers = await fetchTeamMembers(teamYear)
     border: none;
     border-radius: 0;
     text-align: center;
-    
-    background-image: url("/team-bg.png");
-    background-size: cover; 
-    background-position: top center; 
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    min-height: 100vh;
-    background-color: white;
-  }
-
-  @media (max-width: 770px) {
-    article {
-      background-size: 770px auto;
-    }
   }
 
 </style>

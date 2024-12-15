@@ -8,8 +8,9 @@
         <br>
         <a class="link" href="/privacy-policy">Privacy Policy</a>
       </div>
-      <a href="https://cublueprint.org/" target="_blank">
-        <img alt="Made with Love by Carleton Blueprint" src="/made-with-cublueprint.png"/>
+      <a id="made-with" href="https://cublueprint.org/" target="_blank">
+        Made with ❤️ by Carleton Blueprint
+        <!-- <img id="made-with" alt="Made with Love by Carleton Blueprint" src="/made-with-cublueprint.png"/> -->
       </a>
 </footer>
   
@@ -23,11 +24,20 @@
       bottom: 0;
     }
 
-    footer > a > img {
+    #made-with {
       position: absolute;
       right: 20px;
       bottom: 30px;
-      height: 50px;
+      background-color: #60a0a1;
+      padding: 20px;
+      color: #2f605c;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+
+    #made-with:hover {
+      background-color: #7bb7b8;
     }
 
     #links-container {
@@ -53,9 +63,9 @@
       }
     }
     @media (max-width: 600px) {
-      footer > a > img {
-        height: 40px;
+      #made-with {
         left: 20px;
+        width: 320px;
       }
 
       #links-container {
@@ -63,8 +73,10 @@
       }
     }
     @media (max-width: 400px) {
-      footer > a > img {
-        height: 30px;
+      #made-with {
+        font-size: 12px;
+        padding: 13px;
+        width: 240px;
       }
 
       .link {
