@@ -40,13 +40,13 @@ interface EventInterface {
 
 type Events = Entry<EventInterface>[];
 
-
 const { event_id } = Astro.params;
 
 // Fetch the specific event's details using the eventId
+
 const event = await (async () => {
   try {
-    const response = await client.getEntry(event_id);
+    const response = await client.getEntry(event_id as string);
     return response.fields;
   } catch (err) {
     console.error("Error fetching event details:", err);
@@ -54,26 +54,20 @@ const event = await (async () => {
   }
 })();
 
-// Define getStaticPaths to generate the paths for each event
-export async function getStaticPaths() {
-  try {
-    const response = await client.getEntries({ content_type: "event" });
-    return response.items.map((event) => ({
-      params: { event_id: event.sys.id },
-    }));
-  } catch (err) {
-    console.error("Error fetching events for static paths:", err);
-    return [];
-  }
-}
-
 ---
 
 <PageLayout title={event?.eventName}>
-    <div class="container">
-        <Subheading title={event?.eventName} />
-        <EventGrid events={event?.subEvents as Events}/>
-    </div>
+  <div class="container">
+
+    {(event != null) ? (
+      <Subheading title={event?.eventName} />
+      <EventGrid events={event?.subEvents as Events}/>
+    ) : (
+      <Subheading title="Event Not Found"/>
+    )}
+    
+  </div>
+    
 </PageLayout>
 
 <script>
