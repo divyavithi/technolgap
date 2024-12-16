@@ -8,14 +8,14 @@ const { title, body } = Astro.props;
 
 
 <li class="value-card">
-    <a>
+    <div class="card">
         <h3>
             {title}
         </h3>
         <p>
             {body}
         </p>
-    </a>
+    </div>
 </li>
 
 <style>
@@ -36,8 +36,7 @@ const { title, body } = Astro.props;
         transform: translateY(-7px);
     }
 
-    .value-card > a {
-		text-decoration: none;
+    .card {
 		line-height: 1.4;
 		padding: calc(1.5rem - 1px);
         padding-bottom: 3rem;

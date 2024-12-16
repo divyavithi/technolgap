@@ -1,0 +1,84 @@
+---
+import EventGrid from "../../../components/EventGrid.astro";
+import Subheading from "../../../components/Subheading.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import { createClient } from "contentful";
+import type {Entry} from "contentful";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Define the event fields interface
+interface EventInterface {
+  fields: {
+    eventName: string;
+    poster: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    date: string; // Ensure date is expected to be a string
+    venue: string;
+    eventType: string;
+    eventSummary: string;
+    time: string | undefined;
+    registrationLink: string | undefined;
+  };
+  contentTypeId: "event";
+}
+
+type Events = Entry<EventInterface>[];
+
+const { event_id } = Astro.params;
+
+// Fetch the specific event's details using the eventId
+
+const event = await (async () => {
+  try {
+    const response = await client.getEntry(event_id as string);
+    return response.fields;
+  } catch (err) {
+    console.error("Error fetching event details:", err);
+    return null;
+  }
+})();
+
+---
+
+<PageLayout title={event?.eventName}>
+  <div class="container">
+
+    {(event != null) ? (
+      <Subheading title={event?.eventName} />
+      <EventGrid events={event?.subEvents as Events}/>
+    ) : (
+      <Subheading title="Event Not Found"/>
+    )}
+    
+  </div>
+    
+</PageLayout>
+
+<script>
+  document.querySelector("main")?.classList.add("classic-bg")
+</script>
+
+<style>
+
+    .container {
+        justify-items: center;
+        padding-top: 70px;
+        min-height: 100vh;
+    }
+</style>

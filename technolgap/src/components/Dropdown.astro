@@ -1,0 +1,66 @@
+---
+const { name, options, selected } = Astro.props;
+let selectedOption = selected || "OPTION";
+---
+
+<form id="dropdown-form" method="POST">
+  <details class="dropdown" role="list" id="single-select-dropdown">
+    <summary role="button" aria-haspopup="listbox" aria-expanded="false">
+      <span id="selectedOption">{selectedOption}</span>
+    </summary>
+    <ul role="listbox">
+      {options.map((option: string) => (
+        <li role="option">
+          <button class="option-button" type="submit" id={option} name={name} value={option}>
+            {option.charAt(0).toUpperCase() + option.slice(1).toLocaleLowerCase()}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </details>
+</form>
+
+<style>
+  .dropdown {
+    position: relative;
+    width: 175px;
+  }
+  .dropdown summary {
+    background-color: #2d6d68;
+    border: 1.5px solid #fff;
+    cursor: pointer;
+    width: 90%;
+    border-radius: 17px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 0;
+    text-align: center;
+  }
+  .dropdown li {
+    width: 80%;
+  }
+  .dropdown ul {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background-color: #2d6d68dd;
+    border: 1.5px solid #fff;
+    border-radius: 8px;
+  }
+
+  .option-button {
+    display: block;
+    margin-bottom: 0;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    text-overflow: ellipsis;
+  }
+  .option-button:hover {
+    background-color: #64a8a2dd;
+  }
+  .option-button:focus {
+    outline: none;
+    background-color: #64a8a2dd;
+  }
+</style>

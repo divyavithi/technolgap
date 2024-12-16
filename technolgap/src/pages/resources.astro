@@ -1,0 +1,77 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import TextBox from "../components/TextBox.astro";
+import Subheading from "../components/Subheading.astro";
+---
+
+<PageLayout>
+  <div id="resources" class="classic-bg">
+    <Subheading title="Resources" />
+    <TextBox
+      heading="Discover Technolgap Resources!"
+      text="Welcome to our Resources page to explore a curated collection of resources tailored to women and non-binary individuals in tech. Whether you're looking for educational materials, job opportunities, or networking platforms, we've got you covered."
+    />
+    <a id="link" href="/technolgap-resources">RESOURCES</a>
+    <img id="cursor" alt="cursor icon" src="/cursor.png" />
+  </div>
+</PageLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.getElementById("cursor");
+    const link = document.getElementById("link");
+    console.log(link);
+    link?.addEventListener("mouseenter", () => {
+        if (cursor){
+            cursor.style.width = "60px";
+        }
+    });
+    link?.addEventListener("mouseleave", () => {
+        if (cursor){
+            cursor.style.width = "70px";
+        }
+    });
+  });
+</script>
+
+<style>
+  #resources {
+    /* background-image: url("/team-bg.png");
+    background-color: white;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto; */
+    min-height: 100vh;
+    justify-items: center;
+    padding: 50px;
+  }
+
+  #link {
+    text-decoration: none;
+    font-weight: 600;
+    background-color: #2d6d68;
+    padding: 20px 50px;
+    font-size: 28px;
+    border-radius: 15px;
+    color: white;
+    margin-top: 100px;
+    display: block;
+    max-width: 200px;
+    text-align: center;
+    box-shadow: 7px 7px 0 0 #60a0a1;
+  }
+
+  #link:hover {
+    cursor: pointer;
+    /* box-shadow: 0 0 20px 3px #0000005b; */
+    /* box-shadow: 0 0 5px 3px #60a0a1; */
+    box-shadow: none;
+  }
+
+  #cursor {
+    width: 70px;
+    margin-top: -20px;
+    margin-left: 300px;
+  }
+</style>

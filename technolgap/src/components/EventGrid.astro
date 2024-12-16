@@ -1,0 +1,52 @@
+---
+import EventCard from "./EventCard.astro";
+import type { Entry } from "contentful";
+
+interface event {
+  sys: { id: string };
+  fields: {
+    eventName: string;
+    date: string;
+    time: string;
+    poster: {
+      fields: {
+        file: {
+          url: string;
+        } 
+      }
+    }
+    eventType: string;
+  };
+  contentTypeId: "event";
+}
+
+interface Props {
+  events: Entry<event>[];
+}
+
+const { events } = Astro.props;
+---
+
+<section class="events-grid">
+  {events.map((event) => (
+    <EventCard
+      eventId={event.sys.id}
+      eventName={event.fields.eventName as unknown as string}
+      date={event.fields.date as unknown as string}
+      time={event.fields.time == undefined ? "All Day" : (event.fields.time as unknown as string)}
+      poster={(event.fields.poster?.fields as any)?.file?.url ?? ""}
+      eventType={event.fields.eventType as unknown as string}
+    />
+  ))}
+</section>
+
+<style>
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 20px; /* Spacing between the cards */
+    padding: 20px; /* Padding around the grid */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the grid within the page */
+  }
+</style>

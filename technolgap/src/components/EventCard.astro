@@ -1,0 +1,157 @@
+---
+interface Props {
+  eventId: string;
+  eventName: string;
+  date: string;
+  time: string;
+  poster: string;
+  eventType?: string;
+}
+const { eventId, eventName, date, time, poster, eventType } = Astro.props;
+---
+
+<li class="event-card">
+  <a href={eventType == "series" ? `/events/series/${eventId}` : `/events/${eventId}` } class="event-link">
+    <img class="poster" src={poster}>
+    <div class="event-card-content">
+      <div class="event-card-header">
+        <span class="badge">{eventType ?? "Event"}</span>
+      </div>
+      <h3 class="event-name">{eventName}</h3>
+      <div class="event-details">
+        <div class="date-container">
+            <p class="month">{new Date(date).toLocaleString("en-US", { month: "long" }).toUpperCase()}</p>
+            <p class="day">{new Date(date).getDate()}</p>
+            <p class="time">{time}</p>
+          </div>
+      </div>
+    </div>
+  </a>
+</li>
+
+
+<style>
+
+  
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #2D6D68;
+    border-radius: 20px;
+    width: 300px;
+    height: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 10;
+  }
+  
+  .event-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .event-link:hover > img{
+    box-shadow: 0px 0px 3px 2px #ffbce5ac;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 0 #60a0a1
+    /* box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); */
+  }
+  
+  
+  .poster {
+    box-sizing: border-box;
+    margin: 10px auto 10px auto;
+    max-width: 270px;
+    border: 5px solid #ffbce5;
+    border-radius: 15px;
+    display: block;
+    box-shadow: 0px 5px 3px -2px rgba(0, 0, 0, 0.347);
+  }
+
+  .event-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .event-card-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .badge {
+  text-transform: uppercase; 
+  font-weight: bold; 
+  font-size: 12px; 
+  color: #2D6D68;
+  background-color: #ffbce5; 
+  border-radius: 5px; 
+  padding: 5px 10px; 
+  display: inline-block; 
+  box-shadow: 0px 3px 5px 0.5px rgba(0, 0, 0, 0.347);
+}
+
+  .event-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -60px;
+    color: white;
+    position: relative;
+    top: 80px;
+    max-width: 140px;
+  }
+
+  .event-details {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+
+  .date-container {
+  background-color: #60a0a1; 
+  color: white;
+  padding: 15px 10px;
+  border-radius: 10px; 
+  text-align: center; 
+  font-family: Arial, sans-serif; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: 90px; 
+  height: 70px;
+  margin-top: -20px;
+}
+
+.date-container .month {
+  font-size: 14px; 
+  font-weight: bold; 
+  letter-spacing: 1px;
+  text-transform: uppercase; 
+  margin-bottom: 5px; 
+  color: white;
+}
+
+.date-container .day {
+  font-size: 36px;
+  font-weight: bold; 
+  margin-bottom: 5px;
+  color: white;
+}
+
+.date-container .time {
+  font-size: 12px;
+  font-weight: normal;
+  color: white;
+}
+
+
+</style>
