@@ -1,11 +1,43 @@
 ---
 import { createClient } from "contentful";
+import type { Entry } from "contentful";
 import PageLayout from "../../layouts/PageLayout.astro";
+import Subheading from "../../components/Subheading.astro";
 
 const client = createClient({
   space: "33d3d7kdmbg5",
   accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
 });
+
+// Define the event fields interface
+interface EventFields {
+  fields: {
+    eventName: string;
+    poster: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    date: string; // Ensure date is expected to be a string
+    venue: string;
+    eventType: string;
+    eventSummary: string;
+    time: string | undefined;
+    registrationLink: string | undefined;
+  };
+  contentTypeId: "event";
+}
+
+type Event = Entry<EventFields>;
 
 // Fetch the eventId from the route parameters
 const { event_id } = Astro.params;
@@ -13,135 +45,228 @@ const { event_id } = Astro.params;
 // Fetch the specific event's details using the eventId
 const event = await (async () => {
   try {
-    const response = await client.getEntry(event_id);
-    return response.fields;
+    const response = await client.getEntry(event_id as string);
+    return response as Event;
   } catch (err) {
     console.error("Error fetching event details:", err);
     return null;
   }
 })();
 
-// Define getStaticPaths to generate the paths for each event
-export async function getStaticPaths() {
-  try {
-    const response = await client.getEntries({ content_type: "event" });
-    return response.items.map((event) => ({
-      params: { event_id: event.sys.id },
-    }));
-  } catch (err) {
-    console.error("Error fetching events for static paths:", err);
-    return [];
-  }
-}
 ---
 
 {!event && (
   <PageLayout title="Event Not Found">
-    <h1>Event Not Found</h1>
-    <p>Sorry, we couldn't find the event you're looking for.</p>
-  </PageLayout>
-)}
-
-{event && (
-  <PageLayout title={event.eventName}>
-    <div class="event-container">
-      <h1 class="event-title">{event.eventName}</h1>
-      <p><strong>Date:</strong> {event.date ?? "TBA"}</p>
-      <p><strong>Time:</strong> {event.time ?? "TBA"}</p>
-      <p><strong>Venue:</strong> {event.venue ?? "TBA"}</p>
-      {/* {event.registrationLink && (
-        <a href={event.registrationLink} target="_blank" class="register-button">Register</a>
-      )} */}
+    <div class="event-page-container">
+      <Subheading title="Event Not Found"/>
     </div>
   </PageLayout>
 )}
 
+{event && (
+  <PageLayout title={event.fields.eventName}>
+    <div class="event-page-container">
+
+      <Subheading title={event.fields.eventName}/>
+      <div class="event-container">
+        <img class="event-poster" src={(event.fields.poster?.fields as any)?.file?.url} alt="Event Poster"/>
+
+        <div class="details-container">
+          <div class="details-box">
+            <p class="detail"><strong>Date: </strong> {new Date(event.fields.date as unknown as string).toLocaleString("en-US", {weekday: "long", month: "long", day: "numeric", year: "numeric"}) ?? "TBA"}</p>
+            <p class="detail"><strong>Time: </strong> {event.fields.time ?? "All Day"}</p>
+            <p class="detail"><strong>Venue: </strong> {event.fields.venue ?? "TBA"}</p>
+            <br/>
+            <p class="detail">{event.fields.eventSummary}</p>
+          </div>
+          <div class="tags">
+            <a href="#" class="tag">Speaker</a>
+            <a href="#" class="tag">Collaborator</a>
+            <a href="#" class="tag">Sponsor</a>
+          </div>
+        </div>
+      </div>
+      <a href={event.fields.registrationLink ? event.fields.registrationLink as unknown as string : "#"} target="_blank" class="register-button">
+        {event.fields.registrationLink ? "REGISTER" : "No Registration Required"}
+      </a>
+    </div>
+  </PageLayout>
+)}
+
+
+<script>
+  document.querySelector("main")?.classList.add("classic-bg")
+</script>
+
 <style>
-  .event-container {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 800px;
-    text-align: center;
+
+  .event-page-container {
+    text-align: center; 
+    padding: 50px;
   }
 
-  .event-title {
-    font-size: 36px;
-    color: #275950;
-    margin-bottom: 20px;
-    font-weight: bold;
+  .event-container > * {
+    grid-column: span 1; /* Ensure each immediate child adheres to the grid layout */
+  }
+
+  .event-container {
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr); Example grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    gap: 2rem; /* Adjust spacing between items */
+    margin: 50px auto 100px auto;
+    max-width: 1100px;
   }
 
   .details-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 30px;
+    /* max-height: 310px; */
+    height: 70%;
   }
-
+  
   .details-box {
-    flex: 1;
-    border: 2px solid #275950;
+    height: 100%;
     border-radius: 20px;
     padding: 20px;
-    background-color: #ffd9e8;
-    color: #275950;
+    background-color: #275950;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
   }
 
-  .badge {
-    background-color: #ffc2dc;
-    color: #000;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    display: inline-block;
+  .detail {
+    color: white;
   }
 
-  .event-image-placeholder {
-    background-color: #ffc2dc;
-    height: 180px;
-    border-radius: 10px;
-    margin: 15px 0;
+  .event-poster {
+    border-radius: 20px;
+    margin: 0 auto;
+    border: 5px solid #ffbce5;
+    box-shadow: 0px 5px 3px -2px rgba(0, 0, 0, 0.347);
   }
 
-  .button-container {
-    margin-top: 20px;
-  }
 
   .register-button {
-    background-color: #0c5027;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #2d6d68;
+    padding: 20px 40px;
+    font-size: 20px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 100px;
   }
 
   .register-button:hover {
-    background-color: #064024;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 7px 7px 0 0 #60a0a1;
   }
 
   .tags {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-evenly;
     margin-top: 20px;
   }
 
   .tag {
+    text-decoration: none;
     background-color: #60a0a1;
     color: white;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-size: 14px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 15px;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 0px 0 #275950;
+  }
+
+  .tag:hover {
+    scale: 105%;
+    box-shadow: 1px 2px 0 0 #275950;
+  }
+
+  @media (max-width: 1000px) {
+    .details-box {
+      height: 90%;
+    }
+
+    .tag {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+
+
+
+  @media (max-width: 800px) {
+    .details-box {
+      height: 85%;
+      font-size: 14px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .details-box {
+      height: 85%;
+    }
+
+    .tags {
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .event-container {
+      display: block;
+    }
+
+    .event-poster {
+      margin-bottom: 30px;
+      width: 90%;
+    }
+
+    .tags {
+      justify-content: space-evenly;
+    }
+
+    .tag {
+      padding: 12px 25px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .tag {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    
+    .tag {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .tags {
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .tag {
+      font-size: 11px;
+      padding: 10px 8px;
+    }
+    .tags {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
   }
 </style>
