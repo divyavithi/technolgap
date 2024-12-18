@@ -30,7 +30,7 @@
           <li><a href="/volunteers">Volunteers</a></li>
         </ul>
       </li>
-      <button class="custom-button">Contact Us!</button>
+      <li><a class="custom-button">CONTACT US</a></li>
     </ul>
   </nav>
 
@@ -128,7 +128,7 @@
     position: relative;
   }
   .desktop-navbar a {
-    color: white;
+    color: rgb(223, 223, 223);
     font-size: 1rem;
     text-decoration: none;
     transition:
@@ -142,8 +142,9 @@
     box-sizing: border-box;
   }
   .desktop-navbar a:hover {
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: 900;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   /* Dropdown style */
@@ -168,36 +169,33 @@
     display: flex;
     justify-content: center;
     padding: 0.75rem 1rem;
-    color: white;
+    color:  rgb(223, 223, 223);;
     border-radius: 0;
     text-decoration: none;
   }
   .desktop-dropdown-menu li a:hover {
-    background-color: #64a8a2;
+    color: white;
     box-sizing: border-box;
-    border: 0.25px solid white;
+    border: 3px solid white;
   }
   .desktop-dropdown:hover .desktop-dropdown-menu {
     display: block;
   }
   .desktop-dropdown:hover .desktop-dropdown-toggle {
-    font-weight: bold;
-    background-color: #64a8a2;
+    font-weight: 600;
+    /* background-color: #64a8a2; */
     border-radius: 0;
   }
 
   /* Button style */
-  .custom-button {
+  /* .custom-button {
     margin-right: 2rem;
-    border: 0.25px solid white;
-    color: white;
-    background-color: #2d6d68;
-    transition: font-weight 60s;
+    color: rgb(223, 223, 223);;
   }
   .custom-button:hover {
     font-weight: bold;
     background-color: #64a8a2;
-  }
+  } */
 
   /*MOBILE NAVBAR DESIGN*/
   .mobile-navbar {

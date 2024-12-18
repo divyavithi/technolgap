@@ -10,7 +10,10 @@ const { title } = Astro.props;
   <head>
     <title>{title}</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
+    <!-- this caused the shrink of the screen for a smaller width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<meta name="description" content="Empowering women and non-binary individuals in Canada's tech industry through opportunities and community support." />
 		<meta name="generator" content={Astro.generator} />
