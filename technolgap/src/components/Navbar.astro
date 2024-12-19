@@ -48,31 +48,33 @@
         <div class="main-menu"><li><a href="/">HOME</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle"
-              >ABOUT US</a
-            >
-
-            <ul class="mobile-dropdown-menu" id="aboutDropdown">
-              <li><a href="/our-team">Our Team</a></li>
-            </ul>
+            <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle">ABOUT US</a>
           </li>
         </div>
+        <div class="main-menu-sub">
+          <ul class="mobile-dropdown-menu" id="aboutDropdown">
+            <li><a href="/our-team">Our Team</a></li>
+          </ul>
+        </div>
         <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
-
         <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="/get-involved" class="mobile-dropdown-toggle" id="getInvolvedToggle"
-              >GET INVOLVED</a
-            >
+            <a href="/get-involved" class="mobile-dropdown-toggle" id="getInvolvedToggle">GET INVOLVED</a>
+        </div>
+        
+        <div class="main-menu-sub">
             <ul class="mobile-dropdown-menu" id="getInvolvedDropdown">
               <li><a href="/chapters">Chapters</a></li>
               <li><a href="/sponsors">Sponsors</a></li>
               <li><a href="/collaborators">Collaborators</a></li>
               <li><a href="/volunteers">Volunteers</a></li>
             </ul>
-          </li>
-        </div>
+          </div>
+
+        <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div>
+
+        <!-- <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div> -->
       </ul>
     </div>
   </nav>
@@ -169,7 +171,7 @@
     display: flex;
     justify-content: center;
     padding: 0.75rem 1rem;
-    color:  rgb(223, 223, 223);;
+    color:  rgb(223, 223, 223);
     border-radius: 0;
     text-decoration: none;
   }
@@ -183,19 +185,9 @@
   }
   .desktop-dropdown:hover .desktop-dropdown-toggle {
     font-weight: 600;
-    /* background-color: #64a8a2; */
     border-radius: 0;
+    text-shadow: 0px 2px 0px rgb(63, 63, 63);
   }
-
-  /* Button style */
-  /* .custom-button {
-    margin-right: 2rem;
-    color: rgb(223, 223, 223);;
-  }
-  .custom-button:hover {
-    font-weight: bold;
-    background-color: #64a8a2;
-  } */
 
   /*MOBILE NAVBAR DESIGN*/
   .mobile-navbar {
@@ -252,6 +244,17 @@
     transition: box-shadow 0.3s;
     margin-top: 10px;
     margin-bottom: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .main-menu-sub { 
+    width: 90%;
+    transition: box-shadow 0.3s;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    justify-content: center;
+    text-align: center;
   }
 
   .menu a,
@@ -264,12 +267,13 @@
     cursor: pointer;
     text-decoration: none;
     display: block;
+    color: rgb(223, 223, 223);
   }
 
   .menu a:hover,
   .menu button:hover {
-    background-color: #64a8a2;
     font-weight: bold;
+    text-shadow: 0px 2px 0px rgb(63, 63, 63);
   }
 
   /* Dropdown menu styles */
@@ -277,32 +281,38 @@
     display: none;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .mobile-dropdown-toggle {
-    background-color: #64a8a2;
+    color: white;
     border-radius: 0;
   }
 
   .mobile-dropdown-menu li {
     list-style-type: none;
-    margin: 5px 0; /* Add vertical space between the boxes */
-    width: 150%; /* Adjust the width of each box relative to the parent */
+    /* margin: 5px 0; Add vertical space between the boxes */
+    width: 110%; /* Adjust the width of each box relative to the parent */
     display: flex;
     justify-content: center; /* Center text inside the box */
   }
   .mobile-dropdown-menu li a {
-    color: white;
+    background-color: #548d89;
     text-decoration: none;
     display: block; /* Make the link a block element so it fills the box */
     width: 80%; /* Make the link fill the whole list item */
     padding: 10px 20px; /* Add padding to create space inside each box */
-    background-color: #64a8a2; /* Background color for the box */
     text-align: center; /* Center the text */
     box-sizing: border-box; /* Ensure padding is included in the width/height calculation */
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 0;
   }
 
+  .mobile-dropdown-menu li a:hover,  .mobile-dropdown-menu li a:active{
+    color: white;
+    box-sizing: border-box;
+    border: 3px solid white;
+  }
   .mobile-navbar {
     display: none;
     opacity: 1;
