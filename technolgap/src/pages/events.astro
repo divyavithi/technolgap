@@ -100,11 +100,11 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
       <TextBox heading="Join us at Technolgap events!" text="Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement."/>
     </div>
     <form action={Astro.request.url} method="GET">
-      <Dropdown
-      name="eventType"
-      options={["upcoming", "past"]}
-      selected={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
-      />
+    <Dropdown
+    name="eventType"
+    options={["upcoming", "past"]}
+    selected={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
+    />
     </form>
     <!-- Use the EventsGrid component -->
     <EventsGrid
@@ -118,6 +118,16 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
 </script>
 
 <style>
+
+  form {
+    margin-top: -100px;
+    margin-bottom: 100px;
+    margin-left: -100px;
+  }
+
+  body {
+    background-color: #ffe7f5;
+  }
   
   .container {
     padding: 20px;

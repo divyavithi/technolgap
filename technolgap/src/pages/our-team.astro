@@ -85,15 +85,20 @@ const teamYear = url.searchParams.get("year") || defaultYear || "None";
 
 // Fetch team members
 const teamMembers = await fetchTeamMembers(teamYear)
+
+const name = "year"
+const options = years
+const selectedOption = teamYear
 ---
 
 <PageLayout title="Our Team">
   <article class="our-team classic-bg">
     <Subheading title={"Our Team"} />
     <form action={Astro.request.url} method="GET">
-      <div class="dropdown-container">
+      <!-- <div class="dropdown-container"> -->
         <Dropdown name="year" options={years} selected={teamYear}/>
-      </div>
+        
+      <!-- </div> -->
     </form>
     <CardGrid entries={teamMembers}/>
   </article>

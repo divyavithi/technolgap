@@ -2,28 +2,33 @@
 const { name, options, selected } = Astro.props;
 let selectedOption = selected || "OPTION";
 ---
-
 <form id="dropdown-form" method="POST">
-  <details class="dropdown" role="list" id="single-select-dropdown">
+  <details class="dropdown" role="list" id="single-select-dropdown"> 
     <summary role="button" aria-haspopup="listbox" aria-expanded="false">
       <span id="selectedOption">{selectedOption}</span>
     </summary>
-    <ul role="listbox">
-      {options.map((option: string) => (
-        <li role="option">
+
+      <ul role="listbox">
+        {options.map((option: string) => (
+          <li role="option">
           <button class="option-button" type="submit" id={option} name={name} value={option}>
             {option.charAt(0).toUpperCase() + option.slice(1).toLocaleLowerCase()}
           </button>
         </li>
       ))}
+
     </ul>
   </details>
 </form>
 
 <style>
+
+  
   .dropdown {
     position: relative;
     width: 175px;
+    top: 85px; 
+    left: 75px;
   }
   .dropdown summary {
     background-color: #2d6d68;
