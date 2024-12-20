@@ -22,13 +22,14 @@ interface event {
 
 interface Props {
   events: Entry<event>[];
+  filter: string;
 }
 
-const { events } = Astro.props;
+const { events, filter } = Astro.props;
 ---
 
 <section class="events-grid">
-  {events.map((event) => (
+  {events.length != 0 ? events.map((event) => (
     <EventCard
       eventId={event.sys.id}
       eventName={event.fields.eventName as unknown as string}
@@ -37,10 +38,18 @@ const { events } = Astro.props;
       poster={(event.fields.poster?.fields as any)?.file?.url ?? ""}
       eventType={event.fields.eventType as unknown as string}
     />
-  ))}
+  )) : (
+    <h1 class="no-events">No {filter} Events</h1>
+  )}
 </section>
 
 <style>
+
+  .no-events {
+    color: #2f605c;
+    margin-top: 50px;
+  }
+
   .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));

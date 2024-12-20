@@ -109,6 +109,7 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     <!-- Use the EventsGrid component -->
     <EventsGrid
     events={eventType == "past" ? pastEvents : upcomingEvents}
+    filter={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
     />
   </div>
 </PageLayout>
