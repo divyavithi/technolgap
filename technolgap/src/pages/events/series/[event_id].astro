@@ -61,7 +61,7 @@ const event = await (async () => {
 
     {(event != null) ? (
       <Subheading title={event?.eventName} />
-      <EventGrid events={event?.subEvents as Events}/>
+      <EventGrid filter={""} events={event?.subEvents as Events}/>
     ) : (
       <Subheading title="Event Not Found"/>
     )}
