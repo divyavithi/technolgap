@@ -319,7 +319,10 @@
   .mobile-navbar {
     display: none;
     opacity: 1;
+    z-index: 100;
+    position: relative;
   }
+
 
   @media (max-width: 768px) {
     .mobile-navbar {
@@ -390,6 +393,10 @@
     .desktop-navbar {
       display: none;
     }
+
+    #mobileMenu {
+      margin-top: -20px;
+    }
     
     .mobile-navbar {
       display: flex;
@@ -436,6 +443,11 @@
     .mobile-navbar {
       height: 40px;
     }
+
+    #mobileMenu {
+      margin-top: -30px;
+    }
+    
   }
 </style>
 
