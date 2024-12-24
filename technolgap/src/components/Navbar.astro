@@ -10,15 +10,15 @@
       </div>
       <ul>
       <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
-      <li><a href="/">HOME</a></li>
       <li class="desktop-dropdown">
-        <a href="/#about-us" class="desktop-dropdown-toggle">ABOUT US</a>
+        <a href="/" class="desktop-dropdown-toggle">HOME</a>
         <ul class="desktop-dropdown-menu">
+          <li><a href="/#about-us">About Us</a></li>
           <li><a href="/#core-values">Core Values</a></li>
           <li><a href="/#milestones">Milestones</a></li>
-          <li><a href="/our-team">Our Team</a></li>
         </ul>
       </li>
+      <li><a href="/our-team">OUR TEAM</a></li>
       <li><a href="/events">EVENTS</a></li>
       <li><a href="/resources">RESOURCES</a></li>
       <li class="desktop-dropdown">
@@ -45,19 +45,19 @@
 
     <div class="menu" id="mobileMenu">
       <ul>
-        <div class="main-menu"><li><a href="/">HOME</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="#" class="mobile-dropdown-toggle" id="aboutUsToggle">ABOUT US</a>
+            <a href="/" class="mobile-dropdown-toggle" id="aboutUsToggle">HOME</a>
           </li>
         </div>
         <div class="main-menu-sub">
           <ul class="mobile-dropdown-menu" id="aboutDropdown">
+            <li><a href="/#about-us">About Us</a></li>
             <li><a href="/#core-values">Core Values</a></li>
             <li><a href="/#milestones">Milestones</a></li>
-            <li><a href="/our-team">Our Team</a></li>
           </ul>
         </div>
+        <div class="main-menu"><li><a href="/our-team">OUR TEAM</a></li></div>
         <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
         <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
         <div class="main-menu">
@@ -156,6 +156,7 @@
     display: inline-block;
   }
   .desktop-dropdown-menu {
+    min-width: 150px;
     display: none;
     position: absolute;
     top: 100%;
@@ -456,15 +457,23 @@
     aboutUsToggle.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      aboutDropdown.style.display =
-        aboutDropdown.style.display === "flex" ? "none" : "flex";
+      if (aboutDropdown.style.display === "flex"){
+        mobileMenu.style.display = "none";
+        window.location.href = aboutUsToggle.href
+      } else {
+        aboutDropdown.style.display = "flex"
+      }
     });
 
     getInvolvedToggle.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      getInvolvedDropdown.style.display =
-        getInvolvedDropdown.style.display === "flex" ? "none" : "flex";
+      if (getInvolvedDropdown.style.display === "flex"){
+        mobileMenu.style.display = "none";
+        window.location.href = getInvolvedToggle.href
+      } else {
+        getInvolvedDropdown.style.display = "flex"
+      }
     });
 
     document.addEventListener("click", () => {
