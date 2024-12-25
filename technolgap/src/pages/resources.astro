@@ -38,7 +38,6 @@ import Subheading from "../components/Subheading.astro";
   #resources {
     min-height: 100vh;
     justify-items: center;
-    padding: 50px;
   }
 
   #link {
@@ -65,5 +64,17 @@ import Subheading from "../components/Subheading.astro";
     width: 70px;
     margin-top: -20px;
     margin-left: 300px;
+  }
+
+  @media (max-width: 450px) {
+    #cursor {
+      margin-left: 200px;
+      width: 50px;
+    }
+
+    #link {
+      font-size: 22px;
+      padding: 20px 40px;
+    }
   }
 </style>
