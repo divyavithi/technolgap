@@ -108,6 +108,13 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
     position: relative;
     top: 80px;
     max-width: 140px;
+    max-height: 120px;
+    
+    display: -webkit-box;      /* Required for line clamping */
+    -webkit-line-clamp: 5;     /* Limit to 3 lines */
+    -webkit-box-orient: vertical; /* Required for line clamping */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
   }
 
   .event-details {
@@ -115,21 +122,22 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
+    /* position: relative; */
   }
 
   .date-container {
-  background-color: #60a0a1; 
-  color: white;
-  padding: 15px 10px;
-  border-radius: 10px; 
-  text-align: center; 
-  font-family: Arial, sans-serif; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  width: 90px; 
-  height: 70px;
-  margin-top: -20px;
-}
+    background-color: #60a0a1; 
+    color: white;
+    padding: 15px 10px;
+    border-radius: 10px; 
+    text-align: center; 
+    font-family: Arial, sans-serif; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 90px; 
+    height: 70px;
+    margin-top: -40px;
+  }
 
 .date-container .month {
   font-size: 14px; 
@@ -152,6 +160,5 @@ const { eventId, eventName, date, time, poster, eventType } = Astro.props;
   font-weight: normal;
   color: white;
 }
-
 
 </style>
