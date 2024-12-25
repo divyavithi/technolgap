@@ -2,12 +2,21 @@
 const { heading, text } = Astro.props;
 ---
 
-<p class="heading">
-  <span class="highlight">{heading}</span>
-  {text}
-</p>
+<div>
+
+  <p class="heading">
+    <span class="highlight">{heading}</span>
+    {text}
+  </p>
+</div>
 
 <style>
+
+  div {
+    text-align: center;
+    padding: 0 15px;
+  }
+
   .heading {
     font-size: 17px;
     line-height: 1.6;
@@ -29,4 +38,23 @@ const { heading, text } = Astro.props;
     margin-bottom: 10px;
     color: #ffffff;
   }
+
+  @media (max-width: 800px) {
+        .highlight {
+            font-size: 23px;
+        }
+        .heading {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .highlight {
+            font-size: 20px;
+        }
+        .heading {
+            font-size: 12px;
+            padding: 15px 20px 20px 20px;
+        }
+    }
 </style>

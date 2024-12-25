@@ -57,8 +57,10 @@ const event = await (async () => {
 ---
 
 <PageLayout title={event ? event?.eventName : "Event Not Found"}>
-  <div class="container">
 
+  <div>
+
+    
     {(event != null) ? (
       <Subheading title={event?.eventName} />
       <EventGrid filter={""} events={event?.subEvents as Events}/>
@@ -76,7 +78,7 @@ const event = await (async () => {
 
 <style>
 
-    .container {
+    div {
         justify-items: center;
         padding-top: 70px;
         min-height: 100vh;

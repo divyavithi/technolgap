@@ -94,9 +94,11 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
 ---
 
 <PageLayout title="Events">
-  <div class="container">
+  <div>
     <Subheading title="Events"/>
-    <TextBox heading="Join us at Technolgap events!" text="Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement."/>
+  </div>
+
+      <TextBox heading="Join us at Technolgap events!" text="Stay updated on our latest events, workshops, and networking opportunities designed to support and empower women and non-binary individuals in tech. From panel discussions to hackathons, our events are aimed at fostering skill development, career advancement, and community engagement."/>
     <form action={Astro.request.url} method="GET">
       <Dropdown
       name="eventType"
@@ -108,7 +110,6 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
     events={eventType == "past" ? pastEvents : upcomingEvents}
     filter={eventType.charAt(0).toUpperCase() + eventType.slice(1)}
     />
-  </div>
     
 </PageLayout>
 
@@ -118,14 +119,11 @@ const eventType = url.searchParams.get("eventType") || "Upcoming";
 
 <style>
 
-    .container {
-        justify-items: center;
-        padding-top: 70px;
-        min-height: 100vh;
-    }
+  div {
+    padding-top: 50px;
+  }
 
     form {
-      position: relative;
       right: 40vw;
       padding-top: 50px;
       margin-top: -100px;
