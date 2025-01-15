@@ -1,0 +1,135 @@
+---
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+import CardGrid from "../components/CardGrid.astro"
+import PageLayout from "../layouts/PageLayout.astro";
+import TextBox from "../components/TextBox.astro";
+import Card from "../components/Card.astro";
+import Subheading from "../components/Subheading.astro";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+const response = await client.getEntries({
+  content_type: "contact",
+});
+const contacts = response.items;
+const linkedIn = contacts.find(obj => obj.fields.name == 'linkedIn')?.fields.content
+const instagram = contacts.find(obj => obj.fields.name == 'instagram')?.fields.content
+const discord = contacts.find(obj => obj.fields.name == 'discord')?.fields.content
+const facebook = contacts.find(obj => obj.fields.name == 'facebook')?.fields.content
+---
+
+<PageLayout title="Join Us">
+  <div id="join" class="classic-bg">
+    <Subheading title="Join Us" />
+    <TextBox
+      heading="Become part of Technolgap team!"
+      text="Are you passionate about bridging the gender gap in the technology sector? Join us at Technolgap and be part of a supportive community dedicated to empowering women and non-binary individuals in tech. Whether you're a student, professional, or ally, there's a place for you in our community."
+    />
+    <a id="link" class="button" href="https://docs.google.com/forms/d/e/1FAIpQLScP0QNFsZIAPL7fGmrHAxaSYYmzQ7w2YVZqsoipAaAnv2hkNQ/viewform" target="_blank">MEMBERSHIP FORM</a>
+    
+    <div id="connect">
+        <Subheading title="Connect with Us"/>
+        <div class="grid">    
+        <p>
+            <a href={discord as string} target="_blank">
+                <img
+                src="/discord-black-logo3.png"
+                alt="discord logo"
+                class="card-linkedin-logo"
+                onmouseover="this.src='/discord-pink-logo.png'"
+                onmouseout="this.src='/discord-black-logo3.png'"
+                />
+            </a>
+        </p>     
+        <p>
+            <a href={instagram as string} target="_blank">
+                <img
+                src="/ig-black-logo2.png"
+                alt="instagram logo"
+                class="card-linkedin-logo"
+                onmouseover="this.src='/ig-pink-logo.png'"
+                onmouseout="this.src='/ig-black-logo2.png'"
+                />
+            </a>
+        </p>             
+        <p>
+            <a href={linkedIn as string} target="_blank">
+                <img
+                src="/linkedin-logo-black.png"
+                alt="linkedin logo"
+                class="card-linkedin-logo"
+                onmouseover="this.src='/linkedin-logo-pink.png'"
+                onmouseout="this.src='/linkedin-logo-black.png'"
+                />
+            </a>
+        </p> 
+        <p>
+            <a href={facebook as string} target="_blank">
+                <img
+                src="/facebook-black-logo.png"
+                alt="facebook logo"
+                class="card-linkedin-logo"
+                onmouseover="this.src='/facebook-pink-logo.png'"
+                onmouseout="this.src='/facebook-black-logo.png'"
+                />
+            </a>
+        </p>  
+    </div>
+</div>
+</PageLayout>
+
+<style>
+    #join {
+        padding-top: 50px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(11rem, 14rem));
+      padding-bottom: 4rem;
+    }
+
+    p {
+    padding: 0;
+      margin: 0;
+    }
+
+    .card-linkedin-logo {
+        background-color: #2d6d68;
+        border-radius: 50px;
+    }
+
+    #connect {
+        padding-top: 100px;
+    }
+
+    #join {
+        min-height: 100vh;
+        justify-items: center;
+    }
+
+    #link {
+        margin-top: 100px;
+        max-width: 200px;
+    }
+
+    @media (max-width: 500px) {
+        .grid {
+            grid-template-columns: repeat(2, minmax(6rem, 9rem));
+        }
+    }
+
+    @media (max-width: 450px) {
+        #cursor {
+            margin-left: 200px;
+            width: 50px;
+    }
+        #link {
+            font-size: 22px;
+            padding: 20px 40px;
+    }
+  }
+</style>

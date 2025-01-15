@@ -5,8 +5,8 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import Subheading from "../../components/Subheading.astro";
 
 const client = createClient({
-  space: "33d3d7kdmbg5",
-  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
 // Define the event fields interface
@@ -86,7 +86,7 @@ const event = await (async () => {
           </div>
         </div>
       </div>
-      <a href={event.fields.registrationLink ? event.fields.registrationLink as unknown as string : "#"} target="_blank" class="register-button">
+      <a href={event.fields.registrationLink ? event.fields.registrationLink as unknown as string : "#"} target="_blank" class="register-button button">
         {event.fields.registrationLink ? "REGISTER" : "No Registration Required"}
       </a>
     </div>
@@ -102,7 +102,7 @@ const event = await (async () => {
 
   .event-page-container {
     text-align: center; 
-    padding: 50px;
+    padding: 1px 20px 0 20px;
   }
 
   .event-container > * {
@@ -145,21 +145,10 @@ const event = await (async () => {
 
 
   .register-button {
-    text-decoration: none;
-    font-weight: bold;
-    background-color: #2d6d68;
-    padding: 20px 40px;
-    font-size: 20px;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
     display: inline-block;
     margin-bottom: 100px;
   }
 
-  .register-button:hover {
-    box-shadow: 7px 7px 0 0 #60a0a1;
-  }
 
   .tags {
     display: flex;

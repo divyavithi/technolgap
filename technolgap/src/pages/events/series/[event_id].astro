@@ -6,8 +6,8 @@ import { createClient } from "contentful";
 import type {Entry} from "contentful";
 
 const client = createClient({
-  space: "33d3d7kdmbg5",
-  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
 // Define the event fields interface
@@ -80,7 +80,7 @@ const event = await (async () => {
 
     div {
         justify-items: center;
-        padding-top: 70px;
+        padding-top: 1px;
         min-height: 100vh;
     }
 

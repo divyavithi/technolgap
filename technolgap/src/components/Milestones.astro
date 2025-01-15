@@ -1,11 +1,10 @@
 ---
-// src/components/milestones.astro
 import { createClient } from "contentful";
 import Subheading from "./Subheading.astro";
 
 const client = createClient({
-  space: "33d3d7kdmbg5",
-  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
 // Fetch milestones from Contentful
@@ -18,7 +17,7 @@ const increment = 68/(milestones.length);
 ---
 
 <article id="milestones">
-  <Subheading title="Milestones at Technolgap" />
+  <Subheading title="Milestones at Technolgap"/>
   <img src="/white-star.png" alt="White Star Design" class="white-star" />
   <section id="milestones-timeline">
     <div class="timeline">
@@ -42,7 +41,7 @@ const increment = 68/(milestones.length);
 <style>
 
   #milestones {
-    padding-top: 3rem;
+    padding-top: 50px;
     padding-bottom: 6rem;
     margin-bottom: 0;
     border: none;

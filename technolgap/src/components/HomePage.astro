@@ -44,23 +44,25 @@
   }
   .text-container {
     position: absolute;
-    width: 50vw;
-    top: 400px;
+    width: 54vw;
+    top: 350px;
     left: 3%;
     transform-origin: left;
   }
   h1 {
-    font-size: 128px;
+    font-size: 105px;
+    color: white;
   }
   .pink-shadow {
     text-shadow: 4px 0px 0px #ffbce5;
   }
   h2 {
-    font-size: 36px;
+    font-size: 32px;
     color: #ffbce5;
   }
   .message {
-    font-size: 22px;
+    font-size: 18px;
+    color: white;
   }
   .buttons-container {
     display: flex;
@@ -69,42 +71,31 @@
   }
   .sponsor-button,
   .conference-button {
-    width: 168px;
-    height: 64px;
     border: 4px solid white;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     background-color: transparent;
     border-radius: 36px;
+    box-shadow: 3px 3px 0 3px #255b56;
+    font-weight: bold;
+    padding: 10px 25px;
   }
   .sponsor-button:hover,
   .conference-button:hover {
-    background-color: #64a8a2dd;
+    box-shadow: none;
   }
 
   @media (max-width: 1300px) {
-    .text-container {
-      top: 300px;
-    }
     h1 {
       font-size: 96px;
       margin-left: -5px;
     }
-    h2 {
-      font-size: 32px;
-    }
-    .message {
-      font-size: 20px;
-    }
-    .sponsor-button,
-    .conference-button {
-      width: 168px;
-      height: 56px;
-      font-size: 14px;
-    }
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
+    .text-container {
+      top: 300px;
+    }
     h1 {
       font-size: 90px;
       margin-left: -5px;
@@ -120,25 +111,28 @@
     }
   }
 
-  @media (max-width: 855px) {
+  @media (max-width: 950px) {
+    .text-container {
+      top: 270px;
+    }
     h1 {
-      font-size: 80px;
+      font-size: 75px;
       margin-left: -5px;
     }
     h2 {
       font-size: 24px;
     }
-    .message {
+    .message, .sponsor-button, .conference-button {
       font-size: 14px;
     }
     .buttons-container {
-      margin-top: 10px;
+      margin-top: 30px;
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 825px) {
     .text-container {
-      top: 270px;
+      top: 230px;
     }
     h1 {
       font-size: 65px;
@@ -153,13 +147,17 @@
       letter-spacing: -0.5px;
     }
     .conference-button, .sponsor-button {
-      scale: 80%;
+    }
+    .buttons-container {
+      scale: 90%;
+      margin-top: 10px;
+      margin-left: -30px;
     }
   }
 
   @media (max-width: 700px) {
     .text-container {
-      top: 37vw;
+      top: 200px;
     }
     h1 {
       font-size: 9vw;
@@ -175,16 +173,14 @@
       font-size: 12px;
     }
     .buttons-container {
-      position: relative;
-      margin-top: 20px;
-      scale: 90%;
-      left: -30px;
+      scale: 80%;
+      margin-left: -50px;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 615px) {
     .text-container {
-      top: 35vw;
+      top: 180px;
     }
     h1 {
       font-size: 8vw;
@@ -203,7 +199,8 @@
       scale: 75%;
     }
     .buttons-container {
-      margin-top: 10px;
+      margin-top: -10px;
+      gap: 0;
     }
   }
 
@@ -224,15 +221,11 @@
     .conference-button, .sponsor-button {
       scale: 70%;
     }
-    .buttons-container {
-      margin-top: 10px;
-      left: -25px;
-    }
   }
 
   @media (max-width: 485px) {
     .text-container {
-      top: 30vw;
+      top: 155px;
       scale: 95%;
     }
     h1 {
@@ -247,6 +240,7 @@
       font-size: 9px;
       line-height: 1.2;
       margin-bottom: 10px;
+      margin-top: -10px
     }
     .buttons-container {
       left: -25px;
@@ -255,50 +249,57 @@
 
   @media (max-width: 420px) {
     .text-container {
-      scale: 90%;
-    }
-    h1 {
-      font-size: 7vw;
-      margin-bottom: 10px;
+      top: 135px;
     }
     h2 {
-      font-size: 14px;
+      font-size: 13px;
+    }
+    /* h1 {
+      font-size: 7vw;
       margin-bottom: 10px;
     }
     .message {
       font-size: 9px;
       line-height: 1.2;
       margin-bottom: 0px;
+    } */
+    .sponsor-button, .conference-button {
+      font-size: 12px;
+      font-weight: normal;
+      border-width: 2px;
     }
     .buttons-container {
-      margin-top: 0px;
-      scale: 80%;
-      left: -35px;
+      margin-left: -35px;
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 385px) {
     .text-container {
-      scale: 85%;
-      width: 200px;
+      /* scale: 85%;
+      width: 200px; */
+      top: 125px;
     }
-    h1 {
+    .message {
+      font-size: 8px;
+    }
+    /* h1 {
       font-size: 7vw;
     }
     h2 {
       font-size: 13px;
     }
-    .message {
-      font-size: 9px;
-    }
     .conference-button, .sponsor-button {
       scale: 65%;
-    }
+    } */
   }
 
   @media (max-width: 355px) {
     .text-container {
-      scale: 80%;
+      top: 120px;
+    }
+
+    h1 {
+      margin-bottom: 2px;
     }
   }
 
@@ -314,9 +315,6 @@
     }
     .message {
       font-size: 8px;
-    }
-    .conference-button, .sponsor-button {
-      scale: 60%;
     }
     .buttons-container {
       scale: 70%;

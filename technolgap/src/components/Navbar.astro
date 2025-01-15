@@ -22,13 +22,19 @@
       <li><a href="/events">EVENTS</a></li>
       <li><a href="/resources">RESOURCES</a></li>
       <li class="desktop-dropdown">
-        <a href="/get-involved" class="desktop-dropdown-toggle">GET INVOLVED</a>
+        <a href="/join" class="desktop-dropdown-toggle">GET INVOLVED</a>
         <ul class="desktop-dropdown-menu">
           <li><a href="/chapters">Chapters</a></li>
           <li><a href="/sponsors">Sponsors</a></li>
           <li><a href="/collaborators">Collaborators</a></li>
           <li><a href="/speakers">Speakers</a></li>
           <li><a href="/volunteers">Volunteers</a></li>
+        </ul>
+      </li>
+      <li class="desktop-dropdown">
+        <a href="/conference" class="desktop-dropdown-toggle">CONFERENCE</a>
+        <ul class="desktop-dropdown-menu">
+          <li><a href="/conference">Previous Conferences</a></li>
         </ul>
       </li>
       <li><a class="custom-button">CONTACT US</a></li>
@@ -63,7 +69,7 @@
         <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="/get-involved" class="mobile-dropdown-toggle" id="getInvolvedToggle">GET INVOLVED</a>
+            <a href="/join" class="mobile-dropdown-toggle" id="getInvolvedToggle">GET INVOLVED</a>
         </div>
 
         <div class="main-menu-sub">
@@ -76,15 +82,26 @@
             </ul>
           </div>
 
+        <div class="main-menu">
+          <li class="mobile-dropdown">
+            <a href="/conference" class="mobile-dropdown-toggle" id="conferenceToggle">CONFERENCE</a>
+        </div>
+
+        <div class="main-menu-sub">
+            <ul class="mobile-dropdown-menu" id="conferenceDropdown">
+              <li><a href="/conference">Previous Conferences</a></li>
+            </ul>
+          </div>
+
         <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div>
 
-        <!-- <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div> -->
       </ul>
     </div>
   </nav>
 </div>
 
 <style>
+
   /* DESKTOP Navbar style */
 
   .logo-button {
@@ -106,15 +123,16 @@
 
   .desktop-navbar {
     background-color: #2d6d68;
-    padding: 0.5rem;
     top: 0;
-    display: flex;
+    display: flex;1
     align-items: center; /* Center items vertically */
-    height: 70px; /* Set a fixed height */
+    height: 85px; /* Set a fixed height */
     opacity: 1;
     z-index: 5000;
+    position: relative;
+    box-shadow: 0 0 7px 3px rgb(0, 0, 0);
   }
-
+  
   .desktop-navbar ul {
     list-style-type: none;
     margin: 0;
@@ -123,11 +141,13 @@
     /* gap: 2rem; */
   }
 
-  .logo img {
+  .logo {
     width: 75px;
     height: auto;
     display: block;
     margin-right: 20px;
+    padding: 5px;
+    padding-left: 20px;
   }
 
   .desktop-navbar li {
@@ -137,20 +157,19 @@
     color: rgb(223, 223, 223);
     font-size: 1rem;
     text-decoration: none;
-    transition:
-      color 0.3s,
-      text-shadow 0.3s,
-      font-weight 60s;
     font-weight: 400;
     padding: 1rem 1.5rem;
     display: flex;
-    height: 100%;
+    height: 85px;
+    align-items: center; /* Vertically center */
     box-sizing: border-box;
+    text-align: center;
   }
   .desktop-navbar a:hover {
     color: white;
-    font-weight: 900;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0.5px 0px 0px white, 0px 2px 2px rgb(63, 63, 63);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 0;
   }
 
   /* Dropdown style */
@@ -161,12 +180,10 @@
     min-width: 150px;
     display: none;
     position: absolute;
-    top: 100%;
+    top: 90%;
     left: 0;
     background-color: #2d6d68;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
     border-radius: 0;
   }
   .desktop-dropdown-menu li {
@@ -179,21 +196,20 @@
     color:  rgb(223, 223, 223);
     border-radius: 0;
     text-decoration: none;
-    
+    height: 100%;
   }
   .desktop-dropdown-menu li a:hover {
     color: white;
-    box-sizing: border-box;
-    border: 3px solid white;
+    outline: 3px solid white;
   }
   .desktop-dropdown:hover .desktop-dropdown-menu {
     z-index: 10000;
     display: block;
   }
   .desktop-dropdown:hover .desktop-dropdown-toggle {
-    font-weight: 600;
     border-radius: 0;
-    text-shadow: 0px 2px 0px rgb(63, 63, 63);
+    text-shadow: 0.5px 0px 0px white, 0px 2px 2px rgb(63, 63, 63);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   /*MOBILE NAVBAR DESIGN*/
@@ -215,6 +231,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
   }
 
   .menu-button {
@@ -275,12 +292,12 @@
     text-decoration: none;
     display: block;
     color: rgb(223, 223, 223);
+    box-sizing: border-box;
   }
 
   .menu a:hover,
   .menu button:hover {
-    font-weight: bold;
-    text-shadow: 0px 2px 0px rgb(63, 63, 63);
+    text-shadow: 0.5px 0px 0px white, 0px 2px 2px rgb(63, 63, 63);
   }
 
   /* Dropdown menu styles */
@@ -318,7 +335,7 @@
   .mobile-dropdown-menu li a:hover,  .mobile-dropdown-menu li a:active{
     color: white;
     box-sizing: border-box;
-    border: 3px solid white;
+    outline: 3px solid white;
   }
   .mobile-navbar {
     display: none;
@@ -341,9 +358,6 @@
     .desktop-navbar {
       width: 1500px;
     }
-    .logo img {
-      /* margin-right: 350px; */
-    }
     .desktop-dropdown {
       white-space: nowrap;
     }
@@ -354,11 +368,36 @@
       display: inline;
     }
   }
+
+  @media (max-width: 1150px) {
+    .desktop-navbar a {
+      font-size: 15px;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .desktop-navbar a {
+      padding: 15px;
+    }
+  }
+  @media (max-width: 930px) {
+    .desktop-navbar a {
+      padding: 13px;
+      font-size: 13px;
+    }
+
+    .logo {
+      margin-right: 0;
+    }
+
+    .desktop-dropdown:hover .desktop-dropdown-toggle {
+      text-shadow: 0.5px 0px 0px white;
+    }
+
+  }
   
   @media (min-width: 1024px) and (max-width: 1024px) {
-    .desktop-navbar {
-      /* width: 100%; */
-    }
     
     .logo img {
       width: 99px;
@@ -388,9 +427,6 @@
       display: flex;
       /* width: 835px; */
     }
-    .logo img {
-      /* margin-right: 100px; */
-    }
   }
   
   @media (max-width: 825px) {
@@ -418,10 +454,6 @@
       width: 1300px;
     }
     
-    .logo img {
-      /* width: 100px; */
-      /* margin-right: 300px; */
-    }
     .desktop-dropdown {
       white-space: nowrap;
     }
@@ -463,6 +495,8 @@
     const aboutDropdown = document.getElementById("aboutDropdown");
     const getInvolvedToggle = document.getElementById("getInvolvedToggle");
     const getInvolvedDropdown = document.getElementById("getInvolvedDropdown");
+    const conferenceToggle = document.getElementById("conferenceToggle");
+    const conferenceDropdown = document.getElementById("conferenceDropdown");
     
     const toggleMobileMenu = () => {
       mobileMenu.style.display =
@@ -481,6 +515,7 @@
       }
       aboutDropdown.style.display = "none";
       getInvolvedDropdown.style.display = "none";
+      conferenceDropdown.style.display = "none";
     });
 
     aboutUsToggle.addEventListener("click", (event) => {
@@ -505,12 +540,26 @@
       }
     });
 
+    conferenceToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (conferenceDropdown.style.display === "flex"){
+        mobileMenu.style.display = "none";
+        window.location.href = conferenceToggle.href
+      } else {
+        conferenceDropdown.style.display = "flex"
+      }
+    });
+
     document.addEventListener("click", () => {
       if (aboutDropdown.style.display === "flex") {
         aboutDropdown.style.display = "none";
       }
       if (getInvolvedDropdown.style.display === "flex") {
         getInvolvedDropdown.style.display = "none";
+      }
+      if (conferenceDropdown.style.display === "flex") {
+        conferenceDropdown.style.display = "none";
       }
     });
   });

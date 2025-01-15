@@ -5,20 +5,25 @@ const { title } = Astro.props;
 
 <h2 class="subheading">{title}</h2>
 
+
 <style>
+
     .subheading{
         font-size: 50px;
         color: #2f605c;
+        margin-top: 90px;
         margin-bottom: 2rem;
         text-shadow: 0px 3px 3px #7f7f7f;
         -webkit-text-stroke: 0.5px #ffffff;
         padding: 0 20px;
         text-align: center;
+        position: relative;
     }
 
     @media (max-width: 800px) {
         .subheading {
             font-size: 40px;
+            margin-top: 70px;
         }
     }
 

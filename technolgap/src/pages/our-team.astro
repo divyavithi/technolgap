@@ -5,10 +5,11 @@ import PageLayout from "../layouts/PageLayout.astro";
 import CardGrid from "../components/CardGrid.astro"
 import Dropdown from '../components/Dropdown.astro';
 import Subheading from "../components/Subheading.astro";
+import { undefined } from "astro:schema";
 
 const client = createClient({
-  space: "33d3d7kdmbg5",
-  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
 interface TeamMemberFields {
@@ -84,7 +85,32 @@ const url = new URL(Astro.request.url);
 const teamYear = url.searchParams.get("year") || defaultYear || "None";
 
 // Fetch team members
-const teamMembers = await fetchTeamMembers(teamYear)
+const teamMembers = (await fetchTeamMembers(teamYear)).sort((a: TeamMember, b: TeamMember) => {
+  if (a.fields?.position  && b.fields?.position) {
+    if ((a.fields.position as unknown as string).toLowerCase() === 'chair' ) {
+      return -1;
+    } 
+    if ((b.fields.position as unknown as string).toLowerCase() === 'chair' ) {
+      return 1;
+    } 
+    //neither are chair
+    if ((a.fields.position as unknown as string).toLowerCase() === 'conference director' ){
+      return -1;
+    }
+    if ((b.fields.position as unknown as string).toLowerCase() === 'conference director' ){
+      return 1;
+    }
+    //directors
+    if ((a.fields.position as unknown as string).toLowerCase().includes('director')){
+      return -1;
+    }
+    if ((b.fields.position as unknown as string).toLowerCase().includes('director')){
+      return 1;
+    }
+    return 0;
+  }
+  return 0;
+})
 
 const name = "year"
 const options = years
@@ -123,7 +149,6 @@ const selectedOption = teamYear
   }
 
   article {
-    padding-top: 5rem;
     padding-bottom: 5rem;
     margin-bottom: 0;
     border: none;

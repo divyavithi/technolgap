@@ -3,7 +3,8 @@ import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
 import '../custom-pico.css'
 
-const { title } = Astro.props;
+const { title, sparklesTop = true, sparklesBottom = false } = Astro.props;
+
 ---
 
 <html>
@@ -11,9 +12,6 @@ const { title } = Astro.props;
     <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
-    <!-- this caused the shrink of the screen for a smaller width -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 
 		<meta name="description" content="Empowering women and non-binary individuals in Canada's tech industry through opportunities and community support." />
 		<meta name="generator" content={Astro.generator} />
@@ -23,6 +21,18 @@ const { title } = Astro.props;
     <div class="page-wrapper">
       <Navbar />
       <main>
+        {sparklesTop && (
+          <img class="white-star-sparkle-rt star-sparkle" src="/white-star.png"/>
+          <img class="pink-star-sparkle-rt star-sparkle" src="/pink-star.png"/>
+          <img class="white-star-sparkle-lt star-sparkle" src="/white-star.png"/>
+          <img class="pink-star-sparkle-lt star-sparkle" src="/pink-star.png"/>
+      )}
+        {sparklesBottom && (
+          <img class="white-star-sparkle-rb star-sparkle" src="/white-star.png"/>
+          <img class="pink-star-sparkle-rb star-sparkle" src="/pink-star.png"/>
+          <img class="white-star-sparkle-lb star-sparkle" src="/white-star.png"/>
+          <img class="pink-star-sparkle-lb star-sparkle" src="/pink-star.png"/>
+      )}
         <slot />
       </main>
       <Footer />
@@ -31,31 +41,7 @@ const { title } = Astro.props;
 </html>
 
 <style>
-    /* main {
-    background-image: url('/milestones-bg.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-  } */
-  /* home page style */
-  /* body, html {
-    margin: 0;
-    overflow-x: hidden;
-  }
-  .page-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-  main {
-    flex-grow: 1;
-    overflow-y: auto;
-  } */
-
-  /* about us style */
+  
   main {
     padding: 0;
     margin: 0;
@@ -63,4 +49,111 @@ const { title } = Astro.props;
   html {
     scroll-behavior: smooth;
   }
+
+  /* sparkles */
+  .star-sparkle {
+        z-index: 0;
+        position: absolute;
+    }
+
+  /* sparklesTop */
+    .white-star-sparkle-rt { /*right top */
+        width: 100px;
+        top: 50px;
+        left: 60vw;
+    }
+
+    .pink-star-sparkle-rt {
+        width: 70px;
+        top: 100px;
+        left: 70vw;
+    }
+
+    .white-star-sparkle-lt {
+        width: 100px;
+        top: 120px;
+        left: 25vw;
+    }
+
+    .pink-star-sparkle-lt {
+        width: 70px;
+        top: 170px;
+        left: 15vw;
+    }
+
+    /* sparklesBottom */
+    .white-star-sparkle-rb { /*right bottom */
+        width: 100px;
+        top: 70px;
+        left: 70vw;
+    }
+
+    .pink-star-sparkle-rb {
+        width: 220px;
+        top: 110px;
+        right: 0;
+    }
+
+    .white-star-sparkle-lb {
+        width: 200px;
+        top: 250px;
+        left: -5vw;
+    }
+
+    .pink-star-sparkle-lb {
+        width: 100px;
+        top: 190px;
+        left: 20vw;
+    }
+
+    @media (max-width: 1050px) {
+      .pink-star-sparkle-rt {
+        width: 50px;
+        top: 120px;
+        left: 68vw;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .white-star-sparkle-rt, .white-star-sparkle-lt, .pink-star-sparkle-rt, .pink-star-sparkle-lt {
+        scale: 70%;
+      }
+
+      .white-star-sparkle-lt {
+        top: 90px;
+      }
+
+      .pink-star-sparkle-lt {
+        top: 130px;
+      }
+
+      .white-star-sparkle-rb, .pink-star-sparkle-lb {
+        scale: 50%;
+      }
+      
+      .white-star-sparkle-lb, .pink-star-sparkle-rb {
+        scale: 20%;
+        top: 80px;
+      }
+
+      .pink-star-sparkle-lb {
+        top: 50px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .white-star-sparkle-rt, .white-star-sparkle-lt, .pink-star-sparkle-rt, .pink-star-sparkle-lt {
+        scale: 50%;
+      }
+
+      .white-star-sparkle-lb, .pink-star-sparkle-rb {
+        display: none;
+      }
+
+      .pink-star-sparkle-lb {
+        left: 5vw;
+      }
+       
+    }
+
 </style>

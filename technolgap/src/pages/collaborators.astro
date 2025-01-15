@@ -1,0 +1,199 @@
+---
+import CollabCardGrid from "../components/CollabCardGrid.astro";
+import Subheading from "../components/Subheading.astro";
+import TextBox from "../components/TextBox.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+interface collaborator {
+  fields: {
+    name: string;
+    logo: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    contribution: string;
+    website: string;
+    event: {
+      sys: {
+        id: string;
+      }
+      fields: { eventName: string };
+    };
+  };
+  contentTypeId: "collaborator";
+}
+
+type Collaborator = Entry<collaborator>;
+
+
+const responseCollab = await client.getEntries({
+  content_type: "collaborator",
+});
+const collaborators: Collaborator[] = responseCollab.items as Collaborator[];
+
+
+const responseForm = await client.getEntries({
+  content_type: "contact",
+  "fields.name": "collabInterestForm"
+});
+const form = responseForm.items[0];
+---
+
+<PageLayout title="Collaborators">
+    <article class="classic-bg">
+        <Subheading title="Collaborators"/>
+        <TextBox heading="Our Valued Collaborators!" text="We proudly collaborate with organizations and individuals who share our vision of fostering diversity and inclusion in tech. Submit an interest form below!"/>
+          <a id="link" class="button" href=`${form.fields.content}` target="_blank">INTEREST FORM</a>
+        <CollabCardGrid entries={collaborators}/>
+        <div id="why-collab">
+          <h1>Why Collaborate with Us?</h1>
+          <div class="grid">
+            <div>
+              <img
+                src="/diversity-icon.png"
+                alt="diversity and inclusion icon"
+                class="icon"
+                onmouseover="this.src='/diversity-icon-pink.png'"
+                onmouseout="this.src='/diversity-icon.png'"
+              />
+              <p class="subtext">Enhance Impact on<br>Diversity and Inclusion</p>
+            </div>
+            <div>
+              <img
+                src="/outreach-icon.png"
+                alt="outreach and visibility icon"
+                class="icon"
+                onmouseover="this.src='/outreach-icon-pink.png'"
+                onmouseout="this.src='/outreach-icon.png'"
+              />
+              <p class="subtext">Expand your Outreach<br>and Visibility</p>
+            </div>
+            <div>
+              <img
+                src="/positive-brand-icon.png"
+                alt="positive brand association icon"
+                class="icon"
+                onmouseover="this.src='/positive-brand-icon-pink.png'"
+                onmouseout="this.src='/positive-brand-icon.png'"
+              />
+              <p class="subtext">Positive Brand<br>Association</p>
+            </div>
+            <div>
+              <img
+                src="/individuals-icon.png"
+                alt="pool of individuals icon"
+                class="icon"
+                onmouseover="this.src='/individuals-icon-pink.png'"
+                onmouseout="this.src='/individuals-icon.png'"
+              />
+              <p class="subtext">Access to a Talented<br>Pool of Individuals</p>
+            </div>
+          </div>
+          <p id="contact">Contact us as <a href="mailto:outreach@technolgap.org">outreach@technolgap.org</a> for any further inquiries.</p>
+        </div>
+    </article>
+</PageLayout>
+
+
+<style>
+
+  #contact {
+    color: #2d6d68;
+    margin-top: 50px;
+    font-size: 14px;
+  }
+
+  #contact > a{
+    color: #2d6d68;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  #contact > a:hover {
+    text-decoration: underline;
+  }
+
+  #why-collab {
+    color: #2d6d68;
+    margin-top: 100px;
+  }
+  
+  #why-collab > h1{
+    color: #2d6d68;
+    margin-bottom: 50px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, minmax(13rem, 13rem));
+    justify-content: center;
+  }
+
+  .subtext {
+    color: #2d6d68;
+    width: 210px;
+    margin: 10px auto;
+  }
+  
+  .icon {
+    height: 150px;
+    background-color: #60a0a1;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  .icon:hover {
+    background-color: #2d6d68;
+    box-shadow: 0px 0px 10px 3px #ffbce5ac;
+  }
+
+  .icon:hover + .subtext {
+    font-weight: bold;
+  }
+
+  #link {
+    max-width: 300px;
+    margin: 100px auto 50px auto;
+  }
+  
+  article {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(11rem, 14rem));
+    }
+
+    #link {
+      max-width: 200px;
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .grid {
+      grid-template-columns: repeat(1, minmax(11rem, 14rem));
+    }
+  }
+  
+</style>

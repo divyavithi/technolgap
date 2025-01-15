@@ -1,0 +1,95 @@
+---
+import type { Entry } from "contentful";
+import CollabCard from "./CollabCard.astro";
+
+interface collaborator {
+  fields: {
+    name: string;
+    logo: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    contribution: string;
+    website: string;
+    event: {
+      sys: {
+        id: string;
+      }
+      fields: { eventName: string };
+    };
+  };
+  contentTypeId: "collaborator";
+}
+
+type Collaborator = Entry<collaborator>;
+
+interface Props {
+  entries: Collaborator[];
+}
+
+const { entries } = Astro.props;
+---
+
+<section class="grid overflow-auto">
+  {
+    entries.map((member, index) =>
+      (
+      <CollabCard
+            name={member.fields.name as unknown as string}
+            logo={(member.fields.logo?.fields as any)?.file?.url ?? ""}
+            website={(member.fields.website as unknown as string) ?? "none"}
+            contribution={
+              (member.fields.contribution as unknown as string) ?? "none"
+            }
+            eventName={((member.fields.event?.fields as any).eventName as unknown as string) ??
+              "none"
+            }
+            eventId={((member.fields.event?.sys as any).id as unknown as string) ?? "none"}
+          />
+      )
+    )
+  }
+</section>
+
+<style>
+  .grid {
+    padding-top: 65px;
+    display: grid;
+    background-color: #64a8a2;
+    border-radius: 20px;
+    row-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    box-shadow: 0 7px 10px 1px #898989;
+    /* margin: 0 50px; */
+    border: solid 5px #fee8f5;
+  }
+
+  /* Target the first entry specifically */
+  .first-entry {
+    grid-column: 1 / -1; /* Span the entire row */
+    justify-self: center; /* Center horizontally */
+    margin-top: 50px;
+  }
+
+  @media (max-width: 620px) {
+    .first-entry {
+      justify-self: left;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(18rem, 1fr));
+    }
+  }
+</style>
