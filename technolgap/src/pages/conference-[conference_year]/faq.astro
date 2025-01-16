@@ -1,0 +1,103 @@
+---
+import FaqAccordian from "../../components/FaqAccordian.astro"
+import Subheading from "../../components/Subheading.astro"
+import PageLayout from "../../layouts/PageLayout.astro"
+
+const list = [
+  {
+    metadata: { tags: [], concepts: [] },
+    sys: {
+      space: [Object],
+      id: '6ziepjb2xFpmCUqzvAlkuS',
+      type: 'Entry',
+      createdAt: '2024-12-20T22:27:36.816Z',
+      updatedAt: '2024-12-20T22:27:36.816Z',
+      environment: [Object],
+      publishedVersion: 10,
+      revision: 1,
+      contentType: [Object],
+      locale: 'en-US'
+    },
+    fields: {
+      question: 'Is there a registration fee? What does it include?',
+      answer: 'Yes, the registration fee is [TBA]. The fee covers access to all conference sessions, workshops, and networking events. It may also include merch and conference materials.'
+    }
+  },
+  {
+    metadata: { tags: [], concepts: [] },
+    sys: {
+      space: [Object],
+      id: '1zOLN6OsgNUvda6RndFCPk',
+      type: 'Entry',
+      createdAt: '2024-12-20T22:25:38.591Z',
+      updatedAt: '2024-12-20T22:25:38.591Z',
+      environment: [Object],
+      publishedVersion: 5,
+      revision: 1,
+      contentType: [Object],
+      locale: 'en-US'
+    },
+    fields: {
+      question: 'How can I register for the conference?',
+      answer: 'You can register by visiting [TBA]. '
+    }
+  },
+  {
+    metadata: { tags: [], concepts: [] },
+    sys: {
+      space: [Object],
+      id: '4e7xDkGt1mR133EWpKJTW',
+      type: 'Entry',
+      createdAt: '2024-12-20T22:24:52.529Z',
+      updatedAt: '2024-12-20T22:24:52.529Z',
+      environment: [Object],
+      publishedVersion: 8,
+      revision: 1,
+      contentType: [Object],
+      locale: 'en-US'
+    },
+    fields: {
+      question: 'Who can attend the conference?',
+      answer: 'The event is open to women and non-binary individuals interested in technology, whether they are students, professionals, or enthusiasts. Students under 18 will require parental or guardian consent to participate.'
+    }
+  }
+]
+---
+    
+<PageLayout title="Frequently Asked Questions">
+    <article class="classic-bg">
+        <h2 class="subheading">FAQ</h2>
+        <FaqAccordian faqList={list} grey={true}/>
+    </article>
+</PageLayout>
+
+<style>
+
+    article {
+        margin: 0;
+    }
+
+    .subheading{
+        font-size: 50px;
+        color: #5A6160;
+        margin-top: 90px;
+        margin-bottom: 3rem;
+        text-shadow: 0px 3px 3px #7f7f7f;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    @media (max-width: 800px) {
+        .subheading {
+            font-size: 40px;
+            margin-top: 70px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .subheading {
+            font-size: 35px;
+        }
+    }
+</style>
