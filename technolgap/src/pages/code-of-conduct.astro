@@ -159,18 +159,22 @@ import Subheading from "../components/Subheading.astro";
       font-size: 16px;
     }
   }
-  @media (max-width: 560px) {
+  @media (max-width: 590px) {
     #code-of-conduct values {
       font-size: 14px;
-      margin-left: 5rem;
-      margin-right: 5rem;
+      margin-left: 10rem;
+      margin-right: 10rem;
     }
   }
-  @media (max-width: 450px) {
+  @media (max-width: 550px) {
     #code-of-conduct p,
     #code-of-conduct bullet,
-    #code-of-conduct spread {
+    #code-of-conduct spread,
+    #code-of-conduct values {
       margin: 1rem;
+    }
+    #code-of-conduct bullet {
+      margin-left: 2rem;
     }
   }
 </style>
