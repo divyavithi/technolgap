@@ -90,7 +90,7 @@ import Subheading from "../components/Subheading.astro";
     border-radius: 20px;
     row-gap: 5px;
     box-shadow: 0 7px 10px 1px #898989;
-    margin: 0 50px;
+    margin: 0 40px;
     border: solid 5px #fee8f5;
     overflow: hidden;
   }
@@ -175,6 +175,21 @@ import Subheading from "../components/Subheading.astro";
     }
     #code-of-conduct bullet {
       margin-left: 2rem;
+    }
+  }
+  @media (max-width: 450px) {
+    #privacy-policy h3 {
+      font-size: 18px;
+    }
+    #privacy-policy p,
+    #privacy-policy bullet {
+      font-size: 12px;
+      margin: 1rem;
+    }
+    #privacy-policy bullet {
+      margin: 2rem;
+      margin-top: 0.125rem;
+      margin-bottom: 0.25rem;
     }
   }
 </style>
