@@ -107,12 +107,14 @@ import Subheading from "../components/Subheading.astro";
     color: #ffffff;
     font-size: 18px;
     text-align: left;
-    margin-left: 12rem;
+    margin-left: 5rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    margin-right: 12rem;
+    margin-right: 5rem;
   }
   #code-of-conduct values {
+    display: list-item;
+    list-style-type: none;
     color: #FFBCE5;
     font-weight: bold;
     font-size: 24px;
@@ -133,13 +135,13 @@ import Subheading from "../components/Subheading.astro";
   #code-of-conduct bullet {
     display: list-item;
     list-style-type: disc;
-    margin-left: 13rem;
+    margin-left: 6rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     color: #ffffff;
     font-size: 18px;
     text-align: left;
-    margin-right: 12rem;
+    margin-right: 5rem;
   }
 
   @media (max-width: 800px) {
@@ -152,18 +154,11 @@ import Subheading from "../components/Subheading.astro";
     #code-of-conduct spread {
       font-size: 14px;
       margin: 1rem;
-      margin-left: 5rem;
-      margin-right: 5rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
     }
     #code-of-conduct values {
       font-size: 16px;
-    }
-  }
-  @media (max-width: 590px) {
-    #code-of-conduct values {
-      font-size: 14px;
-      margin-left: 10rem;
-      margin-right: 10rem;
     }
   }
   @media (max-width: 550px) {
