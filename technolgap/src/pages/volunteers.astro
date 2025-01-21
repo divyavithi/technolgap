@@ -1,0 +1,80 @@
+---
+import { createClient, type Entry } from "contentful";
+import Subheading from "../components/Subheading.astro"
+import TextBox from "../components/TextBox.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+import FaqAccordian from "../components/FaqAccordian.astro";
+import { markdown } from 'astro:content';
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+// Define the FAQ fields interface
+interface volunteerFields {
+  fields: {
+    title: string,
+    appForm: string,
+    appDeadline: string,
+    roleDescription: string
+  };
+  contentTypeId: "volunteerRole";
+}
+type volunteerRole = Entry<volunteerFields>;
+
+// Helper function to fetch FAQs from Contentful
+async function fetchRoles(): Promise<volunteerRole[]> {
+  const response = await client.getEntries({
+    content_type: "volunteerRole", // Ensure this matches your Contentful content type
+  });
+  return response.items as volunteerRole[];
+}
+
+// Fetch FAQ data asynchronously
+const volunteerRoles = await fetchRoles();
+console.log(volunteerRoles[0].fields)
+
+const faqStyle = volunteerRoles.map(role => ({
+    fields: {
+        question: role.fields.title,
+        answer: role.fields.roleDescription
+    }
+}));
+---
+
+<PageLayout title="Volunteers">
+    <article class="classic-bg">
+        <Subheading title="Our Dedicated Volunteers"/>
+        <TextBox heading="" text="Our volunteers are the backbone of Technolgap, contributing their time and skills to support our mission."/>
+        <div class="volunteer-list-container">
+            <h1>Volunteer Opportunities</h1>
+            <FaqAccordian faqList={faqStyle}/>
+        </div>
+    </article>
+</PageLayout>
+
+<style>
+    article {
+        padding: 1px;
+        margin: 1px;
+    }
+
+    .volunteer-list-container {
+        margin-top: 100px;
+    }
+    
+    .volunteer-list-container > h1 {
+        width: 70%;
+        max-width: 900px;
+        margin: 0 auto;
+        color: #2f605c;
+        text-shadow: 0px 1px 1px #7f7f7f;
+        margin-bottom: 20px;
+    }
+
+    .faq-container {
+        width: 100% !important;
+        max-width: 100% I !important;
+    }
+</style>
