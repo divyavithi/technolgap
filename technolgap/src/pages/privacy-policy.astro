@@ -62,7 +62,7 @@ import Subheading from "../components/Subheading.astro";
             our practices or for other operational, legal, or regulatory reasons. </p>
 
           <h3> Contact Us </h3>
-          <p> If you have any questions about this Privacy Policy, please contact us at: <b>info@technolgap.org</b> </p>
+          <p> If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:info@technolgap.org">info@technolgap.org</a> </p>
 
         </text-container>
       </foreground>
@@ -96,9 +96,11 @@ import Subheading from "../components/Subheading.astro";
     border-radius: 20px;
     row-gap: 5px;
     box-shadow: 0 7px 10px 1px #898989;
-    margin: 0 40px;
     border: solid 5px #fee8f5;
     overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 50px;
   }
   #privacy-policy h3 {
     font-size: 30px;
@@ -128,6 +130,15 @@ import Subheading from "../components/Subheading.astro";
     font-size: 18px;
     text-align: left;
     margin-right: 12rem;
+  }
+  #privacy-policy a {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  #privacy-policy a:hover {
+    color: #fee8f5;
+    text-decoration: underline 2px solid #fee8f5;
   }
 
   @media (max-width: 800px) {

@@ -55,7 +55,7 @@ import Subheading from "../components/Subheading.astro";
             of any changes. </p>
 
           <h3>Contact Information</h3>
-          <spread> Email Address: info@technolgap.org </spread>
+          <spread> Email Address: <a href="mailto:info@technolgap.org">info@technolgap.org</a> </spread>
           <spread> Emergency Services: 911 </spread>
 
         </text-container>
@@ -90,9 +90,11 @@ import Subheading from "../components/Subheading.astro";
     border-radius: 20px;
     row-gap: 5px;
     box-shadow: 0 7px 10px 1px #898989;
-    margin: 0 40px;
     border: solid 5px #fee8f5;
     overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 50px;
   }
   #code-of-conduct h3 {
     font-size: 30px;
@@ -142,6 +144,14 @@ import Subheading from "../components/Subheading.astro";
     font-size: 18px;
     text-align: left;
     margin-right: 5rem;
+  }
+  #code-of-conduct a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  #code-of-conduct a:hover {
+    color: #fee8f5;
+    text-decoration: underline 2px solid #fee8f5;
   }
 
   @media (max-width: 800px) {
