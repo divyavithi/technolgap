@@ -1,35 +1,71 @@
 ---
+import { marked } from 'marked';
+
 interface FaqProps {
   faqList: FaqFields[];
   grey: boolean;
+  markdown: boolean;
 }
 
 interface FaqFields {
   fields: {
     question: string;
     answer: string;
+    appForm?: string;
+    deadline?: string;
   };
   contentTypeId: "faq";
 }
 
-const { faqList, grey=false } = Astro.props;
+const { faqList, grey=false, volunteerRole=false} = Astro.props;
+
 ---
 
 <div class="faq-container">
   {faqList.map((faq: FaqFields, index: number) => (
     <div class={(grey ? "grey " : "green ")+"faq-item"}>
       <div class="faq-question">
-        <h3>{faq.fields.question}</h3>
+        <h3>{faq.fields.question} </h3>
         <span class="arrow">&#9660;</span>
       </div>
       <div class=" faq-answer">
+        {volunteerRole ? (
+          <p set:html={marked(faq.fields.answer)}></p>
+          <div class="volunteer-info">
+            <h5>Application Due: {faq.fields.deadline}</h5>
+            <a class="app-form button" href={faq.fields.appForm}>Apply</a>
+          </div>
+        ) : (
         <p>{faq.fields.answer}</p>
+        )}
       </div>
     </div>
   ))}
 </div>
 
 <style>
+
+  .volunteer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .app-form {
+    text-decoration: none;
+    margin-right: 25px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+    border: solid 3px #60a0a1;
+  }
+
+  .volunteer-info > h5 {
+    display: inline;
+    color: #eeffff !important;
+  }
 
   .grey {
     background-color: #5A6160; !important
@@ -74,6 +110,7 @@ const { faqList, grey=false } = Astro.props;
     .faq-answer {
       display: none;
       padding-top: 1rem;
+      color: white !important;
     }
   
     .faq-item.open .faq-answer {
@@ -81,8 +118,45 @@ const { faqList, grey=false } = Astro.props;
     }
   
     .faq-item.open .arrow {
-      transform: rotate(180deg);
+      transform: rotate(180deg) !important;
     }
+
+
+    @media (max-width: 700px) {
+      .app-form {
+        font-weight: 400;
+        padding: 10px 30px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .volunteer-info > h5 {
+        display: block;
+      }
+
+      .app-form {
+        display: block;
+      }
+
+      .volunteer-info 
+      {
+        display: block;
+      }
+
+      .faq-answer p {
+        font-size: 13px;
+      }
+
+      .faq-question h3 {
+        font-size: 18px;
+      }
+
+      .faq-container {
+        width: 90%;
+      }
+    }
+
   </style>
   
 <script>

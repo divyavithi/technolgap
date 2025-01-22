@@ -4,7 +4,7 @@ import Subheading from "../components/Subheading.astro"
 import TextBox from "../components/TextBox.astro"
 import PageLayout from "../layouts/PageLayout.astro"
 import FaqAccordian from "../components/FaqAccordian.astro";
-import { markdown } from 'astro:content';
+
 
 const client = createClient({
   space: "33d3d7kdmbg5",
@@ -38,7 +38,9 @@ console.log(volunteerRoles[0].fields)
 const faqStyle = volunteerRoles.map(role => ({
     fields: {
         question: role.fields.title,
-        answer: role.fields.roleDescription
+        answer: role.fields.roleDescription,
+        appForm: role.fields.appForm,
+        deadline: role.fields.appDeadline
     }
 }));
 ---
@@ -49,7 +51,7 @@ const faqStyle = volunteerRoles.map(role => ({
         <TextBox heading="" text="Our volunteers are the backbone of Technolgap, contributing their time and skills to support our mission."/>
         <div class="volunteer-list-container">
             <h1>Volunteer Opportunities</h1>
-            <FaqAccordian faqList={faqStyle}/>
+            <FaqAccordian faqList={faqStyle} volunteerRole={true}/>
         </div>
     </article>
 </PageLayout>
@@ -65,7 +67,7 @@ const faqStyle = volunteerRoles.map(role => ({
     }
     
     .volunteer-list-container > h1 {
-        width: 70%;
+        width: 65%;
         max-width: 900px;
         margin: 0 auto;
         color: #2f605c;
@@ -76,5 +78,12 @@ const faqStyle = volunteerRoles.map(role => ({
     .faq-container {
         width: 100% !important;
         max-width: 100% I !important;
+    }
+
+    @media (max-width: 550px) {
+      .volunteer-list-container > h1 {
+        font-size: 22px;
+        width: 85%;
+      }
     }
 </style>
