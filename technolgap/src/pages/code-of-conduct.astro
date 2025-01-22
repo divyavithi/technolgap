@@ -1,0 +1,217 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Subheading from "../components/Subheading.astro";
+---
+
+<PageLayout title="Code of Conduct">
+  <div class="article-wrapper">
+    <article id="code-of-conduct" class="classic-bg">
+      <Subheading title="Code of Conduct" />
+      <foreground>
+        <text-container>
+
+          <p> All users, contributors, and moderators of Technolgap are expected to abide by our Code of
+            Conduct, both online and during in-person events hosted and/or associated with Technolgap. </p>
+          
+          <h3> The Pledge </h3>
+          <p> In the interest of fostering an open and welcoming environment, we pledge to make participation
+          in our community a harassment-free experience for everyone, regardless of age, body size,
+          disability, ethnicity, gender identity and expression, level of experience, nationality, personal
+          appearance, race, religion, or sexual identity and orientation. </p>
+
+          <h3> Core Values </h3>
+          <values> Respect </values>
+          <values> Inclusivity </values>
+          <values> Integrity </values>
+          <values> Transparency </values>
+
+          <h3> Expected Behavior </h3>
+          <bullet> Using welcoming and inclusive language. </bullet>
+          <bullet> Being respectful of differing viewpoints and experiences. </bullet>
+          <bullet> Gracefully accepting constructive criticism. </bullet>
+          <bullet> Referring to people by their preferred pronouns and using gender-neutral pronouns when uncertain. </bullet>
+
+          <h3> Unacceptable Behavior </h3>
+          <bullet> Harassment, trolling, or derogatory comments. </bullet>
+          <bullet> Sharing others' private information without permission. </bullet>
+          <bullet> Ignoring reasonable communication boundaries. </bullet>
+          <bullet> Using sexualized language or imagery. </bullet>
+          <bullet> Swearing or using disturbing language. </bullet>
+          <bullet> Engaging in political arguments. </bullet>
+          <bullet> Promoting inequality or drug use. </bullet>
+          <bullet> Attacking personal tastes. </bullet>
+          <bullet> Any conduct inappropriate in a professional setting. </bullet>
+
+          <h3>Reporting Violations</h3>
+          <p> If you encounter or witness any violations of this code of conduct, please report them
+            immediately to info@technolgap.org. All reports will be handled with confidentiality and
+            sensitivity. We reserve the right and responsibility to remove comments or other contributions
+            that are not aligned with this code of conduct, or to ban temporarily or permanently any
+            members for other behaviors that are deemed inappropriate, threatening, offensive, or harmful. </p>
+
+          <h3>Acknowledgement and Agreement</h3>
+          <p> By using our website, you acknowledge that you have read, understood, and agree to abide by
+            this code of conduct. We reserve the right to update this code as necessary and will notify users
+            of any changes. </p>
+
+          <h3>Contact Information</h3>
+          <spread> Email Address: <a href="mailto:info@technolgap.org">info@technolgap.org</a> </spread>
+          <spread> Emergency Services: 911 </spread>
+
+        </text-container>
+      </foreground>
+  </div>
+</PageLayout>
+
+<style>
+  article {
+    padding-bottom: 5rem;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+
+    min-height: 100vh;
+    background-size: cover;
+    background-color: white;
+    background-color: transparent;
+    box-shadow: none;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+  .article-wrapper {
+    background-color: white;
+  }
+
+  #code-of-conduct foreground {
+    display: grid;
+    background-color: #64a8a2;
+    border-radius: 20px;
+    row-gap: 5px;
+    box-shadow: 0 7px 10px 1px #898989;
+    border: solid 5px #fee8f5;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
+  #code-of-conduct h3 {
+    font-size: 30px;
+    text-shadow: 
+    1px 1px 0px #FFBCE5,
+    -1px -1px 0px #FFBCE5,
+    1px -1px 0px #FFBCE5,
+    -1px 1px 0px #FFBCE5;
+    color: white;
+  }
+  #code-of-conduct p {
+    color: #ffffff;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: 5rem;
+  }
+  #code-of-conduct values {
+    display: list-item;
+    list-style-type: none;
+    color: #FFBCE5;
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-right: 2rem;
+  }
+  #code-of-conduct spread {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-right: 2rem;
+  }
+  #code-of-conduct bullet {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: left;
+    margin-right: 5rem;
+  }
+  #code-of-conduct a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  #code-of-conduct a:hover {
+    color: #fee8f5;
+    text-decoration: underline 2px solid #fee8f5;
+  }
+
+  @media (max-width: 800px) {
+    #code-of-conduct h3 {
+      font-size: 20px;
+      margin-bottom: 2rem;
+    }
+    #code-of-conduct p,
+    #code-of-conduct bullet,
+    #code-of-conduct spread {
+      font-size: 14px;
+      margin: 1rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+    #code-of-conduct values {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 550px) {
+    #code-of-conduct foreground {
+      margin: 0 20px;
+    }
+    #code-of-conduct p,
+    #code-of-conduct bullet,
+    #code-of-conduct spread {
+      margin: 1rem;
+    }
+    #code-of-conduct bullet {
+      margin-left: 2rem;
+    }
+  }
+  @media (max-width: 450px) {
+    #code-of-conduct h3 {
+      font-size: 18px;
+    }
+    #code-of-conduct p,
+    #code-of-conduct bullet,
+    #code-of-conduct spread {
+      font-size: 12px;
+      margin: 1rem;
+    }
+    #code-of-conduct bullet {
+      margin: 2rem;
+      margin-top: 0.125rem;
+      margin-bottom: 0.25rem;
+    }
+  }
+  @media (max-width: 350px) {
+    #code-of-conduct h3 {
+      font-size: 14px;
+    }
+    #code-of-conduct p,
+    #code-of-conduct bullet,
+    #code-of-conduct spread {
+      font-size: 10px;
+
+    }
+    #code-of-conduct values {
+      font-size: 12px;
+    }
+  }
+</style>

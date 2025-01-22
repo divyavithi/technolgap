@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/netlify": "^6.1.0",
     "@astrojs/node": "^9.0.0",
     "@astrojs/ts-plugin": "^1.10.4",
     "@contentful/rich-text-html-renderer": "^16.6.10",
