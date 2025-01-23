@@ -96,7 +96,7 @@ const response = await client.getEntries({
   content_type: "contact",
 });
 const contacts = response.items;
-const form = contacts.find(obj => obj.fields.name == 'collabInterestForm')?.fields.content
+const form = contacts.find(obj => obj.fields.name == 'speakerInterestForm')?.fields.content
 const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.content
 ---
 
