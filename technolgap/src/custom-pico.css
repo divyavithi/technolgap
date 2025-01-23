@@ -33,6 +33,7 @@ body {
 
 .button:hover {
   box-shadow: none;
+  cursor: pointer;
 }
 
 /*!

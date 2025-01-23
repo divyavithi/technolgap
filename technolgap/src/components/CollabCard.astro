@@ -6,9 +6,10 @@ interface Props {
   contribution: string;
   eventName: string;
   eventId: string;
+  contactIcon: string;
 }
 
-const { name, logo, website, contribution, eventName, eventId } = Astro.props;
+const { name, logo, website, contribution, eventName, eventId, contactIcon } = Astro.props;
 ---
 
 <article class="card">
@@ -31,11 +32,12 @@ const { name, logo, website, contribution, eventName, eventId } = Astro.props;
           <p>
             <a href={website} target="_blank">
               <img
-                src="/web-logo-black.png"
-                alt="web logo"
+                src={`${contactIcon}-black.png`}
+                alt={`${contactIcon}`}
                 class="card-web-logo"
-                onmouseover="this.src='/web-logo-pink.png'"
-                onmouseout="this.src='/web-logo-black.png'"
+                onmouseover={`this.src='${contactIcon}-pink.png'`}
+                onmouseout={`this.src='${contactIcon}-black.png'`}
+                style={contactIcon == "web-logo" ? {"border-radius": "50%"} : {"border-radius": "10px"} }
                 />
             </a>
           </p>
@@ -62,7 +64,7 @@ const { name, logo, website, contribution, eventName, eventId } = Astro.props;
     bottom: 15px; /* Distance from the bottom */
     right: 15px; /* Distance from the right */
     height: 45px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 
   .card-web-logo:hover {

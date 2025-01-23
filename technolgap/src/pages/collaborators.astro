@@ -50,19 +50,20 @@ const responseCollab = await client.getEntries({
 const collaborators: Collaborator[] = responseCollab.items as Collaborator[];
 
 
-const responseForm = await client.getEntries({
+const response = await client.getEntries({
   content_type: "contact",
-  "fields.name": "collabInterestForm"
 });
-const form = responseForm.items[0];
+const contacts = response.items;
+const form = contacts.find(obj => obj.fields.name == 'collabInterestForm')?.fields.content
+const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.content
 ---
 
 <PageLayout title="Collaborators">
     <article class="classic-bg">
         <Subheading title="Collaborators"/>
         <TextBox heading="Our Valued Collaborators!" text="We proudly collaborate with organizations and individuals who share our vision of fostering diversity and inclusion in tech. Submit an interest form below!"/>
-          <a id="link" class="button" href=`${form.fields.content}` target="_blank">INTEREST FORM</a>
-        <CollabCardGrid entries={collaborators}/>
+          <a id="link" class="button" href=`${form}` target="_blank">INTEREST FORM</a>
+        <CollabCardGrid entries={collaborators} speaker={false}/>
         <div id="why-collab">
           <h1>Why Collaborate with Us?</h1>
           <div class="grid">
@@ -107,7 +108,7 @@ const form = responseForm.items[0];
               <p class="subtext">Access to a Talented<br>Pool of Individuals</p>
             </div>
           </div>
-          <p id="contact">Contact us as <a href="mailto:outreach@technolgap.org">outreach@technolgap.org</a> for any further inquiries.</p>
+          <p id="contact">Contact us as <a href=`mailto:${email}`>outreach@technolgap.org</a> for any further inquiries.</p>
         </div>
     </article>
 </PageLayout>

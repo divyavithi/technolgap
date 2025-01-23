@@ -1,0 +1,148 @@
+---
+import { createClient, type Entry } from "contentful";
+import Subheading from "../components/Subheading.astro"
+import TextBox from "../components/TextBox.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+import CollabCardGrid from "../components/CollabCardGrid.astro";
+
+const client = createClient({
+  space: "33d3d7kdmbg5",
+  accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
+});
+
+interface collaborator {
+  fields: {
+    name: string;
+    logo: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    };
+    contribution: string;
+    website: string;
+    event: {
+      sys: {
+        id: string;
+      }
+      fields: { eventName: string };
+    };
+  };
+  contentTypeId: "collaborator";
+}
+
+type Collaborator = Entry<collaborator>;
+
+
+interface speaker {
+  fields: {
+    name: string,
+    headshot: {
+      metadata: { tags: [] };
+      sys: object;
+      fields: {
+        title: string;
+        description: string;
+        file: {
+          url: string;
+          details: [object];
+          fileName: string;
+          contentType: string;
+        };
+      };
+    },
+    companyPosition: string,
+    companyName: string,
+    event: {
+      sys: {
+        id: string;
+      }
+      fields: { eventName: string };
+    },
+    bio: string;
+    linkedIn: string
+  };
+  contentTypeId: "speaker";
+}
+
+type Speaker = Entry<speaker>;
+
+
+const responseCollab = await client.getEntries({
+  content_type: "speaker",
+});
+const speakers:Speaker[] = responseCollab.items as Speaker[];
+
+const speakersAsCollab = speakers.map((s) => ({
+    fields: {
+        name: s.fields.name,
+        logo: s.fields.headshot,
+        contribution: s.fields.companyPosition+" at "+s.fields.companyName+". "+(s.fields.bio ?? ''),
+        website: s.fields.linkedIn,
+        event: s.fields.event
+    }
+
+})) as Collaborator[]
+
+const response = await client.getEntries({
+  content_type: "contact",
+});
+const contacts = response.items;
+const form = contacts.find(obj => obj.fields.name == 'collabInterestForm')?.fields.content
+const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.content
+---
+
+<PageLayout title="Speakers">
+    <article class="classic-bg">
+        <Subheading title="Speakers"/>
+        <TextBox heading="Our Esteemed Speakers" text="We are honored to feature a diverse range of speakers who have shared their insights and experiences at Technolgap events."/>
+        <a class="button form" href=`${form}` target="_blank">INTEREST FORM</a>
+        <CollabCardGrid entries={speakersAsCollab} speaker={true}/>
+        <p id="contact">Contact us as <a href=`mailto:${email}`>outreach@technolgap.org</a> for any further inquiries.</p>
+    </article>
+</PageLayout>
+
+<style>
+    #contact {
+        color: #2d6d68;
+        margin-top: 50px;
+        font-size: 14px;
+    }
+
+    #contact > a{
+        color: #2d6d68;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #contact > a:hover {
+        text-decoration: underline;
+    }
+
+    article {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .form {
+        max-width: 280px;
+        margin: 100px auto 50px auto;
+        text-align: center;
+    }
+
+    @media (max-width: 900px) {
+        .form {
+        max-width: 200px;
+        font-size: 20px;
+        }
+  }
+</style>
+
