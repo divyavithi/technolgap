@@ -1,9 +1,9 @@
 ---
 import type { Entry } from 'contentful';
-
 import { createClient } from "contentful";
 import PageLayout from "../layouts/PageLayout.astro";
 import FaqAccordian from '../components/FaqAccordian.astro';
+import { string } from 'astro:schema';
 
 // Assuming `faqList` is fetched from an API or defined here
 // Contentful client setup
@@ -15,19 +15,28 @@ const client = createClient({
 // Define the FAQ fields interface
 interface FaqFields {
   fields: {
-    question: string;
-    answer: string;
+    question: string,
+    answer: string
+  },
+  contentTypeId: "faq"
+}
+interface FaqListFields {
+  fields: {
+    title: string;
+    allFaqs: [FaqFields];
   };
-  contentTypeId: "faq";
+  contentTypeId: "faqList";
 }
 type Faqitem = Entry<FaqFields>;
+type FaqList = Entry<FaqListFields>;
 
 // Helper function to fetch FAQs from Contentful
 async function fetchFaqs(): Promise<Faqitem[]> {
   const response = await client.getEntries({
-    content_type: "faq", // Ensure this matches your Contentful content type
+    content_type: "faqList", // Ensure this matches your Contentful content type
+    "fields.title": "siteWideFaq"
   });
-  return response.items as Faqitem[];
+  return response.items[0].fields.allFaqs as Faqitem[];
 }
 
 // Fetch FAQ data asynchronously
