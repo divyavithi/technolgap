@@ -33,7 +33,6 @@ async function fetchRoles(): Promise<volunteerRole[]> {
 
 // Fetch FAQ data asynchronously
 const volunteerRoles = await fetchRoles();
-console.log(volunteerRoles[0].fields)
 
 const faqStyle = volunteerRoles.map(role => ({
     fields: {
@@ -46,7 +45,7 @@ const faqStyle = volunteerRoles.map(role => ({
 ---
 
 <PageLayout title="Volunteers">
-    <article class="classic-bg">
+    <article class="classic-bg" data-theme="dark">
         <Subheading title="Our Dedicated Volunteers"/>
         <TextBox heading="" text="Our volunteers are the backbone of Technolgap, contributing their time and skills to support our mission."/>
         <div class="volunteer-list-container">
