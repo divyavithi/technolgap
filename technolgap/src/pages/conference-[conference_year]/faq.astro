@@ -9,14 +9,35 @@ const client = createClient({
   accessToken: "00BZSByF4Gmh1S-vDtMfsmOLIdqrC8fyV404sOfIwzM",
 });
 
-// Define the FAQ fields interface
+interface conference {
+    fields: {
+        year: number;
+        ticketTypes: [
+            {
+                fields: {
+                    type: string;
+                    cost: number;
+                    description: string;
+                }
+            }
+        ],
+        faq: FaqListFields,
+        applyHere: string;
+    },
+    contentTypeId: "conference";
+}
+
 interface FaqFields {
   fields: {
     question: string,
     answer: string
   },
+  sys: {
+    id: string,
+  },
   contentTypeId: "faq"
 }
+
 interface FaqListFields {
   fields: {
     title: string;
@@ -24,26 +45,42 @@ interface FaqListFields {
   };
   contentTypeId: "faqList";
 }
+
 type Faqitem = Entry<FaqFields>;
 type FaqList = Entry<FaqListFields>;
+type Conference = Entry<conference>;
 
-// Helper function to fetch FAQs from Contentful
-async function fetchFaqs(): Promise<Faqitem[]> {
-  const response = await client.getEntries({
-    content_type: "faqList", // Ensure this matches your Contentful content type
-    "fields.title": "conferenceFaq"
-  });
-  return response.items[0].fields.allFaqs as Faqitem[];
-}
+const { conference_year } = Astro.params;
 
-// Fetch FAQ data asynchronously
-const faqList = await fetchFaqs();
+
+async function fetchFaqList(): Promise<Faqitem[]> {
+    const conferenceRes = await client.getEntries({
+        content_type: "conference",
+        "fields.year": conference_year
+    });
+
+    if (conferenceRes.items[0]){
+
+      const faqRes = await client.getEntries({
+        content_type: "faqList", // Ensure this matches your Contentful content type
+        "sys.id": conferenceRes.items[0].fields.faq.sys.id
+      });
+
+      return faqRes.items[0].fields.allFaqs as Faqitem[];
+    }
+
+    return []
+
+};
+
+let allFaqs = (await fetchFaqList())
+
 ---
     
 <PageLayout title="Frequently Asked Questions">
     <article class="classic-bg">
         <h2 class="subheading">FAQ</h2>
-        <FaqAccordian faqList={faqList} grey={true}/>
+        <FaqAccordian faqList={allFaqs} grey={true}/>
     </article>
 </PageLayout>
 

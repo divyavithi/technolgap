@@ -1,0 +1,173 @@
+---
+import { createClient } from "contentful";
+import Subheading from "../components/Subheading.astro"
+import TextBox from "../components/TextBox.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+// Fetch chapters from Contentful
+const response = await client.getEntries({
+  content_type: "chapter"
+});
+const chapters = response.items;
+
+const proposalTemplate = (await client.getEntries({
+  content_type: "contact",
+  "fields.name": "chapterProposalTemplate"
+})).items[0]
+
+const interestForm = (await client.getEntries({
+  content_type: "contact",
+  "fields.name": "chapterInterestForm"
+})).items[0]
+
+---
+
+<PageLayout title="Chapters">
+    <article class="classic-bg">
+
+        <Subheading title="Chapters"/>
+        <TextBox heading="Start a Technolgap Chapter" text="Technolgap was founded at Carleton University in 2020. Since then we started scaling our impact and mission by establishing chapters on various campuses around the world. "/>
+        <a href={interestForm.fields.content as string} class="button form-bttn">INTEREST FORM</a>
+        <h1>Explore our existing chapters and visit their website to see their amazing work and initiatives!</h1>
+        <div class="grid">    
+        {
+            chapters.map((c) => (
+                <div class="logo">
+                    <img
+                    src={(c.fields.logo?.fields as any)?.file?.url }
+                    alt={(c.fields.logo?.fields as any)?.title }
+                    />
+                </div> 
+            ))
+        }
+        </div>
+        <h1 style="font-size: 30px;">Establishment Process</h1>
+        <div id="steps">
+            <div class="step"> 
+                <strong>1. Understand Our Mission:</strong> Familiarize yourself with Technolgap’s mission to empower women and non-binary individuals in the tech industry across Canada.
+            </div>
+            <div class="step"> 
+                <strong>2. Meet the Requirements:</strong> Ensure you are currently enrolled in a Canadian Educational institution.
+            </div>
+            <div class="step"> 
+                <strong>3. Prepare Your Proposal:</strong> Draft a proposal outlining your goals, potential team members, and how you plan to promote Technolgap’s values on your campus.
+                <br/><br/>&nbsp;&nbsp;
+                a. Make sure you detail your institutional requirements to start a club/chapter with an external parent organization.
+                <br/><br/>&nbsp;&nbsp;
+                b. <a href={proposalTemplate.fields.content as string}>Proposal Template</a>
+            </div>
+            <div class="step"> 
+                <strong>4. Submit Your Request:</strong> Fill out <a href={interestForm.fields.content as string}>this form</a> provided below with your proposal and contact details.
+            </div>
+            <div class="step"> 
+                <strong>5. Approval and Support:</strong> Our executive team will review your submission and get in touch with you for the next steps. Once approved, you’ll receive support and resources to help you launch
+            </div>
+        </div>
+    </article>
+</PageLayout>
+
+<style>
+    article {
+        margin: 1px;
+    }
+
+    .step a {
+        color: #fad1e9;
+        text-decoration: underline #fad1e9;
+    }
+    
+    article a:hover {
+        color: #fee8f5;
+        text-decoration: underline #fee8f5;
+    }
+
+    .form-bttn {
+        max-width: 300px;
+        margin: 50px auto;
+    }
+
+    article h1 {
+        color: #2d6d68;
+        text-align: center;
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 20px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding-bottom: 4rem;
+      justify-content: center;
+      align-items: center;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .logo {
+        display: inline;
+        background-color: #2d6d68;
+        border-radius: 50px;
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        padding: 20px;
+        border: 10px solid #fdd4ec;
+    }
+
+    .logo > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensures the image shrinks but stays inside */
+    }
+
+    .step {
+        background-color: #2d6d68;
+        color: white;
+        border-radius: 50px;
+        padding: 30px 40px;
+        width: 60%;
+        margin: 20px auto;
+        border: 3px solid white;
+        box-shadow: 1px 2px 2px 2px #00000050;
+    }
+
+    #steps {
+        margin-bottom: 100px;
+    }
+
+    @media (max-width: 800px) {
+        .logo {
+            width: 200px;
+            height: 200px;
+        }
+
+        .grid {
+            max-width: 500px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .logo {
+            width: 150px;
+            height: 150px;
+        }
+
+        .grid {
+            max-width: 400px;
+        }
+    }
+
+    @media (max-width: 475px) {
+        .grid {
+            grid-template-columns: 1fr;
+            width: 150px;
+        }
+    }
+</style>

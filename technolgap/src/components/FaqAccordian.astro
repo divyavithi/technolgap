@@ -22,7 +22,7 @@ const { faqList, grey=false, volunteerRole=false} = Astro.props;
 ---
 
 <div class="faq-container">
-  {faqList.map((faq: FaqFields, index: number) => (
+  {faqList.length != 0 ? faqList.map((faq: FaqFields, index: number) => (
     <div class={(grey ? "grey " : "green ")+"faq-item"}>
       <div class="faq-question">
         <h3>{faq.fields.question} </h3>
@@ -40,7 +40,7 @@ const { faqList, grey=false, volunteerRole=false} = Astro.props;
         )}
       </div>
     </div>
-  ))}
+  )) : <p style={`color: ${grey ? "#5A6160" : "#2d6d68"}; text-align: center; font-weight: bold;`}>No {volunteerRole ? "Volunteer Roles" : "FAQs"} Available</p>}
 </div>
 
 <style>

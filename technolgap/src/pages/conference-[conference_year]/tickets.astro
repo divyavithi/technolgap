@@ -1,0 +1,112 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import TextBox from "../../components/TextBox.astro";
+import { createClient, type Entry } from "contentful";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+interface conference {
+    fields: {
+        year: number;
+        ticketTypes: [
+            {
+                fields: {
+                    type: string;
+                    cost: number;
+                    description: string;
+                }
+            }
+        ],
+        applyHere: string;
+    },
+    contentTypeId: "conference";
+}
+
+type Conference = Entry<conference>;
+
+const { conference_year } = Astro.params;
+
+// const {ticketTypes, applicationLink} = await (async () => {
+async function fetchConference(): Promise<Conference | null> {
+    const response = await client.getEntries({
+        content_type: "conference",
+        "fields.year": conference_year
+    });
+    if (response.items[0]) {
+
+        return (response.items[0] as Conference);
+    } 
+
+    return null;
+};
+
+let {ticketTypes, applyHere} = (await fetchConference())?.fields as conference['fields'] ?? {ticketTypes: null, applyHere: "#"}
+
+---
+
+<PageLayout title="Tickets">
+    <article class="classic-bg">
+        <h2>Tickets</h2>
+        <div class="rows">
+            { ticketTypes ?
+            ticketTypes.map((ticket) => 
+            (
+                <TextBox heading={ticket.fields.type} text={"$"+ticket.fields.cost} description={ticket.fields.description} className="tickets" />
+            )) : 
+            <h2>No Ticket Info Available</h2>
+            }
+        </div>
+        {ticketTypes && <a href={applyHere || ""} class="button apply-here">Apply Here</a>}
+        
+    </article>
+</PageLayout>
+
+<style>
+    article {
+        margin: 1px;
+    }
+    h2 {
+        font-size: 50px;
+        color: #5A6160;
+        margin-top: 90px;
+        margin-bottom: 2rem;
+        text-shadow: 0px 2px 2px #7f7f7f;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+    }
+    .rows {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 35px;
+    }
+    :global(.tickets p) {
+        width: 300px;
+        background-color: #5A6160 !important;
+    }
+    .apply-here {
+        background-color: #5A6160 !important;
+        box-shadow: 7.5px 7.5px 0px #f7deed;
+        max-width: 200px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0 auto;
+    }
+    @media (max-width: 800px) {
+        .rows {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    @media (max-width: 400px) {
+        :global(.tickets p) {
+            width: 250px;
+            background-color: #5A6160 !important;
+        }
+    }
+</style>
