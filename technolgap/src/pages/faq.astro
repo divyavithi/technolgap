@@ -50,7 +50,11 @@ const faqList = await fetchFaqs();
       <h2 class="subheading">Frequently Asked Questions</h2>
     </div>
     <!-- Pass the fetched faqList to the Faq component -->
-    <FaqAccordian faqList={faqList}/>
+     {faqList ?
+     <FaqAccordian faqList={faqList}/>
+     :
+     <h2 class="subheading">No Faqs Available</h2>
+    }
   </article>
   </PageLayout>
 

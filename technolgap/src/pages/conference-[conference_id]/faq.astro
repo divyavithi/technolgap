@@ -50,13 +50,13 @@ type Faqitem = Entry<FaqFields>;
 type FaqList = Entry<FaqListFields>;
 type Conference = Entry<conference>;
 
-const { conference_year } = Astro.params;
+const { conference_id } = Astro.params;
 
 
 async function fetchFaqList(): Promise<Faqitem[]> {
     const conferenceRes = await client.getEntries({
         content_type: "conference",
-        "fields.year": conference_year
+        "sys.id": conference_id
     });
 
     if (conferenceRes.items[0]){
@@ -80,7 +80,11 @@ let allFaqs = (await fetchFaqList())
 <PageLayout title="Frequently Asked Questions">
     <article class="classic-bg">
         <h2 class="subheading">FAQ</h2>
-        <FaqAccordian faqList={allFaqs} grey={true}/>
+        { allFaqs ? 
+          <FaqAccordian faqList={allFaqs} grey={true}/>
+          :
+          <h2 class="subheading">No Faqs Available</h2>
+        }
     </article>
 </PageLayout>
 
@@ -96,6 +100,7 @@ let allFaqs = (await fetchFaqList())
         margin-top: 90px;
         margin-bottom: 3rem;
         text-shadow: 0px 3px 3px #7f7f7f;
+        -webkit-text-stroke: 0.5px #ffffff;
         padding: 0 20px;
         text-align: center;
         position: relative;

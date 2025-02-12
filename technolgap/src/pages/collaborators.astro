@@ -1,5 +1,6 @@
 ---
 import CollabCardGrid from "../components/CollabCardGrid.astro";
+import List from "../components/List.astro";
 import Subheading from "../components/Subheading.astro";
 import TextBox from "../components/TextBox.astro";
 import PageLayout from "../layouts/PageLayout.astro";
@@ -64,52 +65,10 @@ const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.c
         <TextBox heading="Our Valued Collaborators!" text="We proudly collaborate with organizations and individuals who share our vision of fostering diversity and inclusion in tech. Submit an interest form below!"/>
           <a id="link" class="button" href=`${form}` target="_blank">INTEREST FORM</a>
         <CollabCardGrid entries={collaborators} speaker={false}/>
-        <div id="why-collab">
-          <h1>Why Collaborate with Us?</h1>
-          <div class="grid">
-            <div>
-              <img
-                src="/diversity-icon.png"
-                alt="diversity and inclusion icon"
-                class="icon"
-                onmouseover="this.src='/diversity-icon-pink.png'"
-                onmouseout="this.src='/diversity-icon.png'"
-              />
-              <p class="subtext">Enhance Impact on<br>Diversity and Inclusion</p>
-            </div>
-            <div>
-              <img
-                src="/outreach-icon.png"
-                alt="outreach and visibility icon"
-                class="icon"
-                onmouseover="this.src='/outreach-icon-pink.png'"
-                onmouseout="this.src='/outreach-icon.png'"
-              />
-              <p class="subtext">Expand your Outreach<br>and Visibility</p>
-            </div>
-            <div>
-              <img
-                src="/positive-brand-icon.png"
-                alt="positive brand association icon"
-                class="icon"
-                onmouseover="this.src='/positive-brand-icon-pink.png'"
-                onmouseout="this.src='/positive-brand-icon.png'"
-              />
-              <p class="subtext">Positive Brand<br>Association</p>
-            </div>
-            <div>
-              <img
-                src="/individuals-icon.png"
-                alt="pool of individuals icon"
-                class="icon"
-                onmouseover="this.src='/individuals-icon-pink.png'"
-                onmouseout="this.src='/individuals-icon.png'"
-              />
-              <p class="subtext">Access to a Talented<br>Pool of Individuals</p>
-            </div>
-          </div>
+
+        <List titleBeforePink="Why" pinkText="Collaborate" titleAfterPink="With Us?" items={["Enhance Impact on Diversity and Inclusion", "Expand your Outreach and Visibility", "Positive Brand Association", "Access to a Talented Pool of Individuals"]}/>
+        
           <p id="contact">Contact us as <a href=`mailto:${email}`>outreach@technolgap.org</a> for any further inquiries.</p>
-        </div>
     </article>
 </PageLayout>
 

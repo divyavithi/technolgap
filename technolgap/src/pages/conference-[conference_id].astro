@@ -1,0 +1,224 @@
+---
+import TextBox from "../components/TextBox.astro";
+import Subheading from "../components/Subheading.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import { createClient, type Entry } from "contentful";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+interface conference {
+    fields: {
+        name: string,
+        year: number,
+        date: string,
+        venue: string,
+        summary: string,
+        faq: {}
+        ticketTypes: [],
+        applyHere: string  
+        sponsorshipLink: string,
+        active: boolean,
+        days: [] 
+    },
+    contentTypeId: "conference";
+}
+
+type Conference = Entry<conference>;
+
+const { conference_id } = Astro.params;
+
+// const {ticketTypes, applicationLink} = await (async () => {
+async function fetchConference(): Promise<Conference | null> {
+    const response = await client.getEntries({
+        content_type: "conference",
+        "sys.id": conference_id
+    });
+    console.log(response.items, conference_id)
+    if (response.items[0]) {
+
+        return (response.items[0] as Conference);
+    } 
+
+    return null;
+};
+
+let conference = await fetchConference()
+---
+<PageLayout title="">
+
+    <div id="conference" class="classic-bg">
+        <h2>{conference?.fields.name}</h2>
+        <TextBox
+            heading=`${conference?.fields.date} @ ${conference?.fields.venue}`
+            text={conference?.fields.summary}
+            className="gray"
+        />
+        <div class="grid grid-small">
+            <a class="link-small button" href={conference?.fields.applyHere as unknown as string} target="_blank">APPLY HERE</a>
+            <a class="link-small" href={conference?.fields.sponsorshipLink as unknown as string} target="_blank">SPONSOR US</a>
+        </div>
+        
+        <div class="grid grid-big">
+            <a class="link-big" href=`/conference-${conference_id}/tickets`>Tickets</a>
+            <a class="link-big" href=`/conference-${conference_id}/faq`>FaQ</a>
+            <a class="link-big" href=`/conference-${conference_id}/schedule`>Schedule</a>
+            <a class="link-big" href="/sponsors">Sponsors</a>
+        </div>
+        
+        
+    </div>
+</PageLayout>
+
+<style>
+
+    :global(.gray p) {
+        background-color: #5A6160 !important;
+    }
+
+    #conference {
+        padding: 1px;
+        padding-bottom: 50px;
+    }
+
+    #conference h2 {
+        font-size: 50px;
+        color: #5A6160;
+        margin-top: 90px;
+        margin-bottom: 2rem;
+        text-shadow: 0px 2px 2px #7f7f7f;
+        -webkit-text-stroke: 0.5px #ffffff;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .grid {
+        padding-bottom: 4rem;
+        place-items: center;
+        margin-top: 50px;
+    }
+    
+    .grid-big {
+        grid-template-columns: repeat(2, minmax(10rem, 25rem));
+        row-gap: 70px;
+    }
+    
+    .grid-small {
+        grid-template-columns: repeat(2, minmax(10rem, 20rem));
+    }
+
+    .link-small:hover {
+        box-shadow: none;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    #conference {
+        justify-items: center;
+    }
+
+    .link-small {
+        text-decoration: none;
+        font-weight: 600;
+        background-color: #5A6160;
+        padding: 30px 30px;
+        font-size: 28px;
+        border-radius: 15px;
+        color: white;
+        display: block;
+        text-align: center;
+        box-shadow: 1px 1px 3px 1px #00000050, 7px 7px 0 0 #F7DFEE, 6px 8px 5px 1px #00000060;
+        width: 210px;
+    }
+
+    .link-big {
+        text-decoration: none;
+        font-weight: 600;
+        background-color: #5A6160;
+        padding: 20px 50px;
+        font-size: 28px;
+        border-radius: 30px;
+        color: white;
+        display: block;
+        height: 20vh;
+        text-align: center;
+        outline: 12px solid #F7DFEE;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+    }
+
+    .link-big:hover {
+        box-shadow: 0 0 15px 12px #00000060;
+    }
+
+
+    @media (max-width: 850px) {
+        .grid-big {
+            /* grid-template-columns: repeat(2, minmax(20rem, 20rem)); */
+        }
+
+        .link-big {
+            width: 150px;
+            height: 150px;
+        }
+
+        .link-small {
+            width: 150px;
+            font-size: 25px;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+        .grid-big, .grid-small {
+            grid-template-columns: repeat(2, minmax(8rem, 15rem));
+        }
+
+        .link-big {
+            width: 100px;
+            height: 100px;
+            outline-width: 8px;
+            font-size: 25px;
+        }
+
+        .link-small {
+            width: 100px;
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 470px) {
+
+        #conference h2 {
+            font-size: 35px;
+        }
+
+        .grid-big {
+            display: block;
+            margin-top: -10px;
+            justify-content: center;
+        }
+
+        .link-big {
+            width: 60vw;
+            height: 60px;
+            margin: 0 auto 50px auto;
+        }
+
+        .link-small {
+            /* width: 70px; */
+            font-size: 18px;
+            padding: 20px 10px;
+        }
+    }
+
+</style>

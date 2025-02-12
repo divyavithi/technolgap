@@ -1,0 +1,127 @@
+---
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+import TextBox from "../components/TextBox.astro";
+import Card from "../components/Card.astro";
+import Subheading from "../components/Subheading.astro";
+
+---
+
+<div id="conference" class="classic-bg">
+    <Subheading title="Conference Title" />
+    <TextBox
+      heading="Event Date @ Location"
+      text="2-3 sentence summary of event"
+    />
+    <div class="grid">
+        <a class="link-small" href="" target="_blank">Apply Here</a>
+        <a class="link-small" href="" target="_blank">Sponsor Us</a>
+    </div>
+
+    <div class="grid">
+        <a class="link-big" href="" target="_blank">Tickets</a>
+        <a class="link-big" href="" target="_blank">FaQ</a>
+        <a class="link-big" href="" target="_blank">Schedule</a>
+        <a class="link-big" href="" target="_blank">Sponsors</a>
+    </div>
+    
+    
+</div>
+
+<style>
+    #conference {
+        padding-top: 50px;
+    }
+
+    #TextBox .heading{
+        background-color: #5A6160;
+    }
+    .custom-textbox .heading {
+        background-color: #5A6160;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(11rem, 14rem));
+      padding-bottom: 4rem;
+    }
+
+    p {
+    padding: 0;
+      margin: 0;
+    }
+
+    .card-linkedin-logo {
+        background-color: #2d6d68;
+        border-radius: 50px;
+    }
+
+
+    #conference {
+        min-height: 100vh;
+        justify-items: center;
+    }
+
+    .link-small {
+        text-decoration: none;
+        font-weight: 600;
+        background-color: #5A6160;
+        padding: 20px 50px;
+        font-size: 28px;
+        border-radius: 15px;
+        color: white;
+        margin-top: 100px;
+        display: block;
+        max-width: 200px;
+        text-align: center;
+        box-shadow: 7px 7px 0 0 #F7DFEE;
+    }
+
+    .link-big {
+        text-decoration: none;
+        font-weight: 600;
+        background-color: #5A6160;
+        padding: 20px 50px;
+        font-size: 28px;
+        border-radius: 15px;
+        color: white;
+        margin-top: 100px;
+        display: block;
+        max-width: 200px;
+        height: 20vh;
+        text-align: center;
+        border-color: #F7DFEE;
+        border-style: solid;
+        border-width: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #link:hover {
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    #cursor {
+        width: 70px;
+        margin-top: -20px;
+        margin-left: 300px;
+    }
+
+    @media (max-width: 500px) {
+        .grid {
+            grid-template-columns: repeat(2, minmax(6rem, 9rem));
+        }
+    }
+
+    @media (max-width: 450px) {
+        #cursor {
+            margin-left: 200px;
+            width: 50px;
+    }
+        #link {
+            font-size: 22px;
+            padding: 20px 40px;
+    }
+  }
+</style>

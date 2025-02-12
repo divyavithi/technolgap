@@ -1,0 +1,79 @@
+---
+const {titleBeforePink, pinkText, titleAfterPink, items} = Astro.props
+---
+
+<div class="why-sponsor-box">
+    <div>
+
+        <h2>{titleBeforePink} <span class="pink-text">{pinkText}</span> {titleAfterPink}</h2>
+        <ul class="why-sponsor-list">
+            {items.map((i:string) => (
+                <li>{i}</li>
+            ))}
+        </ul>
+    </div>
+  </div>
+
+  <style>
+    .why-sponsor-box {
+        margin: 50px auto;
+        padding: 0 20px;    
+        max-width: 550px;
+  }
+
+  .why-sponsor-box div {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #fff;
+    background-color: #2d6d68;
+    padding: 15px 30px 30px 30px;
+    border-radius: 50px;
+    box-shadow: 10px 10px 0px #f7deed;
+    text-align: center;
+  }
+
+  .why-sponsor-box h2 {
+    font-size: 1.8em;
+    color: #fbfbfb;
+    margin-bottom: 20px;
+  }
+
+  .why-sponsor-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .why-sponsor-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+    color: #ffffff;
+    margin: 10px 0;
+    text-align: left;
+  }
+
+  .why-sponsor-list li::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("/pink-star.png") no-repeat center center;
+    background-size: contain;
+  }
+
+  .pink-text {
+    color: #ffbce5; 
+    }
+
+    @media (max-width: 550px) {
+        .why-sponsor-box h2 {
+            font-size: 20px;
+        }
+
+        .why-sponsor-list li {
+            font-size: 16px;
+        }
+    }
+  </style>

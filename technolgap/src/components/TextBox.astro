@@ -1,5 +1,5 @@
 ---
-const { heading, text, className='', description=null } = Astro.props;
+const {heading, text, className='', description=null } = Astro.props;
 ---
 
 <div class={`textbox ${className}`}>
@@ -8,7 +8,7 @@ const { heading, text, className='', description=null } = Astro.props;
 
     <span class="text" style={description ? "font-size: 27px" : ""}>{text}</span>
     
-    {description ? (<br/><span>{description.map((d) => (
+    {description ? (<br/><span>{description.map((d:string) => (
       <span class="descrip"><img src="/white-star.png" width="25px"/> {d}</span>
     ))}</span>): ''}
   </p>

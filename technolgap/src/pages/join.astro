@@ -26,7 +26,7 @@ const facebook = contacts.find(obj => obj.fields.name == 'facebook')?.fields.con
       heading="Become part of Technolgap team!"
       text="Are you passionate about bridging the gender gap in the technology sector? Join us at Technolgap and be part of a supportive community dedicated to empowering women and non-binary individuals in tech. Whether you're a student, professional, or ally, there's a place for you in our community."
     />
-    <a id="link" class="button" href="https://docs.google.com/forms/d/e/1FAIpQLScP0QNFsZIAPL7fGmrHAxaSYYmzQ7w2YVZqsoipAaAnv2hkNQ/viewform" target="_blank">MEMBERSHIP FORM</a>
+    <a id="link" style="margin-left: auto; margin-right: auto; margin-bottom: -50px;" class="button" href="https://docs.google.com/forms/d/e/1FAIpQLScP0QNFsZIAPL7fGmrHAxaSYYmzQ7w2YVZqsoipAaAnv2hkNQ/viewform" target="_blank">MEMBERSHIP FORM</a>
     
     <div id="connect">
         <Subheading title="Connect with Us"/>
@@ -54,7 +54,7 @@ const facebook = contacts.find(obj => obj.fields.name == 'facebook')?.fields.con
             </a>
         </p>             
         <p>
-            <a href={linkedIn as string} target="_blank">
+            <a href={linkedIn as string} target="_blank" >
                 <img
                 src="/linkedin-logo-black.png"
                 alt="linkedin logo"
@@ -64,7 +64,7 @@ const facebook = contacts.find(obj => obj.fields.name == 'facebook')?.fields.con
                 />
             </a>
         </p> 
-        <p>
+        <p >
             <a href={facebook as string} target="_blank">
                 <img
                 src="/facebook-black-logo.png"
@@ -80,6 +80,7 @@ const facebook = contacts.find(obj => obj.fields.name == 'facebook')?.fields.con
 </PageLayout>
 
 <style>
+
     #join {
         padding-top: 50px;
     }

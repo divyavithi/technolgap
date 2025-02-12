@@ -1,0 +1,360 @@
+---
+import { effect } from "astro:schema";
+import Subheading from "../../components/Subheading.astro";
+import TextBox from "../../components/TextBox.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { createClient, type Entry } from "contentful";
+
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+interface conference {
+    sys: {id: string}
+    fields: {
+        year: number;
+        days: [
+            {
+                sys: {
+                    id: string
+                }
+                fields: {
+                    title: string,
+                    date: string,
+                    events: events[]
+                }
+            }
+        ],
+        applyHere: string;
+    },
+    contentTypeId: "conference";
+}
+
+interface events {
+  fields: {
+    title: string,
+    start: string,
+    end: string,
+    venue: string,
+    summary: string,
+    speaker: {}
+  };
+  contentTypeId: "conferenceEvent";
+}
+
+interface speaker {
+  fields: {
+    name: string,
+    companyPosition: string,
+    companyName: string
+  };
+  contentTypeId: "speaker";
+}
+
+type Events = Entry<events>;
+type Conference = Entry<conference>;
+type Speaker = Entry<speaker>;
+
+const { conference_id } = Astro.params;
+
+// const {ticketTypes, applicationLink} = await (async () => {
+async function fetchConference(): Promise<Conference | null> {
+    const response = await client.getEntries({
+        content_type: "conference",
+        "sys.id": conference_id
+    });
+    if (response.items[0]) {
+        return (response.items[0] as Conference);
+    } 
+    return null;
+};
+
+async function fetchEvents(id: string): Promise<Events[]> {
+    const response = await client.getEntries({
+        content_type: "conferenceDay", // Ensure this matches your Contentful content type
+        "sys.id": id
+    });
+    let events =  response.items[0].fields.events as Events[]
+    for(let e of events){
+        if (e.fields.speaker) {
+            e.fields.speaker = await fetchSponsor(e.fields.speaker.sys.id)
+        }
+    }
+    return events
+}
+
+async function fetchSponsor(id: string): Promise<Speaker> {
+    const response = await client.getEntries({
+        content_type: "speaker",
+        "sys.id": id
+    })
+    return response.items[0] as Speaker
+}
+
+let {days} = (await fetchConference())?.fields as conference['fields'] ?? {days: null}
+// HANDLE IS DAYS IS NULL
+
+
+const url = new URL(Astro.request.url);
+const selectedDay = url.searchParams.get("day") || days && days[0]?.sys.id;
+let events = (await fetchEvents(selectedDay))
+---
+
+<PageLayout title="Conference Schedule">
+    <article class="classic-bg">
+        <h2>Schedule</h2>
+        {
+            days && events ?
+            <div>
+            <div class="rows">
+                {days.map((d) => (
+                    <div id={d.sys.id} class="day">
+                        <TextBox heading={d.fields.title} text={d.fields.date} className={d.sys.id===selectedDay ? "schedule-days selected" : "schedule-days"}/>
+                    </div>
+                ))}
+            </div>
+            {events.map((e) => (            
+                <div class={`schedule-event`}>
+                    <div class="heading">
+                        <p class="event-heading">{e.fields.title}</p>
+                        <p class="event-subheading">{e.fields.venue} @ {new Date(e.fields.start).toLocaleString("en-US", { hour: "numeric", minute: "numeric" })} - {new Date(e.fields.end).toLocaleString("en-US", { hour: "numeric", minute: "numeric" })}</p>
+                        <p class="event-content">{e.fields.summary}</p>
+                        {e.fields.speaker ? (
+                            <a class="event-content" href="/speakers">Speaker: {e.fields.speaker.fields.name}, {e.fields.speaker.fields.companyPosition} @ {e.fields.speaker.fields.companyName}</a>
+                        <br/>): <a class="event-content"></a> }
+                        <a class="cal-link">Add to Calendar <img width="20px" src="/calendar-add.png"/></a>
+                    </div>
+                </div>
+
+                // <add-to-calendar data-event={e}>
+                //     <button>Add to Calendar</button>
+                // </add-to-calendar>
+            )) }
+            </div>
+        :
+            (<TextBox heading="Schedule Not Available"/>)
+        }
+    </article>
+</PageLayout>
+
+<style>
+    article {
+        margin: 1px;
+        padding-bottom: 100px;
+    }
+
+    h2 {
+        font-size: 50px;
+        color: #5A6160;
+        margin-top: 90px;
+        margin-bottom: 2rem;
+        text-shadow: 0px 2px 2px #7f7f7f;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+        -webkit-text-stroke: 0.5px #ffffff;
+    }
+
+    .rows {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 35px;
+    }
+
+    :global(.schedule-days p) {
+        background-color: #5A6160 !important;
+        font-weight: 100;
+        padding: 10px !important;
+        border-radius: 30px !important;
+        width: 250px;
+    }
+
+    :global(.schedule-days .text){
+        font-size: 25px;
+    }
+    
+    :global(.selected span) {
+        font-weight: bold;
+        color: #f7deed !important;
+    } 
+
+    :global(.selected p), :global(.schedule-days:hover p){
+        outline: 5px solid #fff;
+        box-shadow: 5px 7px 2px 1px #00000050, 10px 10px 0px #f7deed !important;
+        cursor: pointer;
+    }
+
+    .schedule-event {
+        text-align: center;
+        padding: 0 15px;
+        z-index: 10;
+        position: relative;
+    }
+    
+    .heading {
+        outline: 2px solid #fff;
+        box-shadow: 10px 10px 0px #f7deed, 10px 10px 2px 1px #00000050;
+        background-color: #5A6160;
+        border-radius: 40px;
+        width: 80%;
+        max-width: 800px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #fff;
+        display: inline-block;
+        padding: 15px 30px;
+        max-width: 800px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .schedule-event p {
+        margin: 0;
+        padding: 5px;
+    }
+
+    .event-heading {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .event-subheading {
+        color: white;
+        font-size: 18px;
+    }
+
+    .event-content {
+        color: white;
+        font-size: 18px;
+    }
+
+    .heading > a {
+        margin-top: 20px;
+        text-decoration: underline #ffffff50;
+    }
+    
+    .heading > a:hover {
+        color: #f7deed;
+        text-decoration: underline #f7deed;
+    }
+
+    .cal-link {
+        background-color: #f7deed;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+        padding: 5px 20px;
+        border-radius: 20px;
+        color: #5A6160;
+    }
+
+    @media(max-width: 1100px) {
+        .cal-link {
+            position: relative;
+            margin-left: 65vw;
+            bottom: 10px;
+        }
+    }
+
+    @media (max-width: 970px) {
+        :global(.schedule-days p) {
+            width: 200px;
+        }
+        
+        :global(.schedule-days .text) {
+            font-size: 20px;
+        }
+    }
+    
+    @media (max-width: 800px) {
+        .rows {
+            gap: 10px;
+            padding: 20px 0;
+        }
+
+        :global(.schedule-days p) {
+            width: 150px;
+        }
+    }
+    
+    @media (max-width: 650px) {
+        :global(.schedule-days p) {
+            width: 100px;
+        }
+
+        .event-heading {
+            font-size: 18px;
+        }
+
+        .event-subheading, .event-content {
+            font-size: 15px;
+        }
+    }
+    
+    @media (max-width: 500px) {
+        :global(.schedule-days .text) {
+            font-size: 15px;
+        }
+        .rows {
+            gap: 0;
+        }
+
+        .cal-link {
+            /* left: 10px; */
+            margin-left: 0;
+        }
+
+        .cal-link img {
+            width: 30px;
+        }
+
+        .heading > a {
+        margin-bottom: 0;
+    }
+    }
+    
+    @media (max-width: 450px) {
+        :global(.schedule-days p) {
+            width: 250px;
+        }
+
+        :global(.schedule-days) {
+            margin-bottom: 30px;
+        }
+
+        .rows {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    const days = document.getElementsByClassName("day")
+    for (const d of days) {
+        d.addEventListener('click', (e) => {
+            const url = new URL(window.location.href);
+            url.searchParams.set("day", e.currentTarget.id); // Updates the param if it exists
+            window.history.replaceState({}, "", url);
+            window.location.reload();
+        })
+    }
+
+    class AddToCalendar extends HTMLElement {
+    connectedCallback() {
+      // Read the message from the data attribute.
+      const event = this.dataset.event;
+      console.log(event)
+      const button = this.querySelector('button');
+      button.addEventListener('click', () => {
+        console.log(event.fields)
+      });
+    }
+  }
+
+  customElements.define('add-to-calendar', AddToCalendar);
+</script>

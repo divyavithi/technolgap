@@ -4,6 +4,7 @@ import Subheading from "../components/Subheading.astro"
 import TextBox from "../components/TextBox.astro"
 import PageLayout from "../layouts/PageLayout.astro"
 import FaqAccordian from "../components/FaqAccordian.astro";
+import List from "../components/List.astro";
 
 
 const client = createClient({
@@ -52,6 +53,7 @@ const faqStyle = volunteerRoles.map(role => ({
             <h1>Volunteer Opportunities</h1>
             <FaqAccordian faqList={faqStyle} volunteerRole={true}/>
         </div>
+        <List titleBeforePink="Benefits of" pinkText="Volunteering" titleAfterPink="" items={["Gain valuable experience and skills", "Network with professionals and peers", "Make a positive impact in the tech community"]}/>
     </article>
 </PageLayout>
 
@@ -63,6 +65,7 @@ const faqStyle = volunteerRoles.map(role => ({
 
     .volunteer-list-container {
         margin-top: 100px;
+        margin-bottom: -75px;
     }
     
     .volunteer-list-container > h1 {

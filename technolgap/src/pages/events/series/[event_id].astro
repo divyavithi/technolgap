@@ -1,6 +1,7 @@
 ---
 import EventGrid from "../../../components/EventGrid.astro";
 import Subheading from "../../../components/Subheading.astro";
+import TextBox from "../../../components/TextBox.astro";
 import PageLayout from "../../../layouts/PageLayout.astro";
 import { createClient } from "contentful";
 import type {Entry} from "contentful";
@@ -29,6 +30,7 @@ interface EventInterface {
       };
     };
     date: string; // Ensure date is expected to be a string
+    endDate?: string;
     venue: string;
     eventType: string;
     eventSummary: string;
@@ -63,6 +65,10 @@ const event = await (async () => {
     
     {(event != null) ? (
       <Subheading title={event?.eventName} />
+      <TextBox heading={`${new Date(event.date).toLocaleString("en-US", { month: "long", day: "numeric" })} - ${new Date(event.endDate).toLocaleString("en-US", { month: "long", day: "numeric" })}`} text={event.eventSummary}/>
+      <br/><br/>
+      <a class="button" href={event.registrationLink}>Register</a>
+      <br/>
       <EventGrid filter={""} events={event?.subEvents as Events}/>
     ) : (
       <Subheading title="Event Not Found"/>

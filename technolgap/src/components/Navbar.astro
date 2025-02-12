@@ -1,3 +1,18 @@
+---
+import { createClient, type Entry } from "contentful";
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+const conferences = (await client.getEntries({
+      content_type: "conference",
+  })).items;
+const activeConference = conferences.find(c => c.fields.active)
+const pastConferences = conferences.filter(c => c!=activeConference)
+
+---
+
 <div id="navbar">
   <!--DESKTOP NAVBAR LAYOUT -->
   <nav class="desktop-navbar">
@@ -19,7 +34,15 @@
         </ul>
       </li>
       <li><a href="/our-team">OUR TEAM</a></li>
-      <li><a href="/events">EVENTS</a></li>
+      <li class="desktop-dropdown">
+        <a href="/events" class="desktop-dropdown-toggle">EVENTS</a>
+        <ul class="desktop-dropdown-menu">
+          {activeConference && <li><a href={`/conference-${activeConference.sys.id}`}>{activeConference.fields.name}</a></li>}
+          {pastConferences.map(c => (
+            <li><a href={`/conference-${c.sys.id}`}>{c.fields.name}</a></li>
+          ))}
+        </ul>
+      </li>
       <li><a href="/resources">RESOURCES</a></li>
       <li class="desktop-dropdown">
         <a href="#" class="desktop-dropdown-toggle">GET INVOLVED</a>
@@ -33,12 +56,7 @@
         </ul>
       </li>
       <li><a href="/faq">FAQ</a></li>
-      <li class="desktop-dropdown">
-        <a href="/conference" class="desktop-dropdown-toggle">CONFERENCE</a>
-        <ul class="desktop-dropdown-menu">
-          <li><a href="/conference">Previous Conferences</a></li>
-        </ul>
-      </li>
+      
       <li><a class="custom-button">CONTACT US</a></li>
     </ul>
   </nav>
@@ -67,7 +85,21 @@
           </ul>
         </div>
         <div class="main-menu"><li><a href="/our-team">OUR TEAM</a></li></div>
-        <div class="main-menu"><li><a href="/events">EVENTS</a></li></div>
+        <div class="main-menu">
+          <li class="mobile-dropdown">
+            <a href="/events" class="mobile-dropdown-toggle" id="conferenceToggle">EVENTS</a>
+            </li>
+            
+        </div>
+
+        <div class="main-menu-sub">
+            <ul class="mobile-dropdown-menu" id="conferenceDropdown">
+              {activeConference && <li><a href={`/conference-${activeConference.sys.id}`}>{activeConference.fields.name}</a></li>}
+              {pastConferences.map(c => (
+                <li><a href={`/conference-`}>{c.sys.id}</a></li>
+              ))}
+            </ul>
+          </div>
         <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
@@ -86,18 +118,6 @@
           </div>
           
         <div class="main-menu"><li><a href="/faq">FAQ</a></li></div>
-
-        <div class="main-menu">
-          <li class="mobile-dropdown">
-            <a href="/conference" class="mobile-dropdown-toggle" id="conferenceToggle">CONFERENCE</a>
-        </div>
-
-        <div class="main-menu-sub">
-            <ul class="mobile-dropdown-menu" id="conferenceDropdown">
-              <li><a href="/conference">Previous Conferences</a></li>
-            </ul>
-          </div>
-
         <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div>
 
       </ul>
@@ -349,15 +369,6 @@
     position: relative;
   }
 
-
-  @media (max-width: 768px) {
-    .mobile-navbar {
-      display: flex;
-    }
-    .desktop-navbar {
-      display: none;
-    }
-  }
   
   @media (min-width: 1280px) and (max-width: 1280px) {
     .desktop-navbar {
@@ -423,7 +434,7 @@
     }
   }
   
-  @media (max-width: 855px) {
+  @media (max-width: 775px) {
     .desktop-navbar {
       display: none;
     }
@@ -432,9 +443,9 @@
       display: flex;
       /* width: 835px; */
     }
-  }
+  } 
   
-  @media (max-width: 825px) {
+  @media (max-width: 600px) {
     .desktop-navbar {
       display: none;
     }
