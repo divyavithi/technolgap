@@ -33,7 +33,7 @@ const { faqList, grey=false, volunteerRole=false} = Astro.props;
           <p set:html={marked(faq.fields.answer)}></p>
           <div class="volunteer-info">
             <h5>Application Due: {faq.fields.deadline}</h5>
-            <a class="app-form button" href={faq.fields.appForm}>Apply</a>
+            <a class="app-form button" href={faq.fields.appForm} target="_blank">Apply</a>
           </div>
         ) : (
         <p>{faq.fields.answer}</p>

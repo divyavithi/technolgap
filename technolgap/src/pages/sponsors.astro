@@ -1,0 +1,297 @@
+---
+import { createClient } from "contentful";
+import type { Entry } from "contentful";
+import PageLayout from "../layouts/PageLayout.astro";
+import Dropdown from "../components/Dropdown.astro";
+import TextBox from "../components/TextBox.astro";
+import Subheading from "../components/Subheading.astro";
+import List from "../components/List.astro";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+interface SponsorFields {
+  fields: {
+    name: string;
+    logo: {
+      fields: {
+        file: {
+          url: string;
+        };
+      };
+    };
+    sponsorshipLevel: string;
+    current: boolean; 
+    website: string;
+  };
+  contentTypeId: "sponsor";
+}
+type Sponsor = Entry<SponsorFields>;
+
+const level = ['Gold', 'Silver', 'Partners', 'Supporters']
+
+async function fetchSponsors(): Promise<Sponsor[]> {
+  const response = await client.getEntries({
+    content_type: "sponsor",
+  });
+  return response.items as Sponsor[];
+}
+
+async function getCurrentAndPastSponsors() {
+  const sponsors = await fetchSponsors();
+
+  
+  const current = sponsors.filter((sponsor) => sponsor.fields.current === true);
+  const past = sponsors.filter((sponsor) => sponsor.fields.current === false);
+  
+  let currentSponsors:Record<string, Sponsor[]> = {}
+  level.forEach((l) => {
+    currentSponsors[l] = current.filter((s) => s.fields.sponsorshipLevel == l)
+  })
+
+  let pastSponsors:Record<string, Sponsor[]> = {}
+    level.forEach((l) => {
+    pastSponsors[l] = past.filter((s) => s.fields.sponsorshipLevel == l)
+  })
+
+  return { currentSponsors, pastSponsors };
+}
+
+const { currentSponsors, pastSponsors } = await getCurrentAndPastSponsors();
+
+const url = new URL(Astro.request.url);
+const sponsorType = url.searchParams.get("sponsorType") || "current";
+
+const email = (await client.getEntries({
+  content_type: "contact",
+  'fields.name': 'sponsorEmail'
+})).items[0].fields.content;
+---
+<PageLayout title="Sponsors">
+  <div>
+    <Subheading title="Sponsors" />
+  </div>
+
+  <TextBox 
+    heading="Our Generous Sponsors" 
+    text="We are incredibly grateful for the support of our sponsors who believe in Technolgap's mission. Their contributions help us drive positive change in the tech industry." 
+    className="topTextbox"
+  />
+
+  <form action={Astro.request.url} method="GET">
+    <Dropdown
+      name="sponsorType"
+      options={["current", "past"]}
+      selected={sponsorType.charAt(0).toUpperCase() + sponsorType.slice(1)}
+    />
+  </form>
+
+  <div class="sponsors-grid">
+    {sponsorType === "current" ? (
+      <>
+        {level.map((l) => (
+          <div>
+            {
+              currentSponsors[l].map((sponsor) => (
+                <div class={`sponsor-card ${sponsor.fields.sponsorshipLevel.toLowerCase()}-sponsor`} key={sponsor.sys.id}>
+                  <a href={sponsor.fields.website}>
+
+                  <img src={sponsor.fields.logo.fields.file.url} alt={sponsor.fields.name} />
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+          <br/>
+        ))
+        }
+      </>
+    ) : (
+      <>
+        {level.map((l) => (
+          <div>
+            {
+              pastSponsors[l].map((sponsor) => (
+                <div class={`sponsor-card ${sponsor.fields.sponsorshipLevel.toLowerCase()}-sponsor`} key={sponsor.sys.id}>
+                  <img src={sponsor.fields.logo.fields.file.url} alt={sponsor.fields.name} />
+                </div>
+              ))
+            }
+          </div>
+          <br/>
+        ))
+        }
+      </>
+    )}
+  </div>
+ 
+  <List titleBeforePink="Why" pinkText="Sponsor" titleAfterPink="Us?" items={["Access to a Talented Network", "Promote Diversity and Inclusion", "Positive Brand Association"]}/>
+
+  <p id="contact">Contact us at <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
+  <div style="height: 1px;"></div>
+</PageLayout>
+
+<script>
+  document.querySelector("main")?.classList.add("classic-bg");
+</script>
+
+<style>
+  #contact {
+    color: #2d6d68;
+    margin-top: 100px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  #contact > a{
+    color: #2d6d68;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  #contact > a:hover {
+    text-decoration: underline;
+  }
+
+  div {
+    padding-top: 1px;
+  }
+
+  form {
+    right: 40vw;
+    padding-top: 50px;
+    margin-top: -100px;
+    margin-bottom: 100px;
+  }
+
+  .sponsors-grid {
+    text-align: center;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .sponsor-card {
+    border: none;
+    margin: 10px;
+    text-align: center; 
+    padding: 10px 50px;
+    display: inline-block;
+    border-radius: 20px;
+    box-shadow: 10px 10px 0px #f7deed, 10px 10px 5px 1px #00000050;
+    transition: box-shadow 0.3s ease-in-out;
+    background-color: #2d6d68;
+  }
+
+  .sponsor-card:hover {
+    box-shadow: none;
+    cursor: pointer;
+  }
+  
+  .sponsor-card img {
+    display: block; 
+    margin: 0 auto;
+    height: 150px; 
+    width: auto; 
+    background: none; 
+    border: none; 
+    border-radius: 20px;
+  }
+
+  .gold-sponsor {
+    width: 300px;
+  }
+  
+  .silver-sponsor {
+    width: 230px;
+  }
+  
+  .partners-sponsor {
+    width: 170px;
+  }
+  
+  .partners-sponsor img {
+    height: 130px;
+  }
+  
+  .supporters-sponsor {
+    width: 120px;
+  }
+
+  .supporters-sponsor img {
+    height: 100px;
+  }
+
+
+  :global(.bottomTextbox .heading) {
+    width: 400px;
+    height: 130px;
+  }
+
+  :global(.topTextbox .heading) {
+    height: 130px;
+  }
+
+  .pink-span {
+    color: #ffbce5;
+  }
+
+
+  @media (max-width: 850px) {
+    .gold-sponsor {
+      width: 200px;
+    }
+    .sponsor-card img {
+      height: 100px;
+    }
+    .silver-sponsor {
+      width: 166px;
+    }
+    .partners-sponsor {
+      width: 133px;
+    }
+    .supporters-sponsor {
+      width: 100px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .sponsor-card {
+      width: 100px;
+    }
+    .gold-sponsor img {
+      height: 90px;
+    }
+    .silver-sponsor img{
+      height: 75px;
+    }
+    .partners-sponsor img{
+      height: 60px;
+    }
+    .supporters-sponsor img{
+      height: 45px;
+    }
+
+    .partners-sponsor, .supporters-sponsor {
+      width: 65px;
+      padding: 10px 30px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .gold-sponsor, .silver-sponsor {
+      padding: 10px 30px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .sponsor-card {
+      padding: 10px 20px;
+      box-shadow: 5px 5px 0px #f7deed, 5px 5px 5px 1px #00000050;
+    }
+  }
+
+  
+</style>

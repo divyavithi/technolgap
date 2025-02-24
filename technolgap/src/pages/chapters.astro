@@ -25,6 +25,11 @@ const interestForm = (await client.getEntries({
   "fields.name": "chapterInterestForm"
 })).items[0]
 
+
+const email = (await client.getEntries({
+  content_type: "contact",
+  'fields.name': 'email'
+})).items[0].fields.content;
 ---
 
 <PageLayout title="Chapters">
@@ -68,10 +73,31 @@ const interestForm = (await client.getEntries({
                 <strong>5. Approval and Support:</strong> Our executive team will review your submission and get in touch with you for the next steps. Once approved, you’ll receive support and resources to help you launch
             </div>
         </div>
+        <p id="contact">Contact us at <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
+
     </article>
 </PageLayout>
 
 <style>
+
+    #contact {
+        color: #2d6d68;
+        margin-top: 100px;
+        font-size: 14px;
+        margin-bottom: -10px;
+        text-align: center;
+    }
+
+    #contact > a{
+        color: #2d6d68;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #contact > a:hover {
+        text-decoration: underline;
+    }
+
     article {
         margin: 1px;
     }
