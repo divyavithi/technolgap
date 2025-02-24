@@ -106,15 +106,16 @@ const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.c
         <TextBox heading="Our Esteemed Speakers" text="We are honored to feature a diverse range of speakers who have shared their insights and experiences at Technolgap events."/>
         <a class="button form" href=`${form}` target="_blank">INTEREST FORM</a>
         <CollabCardGrid entries={speakersAsCollab} speaker={true}/>
-        <p id="contact">Contact us as <a href=`mailto:${email}`>outreach@technolgap.org</a> for any further inquiries.</p>
+        <p id="contact">Contact us as <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
     </article>
 </PageLayout>
 
 <style>
     #contact {
         color: #2d6d68;
-        margin-top: 50px;
+        margin-top: 100px;
         font-size: 14px;
+        margin-bottom: -10px;
     }
 
     #contact > a{

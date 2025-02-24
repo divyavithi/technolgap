@@ -68,7 +68,7 @@ const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.c
 
         <List titleBeforePink="Why" pinkText="Collaborate" titleAfterPink="With Us?" items={["Enhance Impact on Diversity and Inclusion", "Expand your Outreach and Visibility", "Positive Brand Association", "Access to a Talented Pool of Individuals"]}/>
         
-          <p id="contact">Contact us as <a href=`mailto:${email}`>outreach@technolgap.org</a> for any further inquiries.</p>
+          <p id="contact">Contact us at <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
     </article>
 </PageLayout>
 
@@ -77,8 +77,9 @@ const email = contacts.find(obj => obj.fields.name == 'outreachEmail')?.fields.c
 
   #contact {
     color: #2d6d68;
-    margin-top: 50px;
+    margin-top: 100px;
     font-size: 14px;
+    margin-bottom: -10px;
   }
 
   #contact > a{

@@ -43,6 +43,11 @@ const faqStyle = volunteerRoles.map(role => ({
         deadline: role.fields.appDeadline
     }
 }));
+
+const email = (await client.getEntries({
+  content_type: "contact",
+  'fields.name': 'outreachEmail'
+})).items[0].fields.content;
 ---
 
 <PageLayout title="Volunteers">
@@ -54,10 +59,29 @@ const faqStyle = volunteerRoles.map(role => ({
             <FaqAccordian faqList={faqStyle} volunteerRole={true}/>
         </div>
         <List titleBeforePink="Benefits of" pinkText="Volunteering" titleAfterPink="" items={["Gain valuable experience and skills", "Network with professionals and peers", "Make a positive impact in the tech community"]}/>
-    </article>
+        <p id="contact">Contact us at <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
+
+      </article>
 </PageLayout>
 
 <style>
+   #contact {
+        color: #2d6d68;
+        margin-top: 100px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    #contact > a{
+        color: #2d6d68;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #contact > a:hover {
+        text-decoration: underline;
+    }
+
     article {
         padding: 1px;
         margin: 1px;
