@@ -15,11 +15,14 @@ const contacts = response.items;
 const linkedIn = contacts.find(obj => obj.fields.name == 'linkedIn')?.fields.content
 const instagram = contacts.find(obj => obj.fields.name == 'instagram')?.fields.content
 const email = contacts.find(obj => obj.fields.name == 'email')?.fields.content
+
+
 ---
 
 <PageLayout title="Contact Us" sparklesTop={false} sparklesBottom={true}>
     <article>
         <Subheading title="Contact Us"/>
+        <p style="color: #2d6d68;">Our contact form is currently out of order &#x1F6A7;<br/>Feel free to reach out to us by email at <a href=`mailto:${email}` id="email">{email}</a></p>
         <div class="grid">
             <form>
                 <label>
