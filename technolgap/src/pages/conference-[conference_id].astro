@@ -46,6 +46,11 @@ async function fetchConference(): Promise<Conference | null> {
 };
 
 let conference = await fetchConference()
+
+const email = (await client.getEntries({
+  content_type: "contact",
+  'fields.name': 'outreachEmail'
+})).items[0].fields.content;
 ---
 <PageLayout title="">
 
@@ -67,12 +72,30 @@ let conference = await fetchConference()
             <a class="link-big" href=`/conference-${conference_id}/schedule`>Schedule</a>
             <a class="link-big" href="/sponsors">Sponsors</a>
         </div>
-        
+        <p id="contact">Contact us at <a href=`mailto:${email}`>{email}</a> for any further inquiries.</p>
         
     </div>
 </PageLayout>
 
 <style>
+
+    #contact {
+        color: #7f7f7f;
+        margin-top: 100px;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: -40px;
+    }
+
+    #contact > a{
+        color: #5A6160;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #contact > a:hover {
+        text-decoration: underline;
+    }
 
     :global(.gray p) {
         background-color: #5A6160 !important;
