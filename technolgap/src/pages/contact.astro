@@ -1,0 +1,162 @@
+---
+import Subheading from "../components/Subheading.astro"
+import PageLayout from "../layouts/PageLayout.astro"
+import { createClient } from "contentful";
+
+const client = createClient({
+  space: import.meta.env.CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+const response = await client.getEntries({
+  content_type: "contact",
+});
+const contacts = response.items;
+const linkedIn = contacts.find(obj => obj.fields.name == 'linkedIn')?.fields.content
+const instagram = contacts.find(obj => obj.fields.name == 'instagram')?.fields.content
+const email = contacts.find(obj => obj.fields.name == 'email')?.fields.content
+
+
+---
+
+<PageLayout title="Contact Us" sparklesTop={false} sparklesBottom={true}>
+    <article>
+        <Subheading title="Contact Us"/>
+        <p style="color: #2d6d68;">Our contact form is currently out of order &#x1F6A7;<br/>Feel free to reach out to us by email at <a href=`mailto:${email}` id="email">{email}</a></p>
+        <div class="grid">
+            <form>
+                <label>
+                    FULL NAME
+                    <input type="text"/>
+                </label>
+                <label>
+                    EMAIL
+                    <input type="text"/>
+                </label>
+                <label>
+                    MESSAGE
+                    <textarea rows="3" cols="50"></textarea>
+                </label>
+                <button>Send Message</button>
+            </form>
+            <div class="contact-info">
+                <label>CONTACT</label>
+                <a href=`mailto:${email}` id="email">{email}</a>
+                <br/>
+                <a href={instagram as string} target="_blank"><img src="/ig-black-logo2.png" width="40px"/></a>
+                <a href={linkedIn as string} target="_blank"><img src="/linkedin-logo-black.png" width="40px"/></a>
+            </div>
+        </div>
+    </article>
+</PageLayout>
+
+<style>
+    article{
+        min-height: 100vh;
+        margin: 1px;
+        background-image: linear-gradient(#ffeaf8, #fff);
+        text-align: center;
+        padding: 1px 50px;
+    }
+
+    .grid {
+        color: #2d6d68;
+        margin: 70px auto;
+        background-color: #ffeaf8;
+        border-radius: 50px;
+        max-width: 1000px;
+        z-index: 10;
+        position: relative;
+        box-shadow: 0 2px 5px 1px #00000020;
+    }
+
+    .contact-info {
+        text-align: left;
+        padding: 50px;
+    }
+
+    .contact-info > label {
+        margin-bottom: 5px;
+    }
+
+    #email {
+        color: #2d6d68;
+        text-decoration-color: #2d6d68;
+    }
+
+    img {
+        margin-top: 20px;
+        border-radius: 10px;
+        margin-left: 5px;
+    }
+
+    img:hover {
+        box-shadow: 0 1px 2px 1px #00000030;
+    }
+
+    form {
+        padding: 50px;
+        text-align: left;
+    }
+
+    label {
+        text-align: left;
+        color: #2d6d68;
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+
+    input, textarea {
+        background: none;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+        padding: 10px;
+        padding-bottom: 5px;
+        color: black;
+        margin: 0;
+        margin-top: 20px;
+        height: auto;
+    }
+
+    input:focus, textarea:focus {
+        box-shadow: none;
+        box-shadow: 0 2px 5px 1px #00000020;
+    }
+
+    button {
+        background-color: #2d6d68;
+        border: 1px solid white;
+        box-shadow: 0 2px 2px 1px #00000040;
+        color: white;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: transform 0.3s ease-in-out;
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    button:hover {
+        box-shadow: none;
+        transform: translateY(2px);
+    }
+
+    @media (max-width: 765px) {
+        input, textarea {
+            width: 90%;
+        }
+    }
+
+    @media (max-width: 450px) {
+        article {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        form, .contact-info {
+            padding: 30px;
+        }
+
+        .grid {
+            padding-bottom: 30px;
+        }
+    }
+</style>
