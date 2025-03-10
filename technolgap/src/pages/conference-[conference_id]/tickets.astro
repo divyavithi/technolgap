@@ -50,6 +50,7 @@ let {ticketTypes, applyHere} = (await fetchConference())?.fields as conference['
 
 <PageLayout title="Tickets">
     <article class="classic-bg">
+        <a id="back" href={`/conference-${conference_id}`}>&#x2190;</a>
         <h2>Tickets</h2>
         <div class="rows">
             { ticketTypes ?
@@ -66,16 +67,28 @@ let {ticketTypes, applyHere} = (await fetchConference())?.fields as conference['
 </PageLayout>
 
 <style>
+    #back {
+        padding: 10px;
+        padding-top: 5px;
+        background-color: #7f7f7f;
+        color: #F7DFEE;
+        border-radius: 100%;
+        text-decoration: none;
+        box-shadow: 1px 1px 0 0 #F7DFEE, 2px 2px 2px 1px #00000060;
+        position: absolute;
+        top: 120px;
+        font-size: 30px;
+    }
     article {
         margin: 1px;
     }
     h2 {
         font-size: 50px;
+        padding: 0 20px;
         color: #5A6160;
         margin-top: 90px;
         margin-bottom: 2rem;
         text-shadow: 0px 2px 2px #7f7f7f;
-        padding: 0 20px;
         text-align: center;
         position: relative;
         -webkit-text-stroke: 0.5px #ffffff;
@@ -102,6 +115,11 @@ let {ticketTypes, applyHere} = (await fetchConference())?.fields as conference['
     .apply-here:hover {
         box-shadow: none;
     }
+    @media (max-width: 600px) {
+        #back {
+            top: 80px;
+        }
+    }
     @media (max-width: 800px) {
         .rows {
             flex-direction: column;
@@ -112,6 +130,10 @@ let {ticketTypes, applyHere} = (await fetchConference())?.fields as conference['
         :global(.tickets p) {
             width: 250px;
             background-color: #5A6160 !important;
+        }
+
+        #back {
+            font-size: 30px;
         }
     }
 </style>

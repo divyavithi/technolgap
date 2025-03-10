@@ -100,10 +100,18 @@ let {days} = (await fetchConference())?.fields as conference['fields'] ?? {days:
 const url = new URL(Astro.request.url);
 const selectedDay = url.searchParams.get("day") || days && days[0]?.sys.id;
 let events = (await fetchEvents(selectedDay))
+
+
+
+function getUrl(eventTitle:string, eventStart:string, eventEnd:string, eventDetails:string, eventLocation: string) {
+    return `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${new Date(eventStart).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z"}/${new Date(eventEnd).toISOString().replace(/[-:.]/g, "").slice(0, 15) + "Z"}&details=${eventDetails}&location=${eventLocation}`;
+}
+
 ---
 
 <PageLayout title="Conference Schedule">
     <article class="classic-bg">
+        <a id="back" href={`/conference-${conference_id}`}>&#x2190;</a>
         <h2>Schedule</h2>
         {
             days && events ?
@@ -124,13 +132,9 @@ let events = (await fetchEvents(selectedDay))
                         {e.fields.speaker ? (
                             <a class="event-content" href="/speakers">Speaker: {e.fields.speaker.fields.name}, {e.fields.speaker.fields.companyPosition} @ {e.fields.speaker.fields.companyName}</a>
                         <br/>): <a class="event-content"></a> }
-                        <a class="cal-link">Add to Calendar <img width="20px" src="/calendar-add.png"/></a>
-                    </div>
-                </div>
-
-                // <add-to-calendar data-event={e}>
-                //     <button>Add to Calendar</button>
-                // </add-to-calendar>
+                        <a class="cal-link" href={getUrl(e.fields.title, e.fields.start, e.fields.end, e.fields.summary, e.fields.venue)} target="_blank">Add to Calendar <img width="20px" src="/calendar-add.png"/></a>
+                    </div> 
+                </div> 
             )) }
             </div>
         :
@@ -140,6 +144,18 @@ let events = (await fetchEvents(selectedDay))
 </PageLayout>
 
 <style>
+    #back {
+        padding: 10px;
+        padding-top: 5px;
+        background-color: #7f7f7f;
+        color: #F7DFEE;
+        border-radius: 100%;
+        text-decoration: none;
+        box-shadow: 1px 1px 0 0 #F7DFEE, 2px 2px 2px 1px #00000060;
+        position: absolute;
+        top: 120px;
+        font-size: 30px;
+    }
     article {
         margin: 1px;
         padding-bottom: 100px;
@@ -242,7 +258,7 @@ let events = (await fetchEvents(selectedDay))
         color: #f7deed;
         text-decoration: underline #f7deed;
     }
-
+    
     .cal-link {
         background-color: #f7deed;
         margin-top: 10px;
@@ -251,6 +267,13 @@ let events = (await fetchEvents(selectedDay))
         padding: 5px 20px;
         border-radius: 20px;
         color: #5A6160;
+        box-sizing: border-box;
+        text-decoration: none !important;
+    }
+    
+    .cal-link:hover {
+        color: #5A6160 !important;
+        box-shadow: 0 0 5px 1px #fff;
     }
 
     @media(max-width: 1100px) {
@@ -295,6 +318,12 @@ let events = (await fetchEvents(selectedDay))
             font-size: 15px;
         }
     }
+
+    @media (max-width: 600px) {
+        #back {
+            top: 80px;
+        }
+    }
     
     @media (max-width: 500px) {
         :global(.schedule-days .text) {
@@ -329,6 +358,12 @@ let events = (await fetchEvents(selectedDay))
 
         .rows {
             display: block;
+        }
+    }
+
+    @media (max-width: 400px) {
+        #back {
+            font-size: 30px;
         }
     }
 </style>

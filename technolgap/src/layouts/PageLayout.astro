@@ -142,6 +142,12 @@ const { title, sparklesTop = true, sparklesBottom = false } = Astro.props;
     }
 
     @media (max-width: 500px) {
+      .white-star-sparkle-rt, .white-star-sparkle-lt, .pink-star-sparkle-rt, .pink-star-sparkle-lt{
+        display: none;
+      }
+    }
+
+    /* @media (max-width: 500px) {
       .white-star-sparkle-rt, .white-star-sparkle-lt, .pink-star-sparkle-rt, .pink-star-sparkle-lt {
         scale: 50%;
       }
@@ -154,6 +160,6 @@ const { title, sparklesTop = true, sparklesBottom = false } = Astro.props;
         left: 5vw;
       }
        
-    }
+    } */
 
 </style>
