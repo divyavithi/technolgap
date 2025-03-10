@@ -79,6 +79,7 @@ let allFaqs = (await fetchFaqList())
     
 <PageLayout title="Frequently Asked Questions">
     <article class="classic-bg">
+      <a id="back" href={`/conference-${conference_id}`}>&#x2190;</a>
         <h2 class="subheading">FAQ</h2>
         { allFaqs ? 
           <FaqAccordian faqList={allFaqs} grey={true}/>
@@ -89,6 +90,18 @@ let allFaqs = (await fetchFaqList())
 </PageLayout>
 
 <style>
+  #back {
+        padding: 10px;
+        padding-top: 5px;
+        background-color: #7f7f7f;
+        color: #F7DFEE;
+        border-radius: 100%;
+        text-decoration: none;
+        box-shadow: 1px 1px 0 0 #F7DFEE, 2px 2px 2px 1px #00000060;
+        position: absolute;
+        top: 120px;
+        font-size: 30px;
+    }
 
     article {
         margin: 0;
@@ -113,9 +126,21 @@ let allFaqs = (await fetchFaqList())
         }
     }
 
+    @media (max-width: 600px) {
+        #back {
+            top: 80px;
+        }
+    }
+
     @media (max-width: 500px) {
         .subheading {
             font-size: 35px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        #back {
+            font-size: 30px;
         }
     }
 </style>
