@@ -32,8 +32,8 @@ const email = (await client.getEntries({
 })).items[0].fields.content;
 ---
 
-<PageLayout title="Chapters">
-    <article class="classic-bg">
+<PageLayout title="Chapters"  sparklesTop={false} sparklesBottom={true}>
+    <article>
 
         <Subheading title="Chapters"/>
         <TextBox heading="Start a Technolgap Chapter" text="Technolgap was founded at Carleton University in 2020. Since then we started scaling our impact and mission by establishing chapters on various campuses around the world. "/>
@@ -100,6 +100,8 @@ const email = (await client.getEntries({
 
     article {
         margin: 1px;
+        min-height: 100vh;
+        background-image: linear-gradient(#ffeaf8, #fff);
     }
 
     .step a {

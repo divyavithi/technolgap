@@ -26,16 +26,16 @@ const pastConferences = conferences.filter(c => c!=activeConference)
       <ul>
       <!--Adding navbar elements: HOME, ABOUT US, EVENTS, RESOURCES, GET INVOLVED, CONTACT BUTTON -->
       <li class="desktop-dropdown">
-        <a href="/" class="desktop-dropdown-toggle">HOME</a>
+        <a href="/" class="desktop-dropdown-toggle">Home</a>
         <ul class="desktop-dropdown-menu">
           <li><a href="/#about-us">About Us</a></li>
           <li><a href="/#core-values">Core Values</a></li>
           <li><a href="/#milestones">Milestones</a></li>
         </ul>
       </li>
-      <li><a href="/our-team">OUR TEAM</a></li>
+      <li><a href="/our-team">Our Team</a></li>
       <li class="desktop-dropdown">
-        <a href="/events" class="desktop-dropdown-toggle">EVENTS</a>
+        <a href="/events" class="desktop-dropdown-toggle">Events</a>
         <ul class="desktop-dropdown-menu">
           {activeConference && <li><a href={`/conference-${activeConference.sys.id}`}>{activeConference.fields.name}</a></li>}
           {pastConferences.map(c => (
@@ -43,9 +43,9 @@ const pastConferences = conferences.filter(c => c!=activeConference)
           ))}
         </ul>
       </li>
-      <li><a href="/resources">RESOURCES</a></li>
+      <li><a href="/resources">Resources</a></li>
       <li class="desktop-dropdown">
-        <a href="#" class="desktop-dropdown-toggle">GET INVOLVED</a>
+        <a href="#" class="desktop-dropdown-toggle">Get Involved</a>
         <ul class="desktop-dropdown-menu">
           <li><a href="/join">Join Us</a></li>
           <li><a href="/chapters">Chapters</a></li>
@@ -57,7 +57,7 @@ const pastConferences = conferences.filter(c => c!=activeConference)
       </li>
       <li><a href="/faq">FAQ</a></li>
       
-      <li><a href="/contact" class="custom-button">CONTACT US</a></li>
+      <li><a href="/contact" class="custom-button">Contact Us</a></li>
     </ul>
   </nav>
 
@@ -74,7 +74,7 @@ const pastConferences = conferences.filter(c => c!=activeConference)
       <ul>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="/" class="mobile-dropdown-toggle" id="aboutUsToggle">HOME</a>
+            <a href="/" class="mobile-dropdown-toggle" id="aboutUsToggle">Home</a>
           </li>
         </div>
         <div class="main-menu-sub">
@@ -84,10 +84,10 @@ const pastConferences = conferences.filter(c => c!=activeConference)
             <li><a href="/#milestones">Milestones</a></li>
           </ul>
         </div>
-        <div class="main-menu"><li><a href="/our-team">OUR TEAM</a></li></div>
+        <div class="main-menu"><li><a href="/our-team">Our Team</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="/events" class="mobile-dropdown-toggle" id="conferenceToggle">EVENTS</a>
+            <a href="/events" class="mobile-dropdown-toggle" id="conferenceToggle">Events</a>
             </li>
             
         </div>
@@ -100,10 +100,10 @@ const pastConferences = conferences.filter(c => c!=activeConference)
               ))}
             </ul>
           </div>
-        <div class="main-menu"><li><a href="/resources">RESOURCES</a></li></div>
+        <div class="main-menu"><li><a href="/resources">Resources</a></li></div>
         <div class="main-menu">
           <li class="mobile-dropdown">
-            <a href="#" class="mobile-dropdown-toggle" id="getInvolvedToggle">GET INVOLVED</a>
+            <a href="#" class="mobile-dropdown-toggle" id="getInvolvedToggle">Get Involved</a>
         </div>
 
         <div class="main-menu-sub">
@@ -118,7 +118,7 @@ const pastConferences = conferences.filter(c => c!=activeConference)
           </div>
           
         <div class="main-menu"><li><a href="/faq">FAQ</a></li></div>
-        <div class="main-menu"><li><a href="/contact">CONTACT US</a></li></div>
+        <div class="main-menu"><li><a href="/contact">Contact Us</a></li></div>
 
       </ul>
     </div>
