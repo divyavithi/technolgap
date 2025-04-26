@@ -16,28 +16,26 @@ const linkedIn = contacts.find(obj => obj.fields.name == 'linkedIn')?.fields.con
 const instagram = contacts.find(obj => obj.fields.name == 'instagram')?.fields.content
 const email = contacts.find(obj => obj.fields.name == 'email')?.fields.content
 
-
 ---
 
 <PageLayout title="Contact Us" sparklesTop={false} sparklesBottom={true}>
     <article>
         <Subheading title="Contact Us"/>
-        <p style="color: #2d6d68;">Our contact form is currently out of order &#x1F6A7;<br/>Feel free to reach out to us by email at <a href=`mailto:${email}` id="email">{email}</a></p>
         <div class="grid">
-            <form>
+            <form method="POST" id="send-form" >
                 <label>
                     FULL NAME
-                    <input type="text"/>
+                    <input required type="text" name="name"/>
                 </label>
                 <label>
                     EMAIL
-                    <input type="text"/>
+                    <input required type="text" name="email"/>
                 </label>
                 <label>
                     MESSAGE
-                    <textarea rows="3" cols="50"></textarea>
+                    <textarea required rows="3" cols="50" name="message"></textarea>
                 </label>
-                <button>Send Message</button>
+                <button type="submit">Send Message</button>
             </form>
             <div class="contact-info">
                 <label>CONTACT</label>
@@ -45,10 +43,36 @@ const email = contacts.find(obj => obj.fields.name == 'email')?.fields.content
                 <br/>
                 <a href={instagram as string} target="_blank"><img src="/ig-black-logo2.png" width="40px"/></a>
                 <a href={linkedIn as string} target="_blank"><img src="/linkedin-logo-black.png" width="40px"/></a>
+                <h3 id="mssg-sent" class="hidden">Message Sent!</h3>
+                <h3 id="mssg-sending" class="hidden">Sending...</h3>
+                <h3 id="mssg-error" class="hidden">Unfortunately your message was unable to be sent through our contact form. <br/><br/>Please reach out to technolgap directly at <a href=`mailto:${email}`>{email}</a>.</h3>
             </div>
         </div>
     </article>
 </PageLayout>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  const confirmation = document.getElementById('mssg-sent');
+  const sending = document.getElementById('mssg-sending');
+  const errorMssg = document.getElementById('mssg-error');
+
+  const form = document.querySelector('form');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    sending?.classList.remove('hidden');
+    const formData = new FormData(form);
+    const { error } = await actions.send(formData);
+    if (!error) {
+        confirmation?.classList.remove('hidden');
+        form.reset();
+    } else {
+        errorMssg?.classList.remove('hidden');
+    }
+    sending?.classList.add('hidden');
+  })
+</script>
 
 <style>
     article{
@@ -94,7 +118,21 @@ const email = contacts.find(obj => obj.fields.name == 'email')?.fields.content
         box-shadow: 0 1px 2px 1px #00000030;
     }
 
-    form {
+    #mssg-sent, #mssg-sending {
+        color: #2d6d68;
+        margin-top: 30px;
+    }
+
+    #mssg-error {
+        color: #a51414;
+        margin-top: 30px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    form{
         padding: 50px;
         text-align: left;
     }
